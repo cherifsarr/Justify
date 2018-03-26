@@ -1,0 +1,248 @@
+/*[
+  {
+    "id": "5bc0d015-5158-4be6-2295-08d586ed639a",
+    "name": "Patient Demographics",
+    "description": null,
+    "type": 0,
+    "scope": 6,
+    "scopeahs": 1,
+    "scopelab": 1,
+    "scopemp": 0
+  },
+  {
+    "id": "36008b9d-f340-4da7-2296-08d586ed639a",
+    "name": "AHS User Profile",
+    "description": null,
+    "type": 0,
+    "scope": 4,
+    "scopeahs": 1,
+    "scopelab": 0,
+    "scopemp": 0
+  },
+  {
+    "id": "61409c3c-f4a9-472e-2297-08d586ed639a",
+    "name": "Lab User Profile",
+    "description": null,
+    "type": 0,
+    "scope": 2,
+    "scopeahs": 0,
+    "scopelab": 1,
+    "scopemp": 0
+  },
+  {
+    "id": "1a8e5794-3473-4c78-2298-08d586ed639a",
+    "name": "MP User Profile",
+    "description": null,
+    "type": 0,
+    "scope": 1,
+    "scopeahs": 0,
+    "scopelab": 0,
+    "scopemp": 1
+  },
+  {
+    "id": "d94b832a-c6f5-4193-2299-08d586ed639a",
+    "name": "Lab Profile",
+    "description": null,
+    "type": 0,
+    "scope": 6,
+    "scopeahs": 1,
+    "scopelab": 1,
+    "scopemp": 0
+  },
+  {
+    "id": "bf9a24c8-d916-4139-229a-08d586ed639a",
+    "name": "MP Profile",
+    "description": null,
+    "type": 0,
+    "scope": 7,
+    "scopeahs": 1,
+    "scopelab": 1,
+    "scopemp": 1
+  },
+  {
+    "id": "7392cc13-1068-4d77-229b-08d586ed639a",
+    "name": "MP LOcation",
+    "description": null,
+    "type": 0,
+    "scope": 6,
+    "scopeahs": 1,
+    "scopelab": 1,
+    "scopemp": 0
+  }
+]*/
+
+
+
+
+[
+  {
+    "id": "ead8e0cf-b705-4231-a5a0-08d591e36fbb",
+    "code": "100",
+    "name": "AHS Profile Management",
+    "description": null,
+    "type": 0,
+    "orgLevel": true,
+    "labLevel": false,
+    "mpLevel": false
+  },
+  {
+    "id": "eedaa695-6b7f-4595-a5a1-08d591e36fbb",
+    "code": "101",
+    "name": "AHS User Management",
+    "description": null,
+    "type": 0,
+    "orgLevel": true,
+    "labLevel": false,
+    "mpLevel": false
+  },
+  {
+    "id": "85a7dafb-be06-41f3-a5a2-08d591e36fbb",
+    "code": "102",
+    "name": "AHS Reports",
+    "description": null,
+    "type": 0,
+    "orgLevel": true,
+    "labLevel": false,
+    "mpLevel": false
+  },
+  {
+    "id": "e0b48110-7935-4a3a-a5a3-08d591e36fbb",
+    "code": "200",
+    "name": "Lab Profile Management",
+    "description": null,
+    "type": 0,
+    "orgLevel": true,
+    "labLevel": true,
+    "mpLevel": false
+  },
+  {
+    "id": "3559444f-b71b-47b5-a5a4-08d591e36fbb",
+    "code": "201",
+    "name": "Lab User Management",
+    "description": null,
+    "type": 0,
+    "orgLevel": true,
+    "labLevel": true,
+    "mpLevel": false
+  },
+  {
+    "id": "bce57265-202a-4810-a5a5-08d591e36fbb",
+    "code": "202",
+    "name": "Lab Preference Setup",
+    "description": null,
+    "type": 0,
+    "orgLevel": true,
+    "labLevel": true,
+    "mpLevel": false
+  },
+  {
+    "id": "b886ef6f-26f2-438b-a5a6-08d591e36fbb",
+    "code": "203",
+    "name": "Lab Reports",
+    "description": null,
+    "type": 0,
+    "orgLevel": true,
+    "labLevel": true,
+    "mpLevel": false
+  },
+  {
+    "id": "ccc58632-b06f-4011-a5a7-08d591e36fbb",
+    "code": "251",
+    "name": "Lab PGx Order Processing",
+    "description": null,
+    "type": 0,
+    "orgLevel": true,
+    "labLevel": true,
+    "mpLevel": false
+  },
+  {
+    "id": "5546bc0e-7ab2-4f18-a5a8-08d591e36fbb",
+    "code": "252",
+    "name": "Lab Cancer Order Processing",
+    "description": null,
+    "type": 0,
+    "orgLevel": true,
+    "labLevel": true,
+    "mpLevel": false
+  },
+  {
+    "id": "714e368b-d92a-4d8c-a5a9-08d591e36fbb",
+    "code": "253",
+    "name": "Lab Toxicoloy Order Processing",
+    "description": null,
+    "type": 0,
+    "orgLevel": true,
+    "labLevel": true,
+    "mpLevel": false
+  },
+  {
+    "id": "334ffd81-9630-48ad-a5aa-08d591e36fbb",
+    "code": "301",
+    "name": "MP Profile Management",
+    "description": null,
+    "type": 0,
+    "orgLevel": true,
+    "labLevel": true,
+    "mpLevel": true
+  },
+  {
+    "id": "4b4600aa-91de-4e52-a5ab-08d591e36fbb",
+    "code": "302",
+    "name": "MP User Management",
+    "description": null,
+    "type": 0,
+    "orgLevel": true,
+    "labLevel": true,
+    "mpLevel": true
+  },
+  {
+    "id": "7e58cc41-d946-46ca-a5ac-08d591e36fbb",
+    "code": "303",
+    "name": "MP Location Management",
+    "description": null,
+    "type": 0,
+    "orgLevel": true,
+    "labLevel": true,
+    "mpLevel": true
+  },
+  {
+    "id": "3cc42103-c523-4d1d-a5ad-08d591e36fbb",
+    "code": "304",
+    "name": "MP REports",
+    "description": null,
+    "type": 0,
+    "orgLevel": true,
+    "labLevel": false,
+    "mpLevel": true
+  },
+  {
+    "id": "acd0bb6b-2b93-41f0-a5ae-08d591e36fbb",
+    "code": "351",
+    "name": "PGx Test Ordering",
+    "description": null,
+    "type": 0,
+    "orgLevel": true,
+    "labLevel": false,
+    "mpLevel": true
+  },
+  {
+    "id": "482be534-7e47-4292-a5af-08d591e36fbb",
+    "code": "352",
+    "name": "Cancer Test Ordering",
+    "description": null,
+    "type": 0,
+    "orgLevel": true,
+    "labLevel": false,
+    "mpLevel": true
+  },
+  {
+    "id": "86fdbb9a-6c5e-4634-a5b0-08d591e36fbb",
+    "code": "353",
+    "name": "Toxicology Test Ordering",
+    "description": null,
+    "type": 0,
+    "orgLevel": true,
+    "labLevel": false,
+    "mpLevel": true
+  }
+]

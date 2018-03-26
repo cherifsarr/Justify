@@ -1,0 +1,30 @@
+<az-navbar></az-navbar>
+<div class="container-fluid">         
+    <div class="row"> 
+        <az-menu></az-menu>
+        <!--<az-sidebar></az-sidebar>-->
+        <div class="main-wrapper"  [ngClass]="{'menu-collapsed': isMenuCollapsed}"> 
+            <div class="az-overlay" *ngIf="!isMenuCollapsed" (click)="hideMenu()"></div>
+
+            <div class="main">
+                <az-breadcrumb></az-breadcrumb>
+                <router-outlet></router-outlet>
+            </div> 
+
+          
+
+
+            <footer class="footer text-center clearfix">
+                <div class="footer-main pull-right  clearfix">
+                    <div class="copyright pull-right">&copy; American Healthcare Systems 2018</div>
+
+                </div>
+
+                
+            </footer>
+
+            <az-back-top position="200"></az-back-top>
+
+        </div>
+    </div>
+</div>

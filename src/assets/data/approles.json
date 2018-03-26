@@ -1,0 +1,222 @@
+﻿/*[
+  {
+    "scope": 4,
+    "scopeahs": 1,
+    "scopelab": 0,
+    "scopemp": 0,
+    "custom": false,
+    "id": "1826f79c-c767-40b7-8ff5-f43d5b45ecee",
+    "name": "MP Location Admin",
+    "normalizedName": "MP LOCATION ADMIN",
+    "concurrencyStamp": "f1972b0d-c419-464f-bead-e435fb1a4a80"
+  },
+  {
+    "scope": 7,
+    "scopeahs": 1,
+    "scopelab": 1,
+    "scopemp": 1,
+    "custom": false,
+    "id": "198a1c0b-834e-40c9-b038-4a38f36b67b7",
+    "name": "MP User Admin",
+    "normalizedName": "MP USER ADMIN",
+    "concurrencyStamp": "beb27fe5-0f33-41bd-9a20-a264cc5f24d1"
+  },
+  {
+    "scope": 4,
+    "scopeahs": 1,
+    "scopelab": 0,
+    "scopemp": 0,
+    "custom": false,
+    "id": "24f2e3ad-db11-42f0-afeb-4733c18b9684",
+    "name": "AHS User Admin",
+    "normalizedName": "AHS USER ADMIN",
+    "concurrencyStamp": "08702e67-7754-4076-8d42-ab6eb9858f56"
+  },
+  {
+    "scope": 4,
+    "scopeahs": 1,
+    "scopelab": 0,
+    "scopemp": 0,
+    "custom": false,
+    "id": "6007ed42-b47b-450b-a667-9e40bd49aa70",
+    "name": "Lab Profile Full Admin",
+    "normalizedName": "LAB PROFILE FULL ADMIN",
+    "concurrencyStamp": "d1c07a08-e584-4a31-8a2d-b023144dda63"
+  },
+  {
+    "scope": 2,
+    "scopeahs": 0,
+    "scopelab": 1,
+    "scopemp": 0,
+    "custom": false,
+    "id": "948a2039-95f8-4f5c-9649-3734a4a2c980",
+    "name": "Lab Profile Edit Admin",
+    "normalizedName": "LAB PROFILE EDIT ADMIN",
+    "concurrencyStamp": "20a132f3-64eb-47b9-b36b-28fb845d48b0"
+  },
+  {
+    "scope": 6,
+    "scopeahs": 1,
+    "scopelab": 1,
+    "scopemp": 0,
+    "custom": false,
+    "id": "bbdb6cb1-4b48-40c1-8043-8a31bdd8b2fd",
+    "name": "MP Profile Full Admin",
+    "normalizedName": "MP PROFILE FULL ADMIN",
+    "concurrencyStamp": "90c21d89-a309-4e23-8acc-bac4ca67627d"
+  },
+  {
+    "scope": 6,
+    "scopeahs": 1,
+    "scopelab": 1,
+    "scopemp": 0,
+    "custom": false,
+    "id": "e1d30f3e-4358-4634-a852-6b8a37954b52",
+    "name": "Lab User Admin",
+    "normalizedName": "LAB USER ADMIN",
+    "concurrencyStamp": "aa7740aa-0e36-44b2-addf-dcc8f9e51961"
+  },
+  {
+    "scope": 1,
+    "scopeahs": 0,
+    "scopelab": 0,
+    "scopemp": 1,
+    "custom": false,
+    "id": "f8daeee4-08cd-4bfb-9604-10a8c16fec2c",
+    "name": "MP Profile Edit Admin",
+    "normalizedName": "MP PROFILE EDIT ADMIN",
+    "concurrencyStamp": "fd61994a-c644-4847-9d12-29fbeb4e8e15"
+  }
+]*/
+
+
+
+
+[
+  {
+    "id": "22e07e54-bbb8-4535-a2c1-b6b0f9619590",
+    "name": "New MP Role 1",
+    "orgLevel": false,
+    "labLevel": false,
+    "mpLevel": true,
+    "custom": true,
+    "enabled": false
+  },
+  {
+    "id": "35022d70-469d-4abf-805f-0ac7eceda354",
+    "name": "MP User Admin",
+    "orgLevel": false,
+    "labLevel": false,
+    "mpLevel": true,
+    "custom": false,
+    "enabled": true
+  },
+  {
+    "id": "3930d233-bd0d-4f07-aae2-6f2a852702e3",
+    "name": "MP User Edit Admin",
+    "orgLevel": false,
+    "labLevel": false,
+    "mpLevel": true,
+    "custom": false,
+    "enabled": true
+  },
+  {
+    "id": "4bb7a4bf-09ec-44bc-b388-e21c52d634b6",
+    "name": "Provider/Doctor (built-in role)",
+    "orgLevel": false,
+    "labLevel": false,
+    "mpLevel": true,
+    "custom": false,
+    "enabled": true
+  },
+  {
+    "id": "4cd757ca-bcad-43e2-8118-398196bd82be",
+    "name": "MP Location Admin (built-in role)",
+    "orgLevel": false,
+    "labLevel": false,
+    "mpLevel": true,
+    "custom": false,
+    "enabled": true
+  },
+  {
+    "id": "4fe630db-4e13-40f7-a928-713bc7c57378",
+    "name": "New Lab Role 1",
+    "orgLevel": false,
+    "labLevel": true,
+    "mpLevel": false,
+    "custom": true,
+    "enabled": true
+  },
+  {
+    "id": "6e91fbab-aab6-4ebe-a857-505f8320e11b",
+    "name": "AHS Read-only",
+    "orgLevel": true,
+    "labLevel": false,
+    "mpLevel": false,
+    "custom": false,
+    "enabled": true
+  },
+  {
+    "id": "7c05a6aa-a6f4-4e76-852c-24948098a5a9",
+    "name": "Lab Order Processor",
+    "orgLevel": false,
+    "labLevel": true,
+    "mpLevel": false,
+    "custom": false,
+    "enabled": true
+  },
+  {
+    "id": "85a9fc2f-a957-44f9-9120-f72551ef5cb8",
+    "name": "Lab Preference Admin",
+    "orgLevel": false,
+    "labLevel": true,
+    "mpLevel": false,
+    "custom": false,
+    "enabled": true
+  },
+  {
+    "id": "a4afc59b-5d10-48a1-8d92-b2ebb4ae4405",
+    "name": "Medical Assistant (built-in role)",
+    "orgLevel": false,
+    "labLevel": false,
+    "mpLevel": true,
+    "custom": false,
+    "enabled": true
+  },
+  {
+    "id": "b6f8105f-9168-4285-b599-20a1ec932667",
+    "name": "Lab User Admin",
+    "orgLevel": false,
+    "labLevel": true,
+    "mpLevel": false,
+    "custom": false,
+    "enabled": true
+  },
+  {
+    "id": "ba83473e-5a30-4c1b-b610-64adfe2aa628",
+    "name": "AHS Super Admin",
+    "orgLevel": true,
+    "labLevel": false,
+    "mpLevel": false,
+    "custom": false,
+    "enabled": true
+  },
+  {
+    "id": "ddcf47f4-8162-4e22-ae85-f2ebc4ed6ac5",
+    "name": "Lab Full Admin",
+    "orgLevel": false,
+    "labLevel": true,
+    "mpLevel": false,
+    "custom": false,
+    "enabled": true
+  },
+  {
+    "id": "de7fc5b6-6d0a-4720-8dde-4e46517d1806",
+    "name": "Lab Profile Edit Admin",
+    "orgLevel": false,
+    "labLevel": true,
+    "mpLevel": false,
+    "custom": false,
+    "enabled": true
+  }
+]

@@ -1,0 +1,104 @@
+
+<p>
+    editrole works.  Role Id: {{id}}<br />Name: {{roleName}}
+    <br />{{orgLevel}}<br />{{labLevel}}<br />{{mpLevel}}<br />{{enabled}}
+</p>
+
+
+
+<div class="row">
+    <div class="col">
+        <div widget class="card">
+            <div class="card-header">
+                <span class="text-center">
+                    <span *ngIf="id==''">Create a Role</span>
+                    <span *ngIf="id!=''">Edit/Update a Role</span>
+                </span>
+            </div>
+            <div class="card-body widget-body">
+                <div class="form-horizontal">
+                    <div class="form-group row">
+                        <div class="col-sm-1">&nbsp;</div>
+                        <label for="RoleName" class="col-sm-3 form-control-label m-t-5">Name of Role</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="RoleName" >
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-1">&nbsp;</div>
+                        <label for="canbeassignedto-h-f" class="col-sm-3 form-control-label m-t-5">Can be assigned to</label>
+                        <div class="col-sm-8 ml-sm-auto d-flex justify-content-between"> 
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input checkbox-main" id="ahsuser"  />
+                                <label class="custom-control-label" for="ahsuser">AHS User</label>
+                            </div>
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input checkbox-main" id="labuser"  />
+                                <label class="custom-control-label" for="labuser">Lab User</label>
+                            </div>
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input checkbox-main" id="mpuser" />
+                                <label class="custom-control-label" for="mpuser">MP User</label>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group row">
+                        <div class="col-sm-1">&nbsp;</div>
+                        <div class="col-sm-11">
+                            Assignment of Features and Permissions<br/>
+                            <!--<ngx-datatable #table
+                                           class="bootstrap"
+                                           [headerHeight]="30"
+                                           [limit]="10"
+                                           [columnMode]="'force'"
+                                           [footerHeight]="30"
+                                           [rowHeight]="'auto'"
+                                           [rows]="rows">
+                                <ngx-datatable-column name="Feature" prop="name" [width]="250">
+                                    <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
+                                        {{value}}
+                                    </ng-template>
+                                </ngx-datatable-column>
+                                <ngx-datatable-column name="Permissions">
+                                    <ng-template ngx-datatable-cell-template let-row="row">
+                                        <input type="checkbox" [checked]="row.view" />View
+                                        <input type="checkbox" [checked]="row.create" />Create
+                                        <input type="checkbox" [checked]="row.edit" />Edit
+                                        <input type="checkbox" [checked]="ro.delete" />Delete
+                                    </ng-template>
+                                </ngx-datatable-column>
+                            </ngx-datatable>-->
+                        </div>
+                    </div>
+
+
+                    <div class="form-group row">
+                        <div class="col-sm-1">&nbsp;</div>
+                        <div class="col-sm-11">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input checkbox-main" id="cbDisabled"  >
+                                <label class="custom-control-label" for="cbDisabled">Disabled</label>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group row">
+                        <div class="col-sm-1">&nbsp;</div>
+                        <div class="col-sm-11 text-right">
+                            <button class="btn" type="submit">Cancel</button>
+                            <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                            <button class="btn btn-main" type="submit">
+                                <span *ngIf="id==''">Create Role</span>
+                                <span *ngIf="id!=''">Update Role</span>
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
