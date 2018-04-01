@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { FormGroup, FormControl, ReactiveFormsModule, AbstractControl, FormBuilder, Validators } from '@angular/forms';
 
 import { User } from "../../../../shared/models/user";
@@ -14,7 +14,7 @@ import { MpuserService } from "../mpuser.service";
 
 
 export class EditMpuserComponent {
-    public router: Router;
+    public router: ActivatedRoute;
     public form: FormGroup;
     public username: AbstractControl;
     public role: AbstractControl;
@@ -37,7 +37,7 @@ export class EditMpuserComponent {
     public Roles: RoleListItem[];
 
 
-    constructor(router: Router, fb: FormBuilder, private userService: MpuserService) {
+    constructor(router: ActivatedRoute, fb: FormBuilder, private userService: MpuserService) {
         this.router = router;
         this.form = fb.group({
             username: ['', Validators.compose([Validators.required, Validators.minLength(3)])],
@@ -84,9 +84,23 @@ export class EditMpuserComponent {
         }
     }
 
+    public onPasswordGenerate(e) {
+        e.preventDefault();
+        this.form.get('password').setValue(randomPassword(12));
+    }
+
 
 }
 
+export function randomPassword(length) {
+    var chars = "abcdefghijklmnopqrstuvwxyz!@#$%^&*()-+<>ABCDEFGHIJKLMNOP1234567890";
+    var pass = "";
+    for (var x = 0; x < length; x++) {
+        var i = Math.floor(Math.random() * chars.length);
+        pass += chars.charAt(i);
+    }
+    return pass;
+}
 export function emailValidator(control: FormControl): { [key: string]: any } {
     var emailRegexp = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/;
     if (control.value && !emailRegexp.test(control.value)) {

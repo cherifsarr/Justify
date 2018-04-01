@@ -1,0 +1,50 @@
+<!--<p>
+  list works!
+</p>-->
+
+<div class="row">
+    <div class="col">
+        <div widget class="card">
+            <div class="card-header">
+                <span>List of Organizations</span>
+            </div>
+            <div class="card-body widget-body">
+                <div class="input-group input-group-sm my-3">
+                    <a href="#">Create a New Org</a>
+                </div>
+                <div class="input-group input-group-sm my-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fa fa-search"></i></span>
+                    </div>
+                    <input class="form-control" type="text" placeholder="Search ..." (keyup)="updateFilter($event)" />
+                </div>
+
+                <ngx-datatable #table
+                               class="bootstrap"
+                               [headerHeight]="30"
+                               [limit]="10"
+                               [columnMode]="'force'"
+                               [footerHeight]="30"
+                               [rowHeight]="'auto'"
+                               [rows]="rows">
+                    <ngx-datatable-column name="Name" prop="id">
+                        <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
+                            <a [routerLink]="['../editorg', row.id]"> {{value}} </a>
+                        </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="Display Name" prop="uniqueName">
+                        <ng-template ngx-datatable-cell-template let-value="value">
+                            {{value}}
+                        </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="URL" prop="website">
+                        <ng-template ngx-datatable-cell-template let-value="value">
+                            {{value}}
+                        </ng-template>
+                    </ngx-datatable-column>
+                </ngx-datatable>
+            </div>
+        </div>
+    </div>
+</div>
+

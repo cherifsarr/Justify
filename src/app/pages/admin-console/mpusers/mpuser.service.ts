@@ -46,6 +46,13 @@ export class MpuserService extends BaseService {
             });
     }
 
+    getMpUsers() {
+        return this.http.get<User[]>(
+            this.baseUrl + '/mpusers'
+        );
+    }
+
+
     getRoles(scope: number) {
         return this.http.get<RoleListItem[]>(
             this.baseUrl + '/approles/list/' + scope,

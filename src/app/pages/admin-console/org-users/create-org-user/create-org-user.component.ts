@@ -1,5 +1,5 @@
-import { Component, VERSION,  ViewEncapsulation } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, VERSION, OnInit, OnDestroy, ViewEncapsulation, ViewChild } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { FormGroup, FormControl, ReactiveFormsModule, AbstractControl, FormBuilder, Validators } from '@angular/forms';
 
 import { User } from "../../../../shared/models/user";
@@ -13,8 +13,11 @@ import { ToastrService, GlobalConfig } from 'ngx-toastr';
   templateUrl: './create-org-user.component.html',
   styleUrls: ['./create-org-user.component.scss']
 })
-export class CreateOrgUserComponent  {
-    public router: Router;
+export class CreateOrgUserComponent implements OnInit, OnDestroy {
+    id: string;
+    private sub: any;
+
+    public router: ActivatedRoute;
     public form: FormGroup;
     public username: AbstractControl;
     public role: AbstractControl;
@@ -38,7 +41,7 @@ export class CreateOrgUserComponent  {
 
     options: GlobalConfig;
 
-    constructor(router: Router, fb: FormBuilder, private userService: OrgUserService, public toastrService: ToastrService) {
+    constructor(router: ActivatedRoute, fb: FormBuilder, private userService: OrgUserService, public toastrService: ToastrService) {
         this.options = this.toastrService.toastrConfig;
         this.router = router;
         this.form = fb.group({
@@ -64,31 +67,17 @@ export class CreateOrgUserComponent  {
             });
 
         this.user = new User();
-     /*   this.username = this.form.controls['username'];
-        this.firstname = this.form.controls['firstname'];
-        this.lastname = this.form.controls['lastname'];
-        this.email = this.form.controls['email'];
-        this.password = this.form.controls['password'];
-        this.confirmPassword = this.form.controls['confirmPassword'];
-        this.role = this.form.controls['role'];
-        this.title = this.form['title']; */
-     //   this.randomPassword = this.form.controls['randomPassword'];
-     //   this.isLockedOut = this.form.controls['isLockedOut'];
-     //   this.sendActivationEmail = this.form.controls['sendActivationEmail'];
-     //   this.forcePasswordChange = this.form.controls['forcePasswordChange'];
-      //  this.isEnabled = this.form.controls['isEnabled'];
 
-     /*   this.user.password = this.password.value;
-        this.user.passwordConfirmation = this.confirmPassword.value;
-        this.user.title = this.title.value;
-        this.user.role = this.role.value;
-        this.user.email = this.email.value;
-        this.user.forcePasswordChange = this.forcePasswordChange.value;
-        this.user.isEnabled = this.isEnabled.value;
-        this.user.randomPassword = this.randomPassword.value;
-        this.user.sendActivationEmail = this.sendActivationEmail.value;
-        this.user.isLockedOut = this.isLockedOut.value; */
+    }
 
+    ngOnInit() {
+        this.sub = this.router.params.subscribe(params => {
+            this.id = params['id'];
+        });
+    }
+
+    ngOnDestroy() {
+        this.sub.unsubscribe();
     }
 
     public onSubmit(values: Object): void {
@@ -125,7 +114,6 @@ export class CreateOrgUserComponent  {
                 () => {
                     console.log("The POST observable is now completed.");
                     //Remove when return status is fixed;
-                    this.toastrService.success("User created.");
                     this.form.reset();
 
                 });
@@ -136,7 +124,22 @@ export class CreateOrgUserComponent  {
         }
     }
 
+    public onPasswordGenerate(e) {
+        e.preventDefault();
+        this.form.get('password').setValue(randomPassword(12));
+    }
 
+
+}
+
+export function randomPassword(length) {
+    var chars = "abcdefghijklmnopqrstuvwxyz!@#$%^&*()-+<>ABCDEFGHIJKLMNOP1234567890";
+    var pass = "";
+    for (var x = 0; x < length; x++) {
+        var i = Math.floor(Math.random() * chars.length);
+        pass += chars.charAt(i);
+    }
+    return pass;
 }
 
 export function emailValidator(control: FormControl): { [key: string]: any } {

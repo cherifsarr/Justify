@@ -31,6 +31,14 @@ export class OrgUserService extends BaseService {
         return this.http.post(
             this.baseUrl + '/accounts',
             JSON.stringify(user),
+
+          //  { responseType: 'text' }
+        );
+    }
+
+    getOrgUsers() {
+        return this.http.get<User[]>(
+            this.baseUrl + '/orgusers'
         );
     }
 

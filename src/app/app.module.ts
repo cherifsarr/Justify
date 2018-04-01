@@ -16,9 +16,7 @@ import { AuthService } from './shared/services/auth.service';
 //import { JwtHelperService } from '@auth0/angular-jwt';
 import { UserService } from './shared/services/user.service';
 
-import { FeaturesService } from './shared/services/features.service';
-import { RolesService } from './shared/services/roles.service';
-import { EditroleService } from './shared/services/editrole.service';
+//import { FeaturesService } from './shared/services/features.service';
 
 
 
@@ -55,8 +53,8 @@ export function tokenGetter() {
           }
       })
   ],
-    providers: [AppConfig, AuthGuard, AuthService, UserService, ConfigService, FeaturesService,
-                    RolesService, EditroleService,
+    providers: [AppConfig, AuthGuard, AuthService, UserService, ConfigService,
+                    
       {
           provide: HTTP_INTERCEPTORS,
           useClass: AuthInterceptor,

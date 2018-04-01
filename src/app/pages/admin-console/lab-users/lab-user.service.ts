@@ -34,8 +34,6 @@ export class LabUserService extends BaseService {
         ).subscribe(
 
             (val) => {
-                //  let result: AuthResult = JSON.parse(val.toString());
-             //   console.log("POST call successful value returned in body", val);
                 return true;
             },
             response => {
@@ -44,6 +42,12 @@ export class LabUserService extends BaseService {
             () => {
                 // console.log("The POST observable is now completed.");
             });
+    }
+
+    getLabUsers() {
+        return this.http.get<User[]>(
+            this.baseUrl + '/labusers'
+        );
     }
 
     getRoles(scope: number) {

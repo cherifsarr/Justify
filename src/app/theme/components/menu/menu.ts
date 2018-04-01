@@ -56,13 +56,14 @@ export const menuItems = [
               routerLink: 'admin-console/roles',
           },
           {
-              title: 'AHS Profile',
-              routerLink: 'admin-console/org-profile',
+              title: 'AHS',
+              //routerLink: 'admin-console/orgs',
+              routerLink: 'admin-console/orgs/editorg/680b4638-e23c-4bd6-72cd-08d58e2d9e43',
           },
-          {
-              title: 'AHS Users',
-              routerLink: 'admin-console/org-users',
-          },
+          //{
+          //    title: 'AHS Users',
+          //    routerLink: 'admin-console/org-users',
+          //},
           {
               title: 'Lab Profile',
               routerLink: 'admin-console/lab-profile',

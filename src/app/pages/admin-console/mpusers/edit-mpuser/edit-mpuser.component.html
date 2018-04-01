@@ -144,7 +144,7 @@
                         <div class="form-group row ">
                             <label for="password" class="col-lg-3 form-control-label m-t-5">Password</label>
                             <div class="col-lg-9">
-                                <input formControlName="password" class="form-control checking-field" placeholder="Password" type="password" minlength="6">
+                                <input formControlName="password" class="form-control checking-field" placeholder="Password" type="text" minlength="6">
                                 <span class="help-block" *ngIf="form.get('password').touched">
                                     <span class="text-danger" *ngIf="form.get('password').hasError('required')">Password is required</span>
                                     <span class="text-danger" *ngIf="form.get('password').hasError('minlength')">Password isn't long enough, minimum of 6 characters</span>
@@ -154,7 +154,7 @@
                     </div>
 
                     <div class="col-md-6 m-t-5">
-                        <a href="#">Random Password</a>
+                        <button class="btn btn-primary" (click)="onPasswordGenerate($event)">Generate</button>
                     </div>
                 </div>
 

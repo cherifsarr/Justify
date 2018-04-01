@@ -1,5 +1,5 @@
-import { Component, ViewEncapsulation } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, VERSION, OnInit, OnDestroy, ViewEncapsulation, ViewChild } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { FormGroup, FormControl, ReactiveFormsModule, AbstractControl, FormBuilder, Validators } from '@angular/forms';
 
 import { User } from "../../../../shared/models/user";
@@ -13,8 +13,10 @@ import { LabUserService } from "../lab-user.service";
 })
 
 
-export class EditLabUserComponent {
-    public router: Router;
+export class EditLabUserComponent implements OnInit, OnDestroy {
+    id: string;
+    private sub: any;
+    public router: ActivatedRoute;
     public form: FormGroup;
     public username: AbstractControl;
     public role: AbstractControl;
@@ -37,7 +39,7 @@ export class EditLabUserComponent {
     public Roles: RoleListItem[];
 
 
-    constructor(router: Router, fb: FormBuilder, private userService: LabUserService) {
+    constructor(router: ActivatedRoute, fb: FormBuilder, private userService: LabUserService) {
         this.router = router;
         this.form = fb.group({
             username: ['', Validators.compose([Validators.required, Validators.minLength(3)])],
@@ -65,6 +67,16 @@ export class EditLabUserComponent {
 
     }
 
+    ngOnInit() {
+        this.sub = this.router.params.subscribe(params => {
+            this.id = params['id'];
+        });
+    }
+
+    ngOnDestroy() {
+        this.sub.unsubscribe();
+    }
+
     public onSubmit(values: Object): void {
         if (this.form.valid) {
          //   alert(this.form.get('username').value);
@@ -84,7 +96,22 @@ export class EditLabUserComponent {
         }
     }
 
+    public onPasswordGenerate(e) {
+        e.preventDefault();
+        this.form.get('password').setValue(randomPassword(12));
+    }
 
+
+}
+
+export function randomPassword(length) {
+    var chars = "abcdefghijklmnopqrstuvwxyz!@#$%^&*()-+<>ABCDEFGHIJKLMNOP1234567890";
+    var pass = "";
+    for (var x = 0; x < length; x++) {
+        var i = Math.floor(Math.random() * chars.length);
+        pass += chars.charAt(i);
+    }
+    return pass;
 }
 
 export function emailValidator(control: FormControl): { [key: string]: any } {

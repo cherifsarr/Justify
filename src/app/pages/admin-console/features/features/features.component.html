@@ -1,0 +1,64 @@
+<!--<p>
+  features works!
+</p>-->
+
+<div class="row">
+    <div class="col">
+        <div widget class="card">
+            <div class="card-header">
+                <span>List of Features</span>
+            </div>
+            <div class="card-body widget-body">
+                <div class="input-group input-group-sm my-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fa fa-search"></i></span>
+                    </div>
+                    <input class="form-control" type="text" placeholder="Search ..." (keyup)="updateFilter($event)" />
+                </div>
+
+                <ngx-datatable #table
+                               class="bootstrap"
+                               [headerHeight]="30"
+                               [limit]="10"
+                               [columnMode]="'force'"
+                               [footerHeight]="30"
+                               [rowHeight]="'auto'"
+                               [rows]="rows">
+                    <ngx-datatable-column [width]="30"
+                                          [sortable]="false"
+                                          [canAutoResize]="false"
+                                          [draggable]="false"
+                                          [resizeable]="false"
+                                          [headerCheckboxable]="false"
+                                          [checkboxable]="false">
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="Feature Id" prop="code">
+                        <ng-template ngx-datatable-cell-template let-value="value">
+                            {{value}}
+                        </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="Feature Name" prop="name">
+                        <ng-template ngx-datatable-cell-template let-value="value">
+                            {{value}}
+                        </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="AHS" prop="orgLevel">
+                        <ng-template ngx-datatable-cell-template let-value="value">
+                            <input type="checkbox" [checked]="value" disabled="disabled" />
+                        </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="Lab" prop="labLevel">
+                        <ng-template ngx-datatable-cell-template let-value="value">
+                            <input type="checkbox" [checked]="value" disabled="disabled" />
+                        </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="MP" prop="scopemp">
+                        <ng-template ngx-datatable-cell-template let-value="value">
+                            <input type="checkbox" [checked]="mpLevel" disabled="disabled" />
+                        </ng-template>
+                    </ngx-datatable-column>
+                </ngx-datatable>
+            </div>
+        </div>
+    </div>
+</div>
