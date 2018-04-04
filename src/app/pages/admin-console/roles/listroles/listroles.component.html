@@ -1,0 +1,63 @@
+<!--<p>
+  listroles works!
+</p>-->
+
+
+<div class="row">
+    <div class="col">
+        <div widget class="card">
+            <div class="card-header">
+                <span>List of All Roles</span>
+            </div>
+            <div class="card-body widget-body">
+                <div class="input-group input-group-sm my-3">
+                    <a href="#">Create a New Role</a>
+                </div>
+                <div class="input-group input-group-sm my-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fa fa-search"></i></span>
+                    </div>
+                    <input class="form-control" type="text" placeholder="Search ..." (keyup)="updateFilter($event)" />
+                </div>
+
+                <ngx-datatable #table
+                               class="bootstrap"
+                               [headerHeight]="30"
+                               [limit]="10"
+                               [columnMode]="'force'"
+                               [footerHeight]="30"
+                               [rowHeight]="'auto'"
+                               [rows]="rows">
+                    <ngx-datatable-column name="Name" prop="name">
+                        <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
+                            <a [routerLink]="['../editrole', row.id]"> {{value}} </a>
+                        </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="AHS" prop="orgLevel">
+                        <ng-template ngx-datatable-cell-template let-value="value">
+                            <input type="checkbox" [checked]="value" disabled="disabled" />
+                        </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="Lab" prop="labLevel">
+                        <ng-template ngx-datatable-cell-template let-value="value">
+                            <input type="checkbox" [checked]="value" disabled="disabled" />
+                        </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="MP" prop="mpLevel">
+                        <ng-template ngx-datatable-cell-template let-value="value">
+                            <input type="checkbox" [checked]="value" disabled="disabled" />
+                        </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="Actions" prop="custom">
+                        <ng-template ngx-datatable-cell-template let-row="row">
+                            <span *ngIf="!row.custom">Built-in</span>
+                            <span *ngIf="(row.custom && row.enabled)">Custom (Enabled)</span>
+                            <span *ngIf="(row.custom && !row.enabled)">Custom (Disabled)</span>
+                        </ng-template>
+                    </ngx-datatable-column>
+                </ngx-datatable>
+            </div>
+        </div>
+    </div>
+</div>
+
