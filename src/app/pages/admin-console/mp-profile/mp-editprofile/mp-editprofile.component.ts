@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, AbstractControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import { STATES } from '../../../../shared/utils/states-titlecase';
 @Component({
   selector: 'ahs-mp-editprofile',
   templateUrl: './mp-editprofile.component.html',
@@ -7,6 +8,7 @@ import { FormBuilder, FormControl, FormGroup, AbstractControl, ReactiveFormsModu
 })
 export class MpEditprofileComponent implements OnInit {
   public form: FormGroup;
+  public states = STATES;
   constructor(formBuilder: FormBuilder) {
 
     this.form = formBuilder.group({
@@ -21,7 +23,9 @@ export class MpEditprofileComponent implements OnInit {
       fax: ['', Validators.required],
       contactName: ['', Validators.required],
       email: [''],
-      testRights: [''],
+      testRightsPgx: [''],
+      testRightsCancer: [''],
+      testRightsToxicology: [''],
       website: ['']
 
     })

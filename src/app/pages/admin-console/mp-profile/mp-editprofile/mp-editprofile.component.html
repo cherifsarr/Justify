@@ -29,18 +29,29 @@
                       <label for="address" class="col-sm-3 form-control-label m-t-5"><span>*</span>Address</label>
                       <div class="col-sm-9">
                           <input formControlName="address" type="text" class="form-control" />
+                          <span class="help-block" *ngIf="form.get('displayName').touched">
+                              <span class="text-danger" *ngIf="form.get('displayName').hasError('required')">Address is required</span>
+                          </span>
                       </div>
                   </div>
                   <div class="form-group row">
                       <label for="city" class="col-sm-3 form-control-label m-t-5"><span>*</span>City</label>
                       <div class="col-sm-9">
                           <input formControlName="city" type="text" class="form-control" />
+                          <span class="help-block" *ngIf="form.get('displayName').touched">
+                              <span class="text-danger" *ngIf="form.get('displayName').hasError('required')">City is required</span>
+                          </span>
                       </div>
                   </div>
                   <div class="form-group row">
                       <label for="state" class="col-sm-3 form-control-label m-t-5"><span>*</span>State</label>
                       <div class="col-sm-9">
-                          <input formControlName="state" type="text" class="form-control" />
+                        <select formControlName="state" id="exampleSelect3" class="form-control custom-select">
+                            <option *ngFor="let state of states" value="{{state.abbreviation}}">{{state.name}}</option>
+                        </select>
+                        <span class="help-block" *ngIf="form.get('displayName').touched">
+                            <span class="text-danger" *ngIf="form.get('displayName').hasError('required')">State is required</span>
+                        </span>
                       </div>
                   </div>
                   <div class="form-group row">
@@ -77,6 +88,35 @@
                       <label for="email" class="col-sm-3 form-control-label m-t-5">Contact Email</label>
                       <div class="col-sm-9">
                           <input formControlName="email" type="text" class="form-control" />
+                      </div>
+                  </div>
+                  <div class="form-group row">
+                      <label for="testRights" class="col-sm-3 form-control-label m-t-5">Ancillary Tests</label>
+                      <div class="col-sm-9">
+                          <div class="abc-radio abc-radio-info">
+                              <input type="radio" name="abc-radio" id="abc-radio4">
+                              <label for="abc-radio4">PGx</label>
+                          </div>
+                          <div class="abc-radio abc-radio-warning">
+                              <input type="radio" name="abc-radio" id="abc-radio5">
+                              <label for="abc-radio5">Cancer</label>
+                          </div>
+                          <div class="abc-radio abc-radio-danger">
+                              <input type="radio" name="abc-radio" id="abc-radio6">
+                              <label for="abc-radio6">Toxicology</label>
+                          </div>
+                          <!-- <div class="abc-radio">
+                              <input type="radio" formControlName="testRightsPgx" id="testRightspgx">
+                              <label for="testRights">Default</label>
+                          </div>
+                          <div class="abc-radio abc-radio-primary">
+                              <input type="radio" formControlName="testRightsCancer" id="testRightscancer">
+                              <label for="testRights">Primary</label>
+                          </div>
+                          <div class="abc-radio abc-radio-success">
+                              <input type="radio" formControlName="testRightsToxicology" id="testRightstoxi">
+                              <label for="testRights">Success</label>
+                          </div> -->
                       </div>
                   </div>
                   <div class="form-group row">
