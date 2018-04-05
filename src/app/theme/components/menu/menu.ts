@@ -77,17 +77,17 @@ export const menuItems = [
               routerLink: 'admin-console/lab-users',
           },
           {
-              title: 'Medical Practice Profile',
+              title: 'Medical Practice',
               routerLink: 'admin-console/mp-profile',
           },
-          {
-              title: 'MP Locations',
-              routerLink: 'admin-console/mp-locations',
-          },
-          {
-              title: 'MP Users',
-              routerLink: 'admin-console/mp-users',
-          },
+        //   {
+        //       title: 'MP Locations',
+        //       routerLink: 'admin-console/mp-locations',
+        //   },
+        //   {
+        //       title: 'MP Users',
+        //       routerLink: 'admin-console/mp-users',
+        //   },
       ]
   },
 ];

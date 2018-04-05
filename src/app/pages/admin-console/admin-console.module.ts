@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DirectivesModule } from '../../theme/directives/directives.module';
 import { PipesModule } from '../../theme/pipes/pipes.module';
 //import { FeaturesComponent } from './features/features.component';
@@ -12,6 +12,9 @@ import { LabPreferencesComponent } from './lab-preferences/lab-preferences.compo
 import { MpProfileComponent } from './mp-profile/mp-profile.component';
 import { MpLocationsComponent } from './mp-locations/mp-locations.component';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import {MpListprofileComponent} from './mp-profile/mp-listprofile/mp-listprofile.component';
+import { MPProfileService } from '../../shared/services/mp-profile.service';
+import { MpEditprofileComponent } from './mp-profile/mp-editprofile/mp-editprofile.component';
 
 
 
@@ -48,10 +51,12 @@ export const routes = [
       NgxDatatableModule,
       DirectivesModule,
       PipesModule,
+      ReactiveFormsModule,
       RouterModule.forChild(routes)
     ],
+    providers: [MPProfileService],
     declarations: [OrgProfileComponent, LabProfileComponent,
-        LabPreferencesComponent, MpProfileComponent, MpLocationsComponent
+        LabPreferencesComponent, MpProfileComponent, MpLocationsComponent, MpListprofileComponent, MpEditprofileComponent
     ]
 })
 export class AdminConsoleModule { }

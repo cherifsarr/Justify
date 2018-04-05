@@ -1,0 +1,99 @@
+<div class="row">
+  <div class="col">
+      <div widget class="card">
+          <div class="card-header">
+              <span>Account (Medical Practice) Setup</span>
+            </div>
+          <div class="card-body widget-body">
+              <form [formGroup]="form" class="form-horizontal" (ngSubmit)="onFormSubmit(form.value)">
+                  <div class="form-group row">
+                      <label for="name" class="col-sm-3 form-control-label m-t-5"><span>*</span>Name</label>
+                      <div class="col-sm-9">
+                          <input formControlName="name" type="text" class="form-control" />
+                          <span class="help-block" *ngIf="form.get('name').touched">
+                              <span class="text-danger" *ngIf="form.get('name').hasError('required')">Name is required</span>
+                              <span class="text-danger" *ngIf="form.get('name').hasError('minlength')">Minimum of 1 character</span>
+                          </span>
+                      </div>
+                  </div>
+                  <div class="form-group row">
+                      <label for="displayName" class="col-sm-3 form-control-label m-t-5"><span>*</span>Display Name</label>
+                      <div class="col-sm-9">
+                          <input formControlName="displayName" type="text" class="form-control" />
+                          <span class="help-block" *ngIf="form.get('displayName').touched">
+                              <span class="text-danger" *ngIf="form.get('displayName').hasError('required')">Display name is required</span>
+                          </span>
+                      </div>
+                  </div>
+                  <div class="form-group row">
+                      <label for="address" class="col-sm-3 form-control-label m-t-5"><span>*</span>Address</label>
+                      <div class="col-sm-9">
+                          <input formControlName="address" type="text" class="form-control" />
+                      </div>
+                  </div>
+                  <div class="form-group row">
+                      <label for="city" class="col-sm-3 form-control-label m-t-5"><span>*</span>City</label>
+                      <div class="col-sm-9">
+                          <input formControlName="city" type="text" class="form-control" />
+                      </div>
+                  </div>
+                  <div class="form-group row">
+                      <label for="state" class="col-sm-3 form-control-label m-t-5"><span>*</span>State</label>
+                      <div class="col-sm-9">
+                          <input formControlName="state" type="text" class="form-control" />
+                      </div>
+                  </div>
+                  <div class="form-group row">
+                      <label for="zip" class="col-sm-3 form-control-label m-t-5"><span>*</span>Zip Code</label>
+                      <div class="col-sm-9">
+                          <input formControlName="zip" type="text" class="form-control" />
+                      </div>
+                  </div>
+                  <div class="form-group row">
+                      <label for="npi" class="col-sm-3 form-control-label m-t-5"><span>*</span>NPI</label>
+                      <div class="col-sm-9">
+                          <input formControlName="npi" type="text" class="form-control" />
+                      </div>
+                  </div>
+                  <div class="form-group row">
+                      <label for="phone" class="col-sm-3 form-control-label m-t-5"><span>*</span>Phone</label>
+                      <div class="col-sm-9">
+                          <input formControlName="phone" type="text" class="form-control" />
+                      </div>
+                  </div>
+                  <div class="form-group row">
+                      <label for="fax" class="col-sm-3 form-control-label m-t-5"><span>*</span>Fax</label>
+                      <div class="col-sm-9">
+                          <input formControlName="fax" type="text" class="form-control" />
+                      </div>
+                  </div>
+                  <div class="form-group row">
+                      <label for="contactName" class="col-sm-3 form-control-label m-t-5">Contact</label>
+                      <div class="col-sm-9">
+                          <input formControlName="contactName" type="text" class="form-control" placeholder="First name, Last name" />
+                      </div>
+                  </div>
+                  <div class="form-group row">
+                      <label for="email" class="col-sm-3 form-control-label m-t-5">Contact Email</label>
+                      <div class="col-sm-9">
+                          <input formControlName="email" type="text" class="form-control" />
+                      </div>
+                  </div>
+                  <div class="form-group row">
+                      <label for="website" class="col-sm-3 form-control-label m-t-5">Website URL</label>
+                      <div class="col-sm-9">
+                          <input formControlName="website" type="text" class="form-control" />
+                      </div>
+                  </div>
+                  <div class="form-group row">
+                      <div class="col-sm-12 text-right">
+                          <button class="btn" (click)="cancelme($event)">Cancel</button>
+                          <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                          <button class="btn btn-main" type="submit">Save</button>
+                      </div>
+                  </div>
+              </form>
+          </div>
+      </div>
+  </div>
+</div>
