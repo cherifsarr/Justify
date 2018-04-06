@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import {Observable} from "rxjs/Observable";
 import {of} from "rxjs/observable/of";
 import {HttpClient} from "@angular/common/http";
-import {ConfigService} from "../utils/config.service";
-import {Mplocation} from "../models/mplocation";
 import {catchError} from "rxjs/operators";
+import { ConfigService } from '../../../../shared/utils/config.service';
+import { Mplocation } from '../../../../shared/models/mplocation';
 
 @Injectable()
 export class MpLocationsService {

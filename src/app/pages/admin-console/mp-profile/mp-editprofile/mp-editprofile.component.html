@@ -1,139 +1,203 @@
-<div class="row">
-  <div class="col">
-      <div widget class="card">
-          <div class="card-header">
-              <span>Account (Medical Practice) Setup</span>
-            </div>
-          <div class="card-body widget-body">
-              <form [formGroup]="form" class="form-horizontal" (ngSubmit)="onFormSubmit(form.value)">
-                  <div class="form-group row">
-                      <label for="name" class="col-sm-3 form-control-label m-t-5"><span>*</span>Name</label>
-                      <div class="col-sm-9">
-                          <input formControlName="name" type="text" class="form-control" />
-                          <span class="help-block" *ngIf="form.get('name').touched">
-                              <span class="text-danger" *ngIf="form.get('name').hasError('required')">Name is required</span>
-                              <span class="text-danger" *ngIf="form.get('name').hasError('minlength')">Minimum of 1 character</span>
-                          </span>
-                      </div>
-                  </div>
-                  <div class="form-group row">
-                      <label for="displayName" class="col-sm-3 form-control-label m-t-5"><span>*</span>Display Name</label>
-                      <div class="col-sm-9">
-                          <input formControlName="displayName" type="text" class="form-control" />
-                          <span class="help-block" *ngIf="form.get('displayName').touched">
-                              <span class="text-danger" *ngIf="form.get('displayName').hasError('required')">Display name is required</span>
-                          </span>
-                      </div>
-                  </div>
-                  <div class="form-group row">
-                      <label for="address" class="col-sm-3 form-control-label m-t-5"><span>*</span>Address</label>
-                      <div class="col-sm-9">
-                          <input formControlName="address" type="text" class="form-control" />
-                          <span class="help-block" *ngIf="form.get('displayName').touched">
-                              <span class="text-danger" *ngIf="form.get('displayName').hasError('required')">Address is required</span>
-                          </span>
-                      </div>
-                  </div>
-                  <div class="form-group row">
-                      <label for="city" class="col-sm-3 form-control-label m-t-5"><span>*</span>City</label>
-                      <div class="col-sm-9">
-                          <input formControlName="city" type="text" class="form-control" />
-                          <span class="help-block" *ngIf="form.get('displayName').touched">
-                              <span class="text-danger" *ngIf="form.get('displayName').hasError('required')">City is required</span>
-                          </span>
-                      </div>
-                  </div>
-                  <div class="form-group row">
-                      <label for="state" class="col-sm-3 form-control-label m-t-5"><span>*</span>State</label>
-                      <div class="col-sm-9">
-                        <select formControlName="state" id="exampleSelect3" class="form-control custom-select">
-                            <option *ngFor="let state of states" value="{{state.abbreviation}}">{{state.name}}</option>
-                        </select>
-                        <span class="help-block" *ngIf="form.get('displayName').touched">
-                            <span class="text-danger" *ngIf="form.get('displayName').hasError('required')">State is required</span>
-                        </span>
-                      </div>
-                  </div>
-                  <div class="form-group row">
-                      <label for="zip" class="col-sm-3 form-control-label m-t-5"><span>*</span>Zip Code</label>
-                      <div class="col-sm-9">
-                          <input formControlName="zip" type="text" class="form-control" />
-                      </div>
-                  </div>
-                  <div class="form-group row">
-                      <label for="npi" class="col-sm-3 form-control-label m-t-5"><span>*</span>NPI</label>
-                      <div class="col-sm-9">
-                          <input formControlName="npi" type="text" class="form-control" />
-                      </div>
-                  </div>
-                  <div class="form-group row">
-                      <label for="phone" class="col-sm-3 form-control-label m-t-5"><span>*</span>Phone</label>
-                      <div class="col-sm-9">
-                          <input formControlName="phone" type="text" class="form-control" />
-                      </div>
-                  </div>
-                  <div class="form-group row">
-                      <label for="fax" class="col-sm-3 form-control-label m-t-5"><span>*</span>Fax</label>
-                      <div class="col-sm-9">
-                          <input formControlName="fax" type="text" class="form-control" />
-                      </div>
-                  </div>
-                  <div class="form-group row">
-                      <label for="contactName" class="col-sm-3 form-control-label m-t-5">Contact</label>
-                      <div class="col-sm-9">
-                          <input formControlName="contactName" type="text" class="form-control" placeholder="First name, Last name" />
-                      </div>
-                  </div>
-                  <div class="form-group row">
-                      <label for="email" class="col-sm-3 form-control-label m-t-5">Contact Email</label>
-                      <div class="col-sm-9">
-                          <input formControlName="email" type="text" class="form-control" />
-                      </div>
-                  </div>
-                  <div class="form-group row">
-                      <label for="testRights" class="col-sm-3 form-control-label m-t-5">Ancillary Tests</label>
-                      <div class="col-sm-9">
-                          <div class="abc-radio abc-radio-info">
-                              <input type="radio" name="abc-radio" id="abc-radio4">
-                              <label for="abc-radio4">PGx</label>
-                          </div>
-                          <div class="abc-radio abc-radio-warning">
-                              <input type="radio" name="abc-radio" id="abc-radio5">
-                              <label for="abc-radio5">Cancer</label>
-                          </div>
-                          <div class="abc-radio abc-radio-danger">
-                              <input type="radio" name="abc-radio" id="abc-radio6">
-                              <label for="abc-radio6">Toxicology</label>
-                          </div>
-                          <!-- <div class="abc-radio">
-                              <input type="radio" formControlName="testRightsPgx" id="testRightspgx">
-                              <label for="testRights">Default</label>
-                          </div>
-                          <div class="abc-radio abc-radio-primary">
-                              <input type="radio" formControlName="testRightsCancer" id="testRightscancer">
-                              <label for="testRights">Primary</label>
-                          </div>
-                          <div class="abc-radio abc-radio-success">
-                              <input type="radio" formControlName="testRightsToxicology" id="testRightstoxi">
-                              <label for="testRights">Success</label>
-                          </div> -->
-                      </div>
-                  </div>
-                  <div class="form-group row">
-                      <label for="website" class="col-sm-3 form-control-label m-t-5">Website URL</label>
-                      <div class="col-sm-9">
-                          <input formControlName="website" type="text" class="form-control" />
-                      </div>
-                  </div>
-                  <div class="form-group row">
-                      <div class="col-sm-12 text-right">
-                          <button class="btn" (click)="cancelme($event)">Cancel</button>
-                          <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                          <button class="btn btn-main" type="submit">Save</button>
-                      </div>
-                  </div>
-              </form>
-          </div>
-      </div>
+<div class="row">    
+    <div class="col bottom-30">
+                <div class="row bottom-30">
+                    <div class="col">
+                        <ul class="nav nav-tabs top tabs-primary" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="#p1" role="tab" data-toggle="tab">Medical Practice Profile</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#p2" role="tab" data-toggle="tab">Locations</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#p3" role="tab" data-toggle="tab">Users</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane fade show active" id="p1">
+                                <div widget class="card">
+                                    <div class="card-header">
+                                        <span>Account (Medical Practice) Setup</span>
+                                      </div>
+                                    <div class="card-body widget-body">
+                                        <form [formGroup]="form" class="form-horizontal" (ngSubmit)="onFormSubmit(form.value)">
+                                            <div class="form-group row">
+                                                <label for="name" class="col-sm-3 form-control-label m-t-5"><span>*</span>Name</label>
+                                                <div class="col-sm-9">
+                                                    <input formControlName="name" type="text" class="form-control" />
+                                                    <span class="help-block" *ngIf="form.get('name').touched">
+                                                        <span class="text-danger" *ngIf="form.get('name').hasError('required')">Name is required</span>
+                                                        <span class="text-danger" *ngIf="form.get('name').hasError('minlength')">Minimum of 1 character</span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="displayName" class="col-sm-3 form-control-label m-t-5"><span>*</span>Display Name</label>
+                                                <div class="col-sm-9">
+                                                    <input formControlName="displayName" type="text" class="form-control" />
+                                                    <span class="help-block" *ngIf="form.get('displayName').touched">
+                                                        <span class="text-danger" *ngIf="form.get('displayName').hasError('required')">Display name is required</span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="address" class="col-sm-3 form-control-label m-t-5"><span>*</span>Address</label>
+                                                <div class="col-sm-9">
+                                                    <input formControlName="address" type="text" class="form-control" />
+                                                    <span class="help-block" *ngIf="form.get('address').touched">
+                                                        <span class="text-danger" *ngIf="form.get('address').hasError('required')">Address is required</span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="city" class="col-sm-3 form-control-label m-t-5"><span>*</span>City</label>
+                                                <div class="col-sm-9">
+                                                    <input formControlName="city" type="text" class="form-control" />
+                                                    <span class="help-block" *ngIf="form.get('city').touched">
+                                                        <span class="text-danger" *ngIf="form.get('city').hasError('required')">City is required</span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="state" class="col-sm-3 form-control-label m-t-5"><span>*</span>State</label>
+                                                <div class="col-sm-9">
+                                                  <select formControlName="state" id="exampleSelect3" class="form-control custom-select">
+                                                      <option *ngFor="let state of states" value="{{state.abbreviation}}">{{state.name}}</option>
+                                                  </select>
+                                                  <span class="help-block" *ngIf="form.get('state').touched">
+                                                      <span class="text-danger" *ngIf="form.get('state').hasError('required')">State is required</span>
+                                                  </span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="zip" class="col-sm-3 form-control-label m-t-5"><span>*</span>Zip Code</label>
+                                                <div class="col-sm-9">
+                                                    <input formControlName="zip" type="text" class="form-control" />
+                                                    <span class="help-block" *ngIf="form.get('zip').touched">
+                                                        <span class="text-danger" *ngIf="form.get('zip').hasError('required')">Zip code is required</span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="npi" class="col-sm-3 form-control-label m-t-5"><span>*</span>NPI</label>
+                                                <div class="col-sm-9">
+                                                    <input formControlName="npi" type="text" class="form-control" />
+                                                    <span class="help-block" *ngIf="form.get('npi').touched">
+                                                        <span class="text-danger" *ngIf="form.get('npi').hasError('required')">NPI is required</span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="phone" class="col-sm-3 form-control-label m-t-5"><span>*</span>Phone</label>
+                                                <div class="col-sm-9">
+                                                    <input formControlName="phone" type="text" class="form-control" />
+                                                    <span class="help-block" *ngIf="form.get('phone').touched">
+                                                        <span class="text-danger" *ngIf="form.get('phone').hasError('required')">State is required</span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="fax" class="col-sm-3 form-control-label m-t-5"><span>*</span>Fax</label>
+                                                <div class="col-sm-9">
+                                                    <input formControlName="fax" type="text" class="form-control" />
+                                                    <span class="help-block" *ngIf="form.get('fax').touched">
+                                                        <span class="text-danger" *ngIf="form.get('fax').hasError('required')">State is required</span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="contactName" class="col-sm-3 form-control-label m-t-5"><span>*</span>Contact</label>
+                                                <div class="col-sm-9">
+                                                    <input formControlName="contactName" type="text" class="form-control" placeholder="First name, Last name" />
+                                                    <span class="help-block" *ngIf="form.get('contactName').touched">
+                                                        <span class="text-danger" *ngIf="form.get('contactName').hasError('required')">State is required</span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="email" class="col-sm-3 form-control-label m-t-5">Contact Email</label>
+                                                <div class="col-sm-9">
+                                                    <input formControlName="email" type="text" class="form-control" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="testRights" class="col-sm-3 form-control-label m-t-5">Ancillary Tests</label>
+                                                <div class="form-group radio col-sm-9">
+                                                    <div class="custom-control custom-radio">
+                                                        <input type="radio"  formControlName="testRights" value="{{testRight.PGx}}" [checked]="isCheckedPgx"  class="custom-control-input" id="radioDefault">
+                                                        <label class="custom-control-label" for="radioDefault">PGx</label>
+                                                    </div>
+                                                    <div class="custom-control custom-radio">
+                                                        <input type="radio" formControlName="testRights" value="{{testRight.Cancer}}" [checked]="isCheckedCan" class="custom-control-input" id="radioPrimary">
+                                                        <label class="custom-control-label" for="radioPrimary">Cancer</label>
+                                                    </div>
+                                                    <div class="custom-control custom-radio">
+                                                        <input type="radio" formControlName="testRights" value="{{testRight.Toxicology}}" [checked]="isCheckedTox" class="custom-control-input" id="radioSuccess">
+                                                        <label class="custom-control-label" for="radioSuccess">Toxicology</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- <div class="col-md-6 col-12">
+                                                <label for="testRights" class="col-sm-3 form-control-label m-t-5">Ancillary Tests</label>
+                                                <div class="form-group">
+                                                    <div class="abc-radio">
+                                                        <input type="radio" formControlName="testRightsPgx" name="abc-radio" id="abc-radio1" checked>
+                                                        <label for="abc-radio1">Default</label>
+                                                    </div>
+                                                    <div class="abc-radio abc-radio-primary">
+                                                        <input type="radio"formControlName="testRightsCancer" name="abc-radio" id="abc-radio2">
+                                                        <label for="abc-radio2">Primary</label>
+                                                    </div>
+                                                    <div class="abc-radio abc-radio-success">
+                                                        <input type="radio" name="testRightsToxicology" formControlName="abc-radio" id="abc-radio3">
+                                                        <label for="abc-radio3">Success</label>
+                                                    </div>
+                                                    <div class="abc-radio abc-radio-info">
+                                                        <input type="radio" name="abc-radio" id="abc-radio4">
+                                                        <label for="abc-radio4">Info</label>
+                                                    </div>
+                                                    <div class="abc-radio abc-radio-warning">
+                                                        <input type="radio" name="abc-radio" id="abc-radio5">
+                                                        <label for="abc-radio5">Warning</label>
+                                                    </div>
+                                                    <div class="abc-radio abc-radio-danger">
+                                                        <input type="radio" name="abc-radio" id="abc-radio6">
+                                                        <label for="abc-radio6">Danger</label>
+                                                    </div>
+                                                    
+                                                </div>
+                                            </div>   -->
+                                            <div class="form-group row">
+                                                <label for="website" class="col-sm-3 form-control-label m-t-5">Website URL</label>
+                                                <div class="col-sm-9">
+                                                    <input formControlName="website" type="text" class="form-control" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="logo" class="col-sm-3 form-control-label m-t-5">Logo</label>
+                                                <div class="col-sm-9">
+                                                   <az-image-uploader (onLogo)="onLogo($event)"></az-image-uploader>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <div class="col-sm-12 text-right">
+                                                    <button class="btn" (click)="cancelme($event)">Cancel</button>
+                                                    <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                                                    <button class="btn btn-main" type="submit">Save</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="p2">
+                               <ahs-mp-listlocation></ahs-mp-listlocation>
+                            </div>
+                            <div class="tab-pane fade" id="p3">
+                              <!--  <ahs-list-mpusers></ahs-list-mpusers>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    </div>
   </div>
-</div>

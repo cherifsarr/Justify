@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MpLocationsComponent } from './mp-locations.component';
+import { MpEditlocationComponent } from './mp-editlocation.component';
 
-describe('MpLocationsComponent', () => {
-  let component: MpLocationsComponent;
-  let fixture: ComponentFixture<MpLocationsComponent>;
+describe('MpEditlocationComponent', () => {
+  let component: MpEditlocationComponent;
+  let fixture: ComponentFixture<MpEditlocationComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MpLocationsComponent ]
+      declarations: [ MpEditlocationComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MpLocationsComponent);
+    fixture = TestBed.createComponent(MpEditlocationComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

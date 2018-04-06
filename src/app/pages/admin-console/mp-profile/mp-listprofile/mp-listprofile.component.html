@@ -6,7 +6,7 @@
           </div>
           <div class="card-body widget-body">
             <div class="input-group input-group-sm my-3">
-                    <a (click)="createNew($event)" href="#">Create a New MP Profile</a>
+                    <a [routerLink]="['../create']">Create a New MP Profile</a>
             </div>
             <div class="input-group input-group-sm my-3">
               <div class="input-group-prepend">
@@ -24,7 +24,7 @@
                                [rows]="rows">
                     <ngx-datatable-column name="Name" prop="name">
                         <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
-                            <a [routerLink]="['../editrole', row.id]"> {{value}} </a>
+                            <a [routerLink]="['../edit', row.id]"> {{value}} </a>
                         </ng-template>
                     </ngx-datatable-column>
                     <ngx-datatable-column name="Address" prop="address">
@@ -51,9 +51,4 @@
           </div>
       </div>
   </div>
-</div>
-<div class="row" *ngIf="isCreatedNew">    
-        <div class="col bottom-30">
-             <ahs-mp-editprofile></ahs-mp-editprofile>
-        </div>
 </div>

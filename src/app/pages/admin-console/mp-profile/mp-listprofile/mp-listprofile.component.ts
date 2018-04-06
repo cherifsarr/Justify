@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
-import { MPProfileService } from '../../../../shared/services/mp-profile.service';
 import { MPProfile } from '../../../../shared/models/mpprofile';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
+import { MPProfileService } from '../services/mp-profile.service';
 
 @Component({
   selector: 'ahs-mp-listprofile',

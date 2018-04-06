@@ -1,23 +1,25 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ConfigService } from '../utils/config.service';
+import { LabProfile } from '../../../../shared/models/lab-profile';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { catchError, map, tap } from 'rxjs/operators';
-import { MPProfile } from '../models/mpprofile';
+import { ConfigService } from '../../../../shared/utils/config.service';
+import { pipe } from 'rxjs';
 @Injectable()
-export class MPProfileService {
-
-  constructor(private http: HttpClient, private configService: ConfigService) { }
+export class LabProfileService {
+  constructor(private http: HttpClient, private configService:ConfigService) { }
   
-  getMPProfiles(): Observable<MPProfile[]> {
-    return this.http.get<MPProfile[]>(this.configService.getApiURI() + '/MPProfiles')
-    .pipe(
-      catchError(this.handleError('getMPProfiles', []))
-    );
+  /**
+   * Get all Lab Profiles
+   */
+  getLabProfiles(): Observable<LabProfile[]> {
+    return this.http.get<LabProfile[]>(this.configService.getApiURI() + "/LabProfiles")
+            .pipe(
+              catchError(this.handleError('getLabProfiles', []))
+            );
   }
-  
- /**
+/**
    * Handle the http operation that failed
    * Let the app continue
    * @param operation  name of the operation that failed
@@ -32,5 +34,4 @@ export class MPProfileService {
         return of(result as T);
     };
   }
-
 }
