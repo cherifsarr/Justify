@@ -1,3 +1,47 @@
-<p>
-  mp-locations works!
-</p>
+<div class="row">
+  <div class="col bottom-30">
+    <div widget class="card">
+      <div class="card-header">
+        <span>List of Locations</span>
+      </div>
+      <div class="card-body widget-body">
+        <div class="input-group input-group-sm my-3">
+          <a (click)="onclickShow($event)" href="#">Add a Location</a>
+        </div>
+        <ngx-datatable #table
+                       class="bootstrap"
+                       [headerHeight]="30"
+                       [limit]="10"
+                       [columnMode]="'force'"
+                       [footerHeight]="30"
+                       [rowHeight]="'auto'"
+                       [rows]="rows">
+          <ngx-datatable-column name="Location" prop="location">
+            <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
+              <a [routerLink]="['../editrole', row.id]"> {{value}} </a>
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="Address" prop="address">
+            <ng-template ngx-datatable-cell-template let-value="value">
+              {{value}}
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="City" prop="city">
+            <ng-template ngx-datatable-cell-template let-value="value">
+              {{value}}
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="State" prop="state">
+            <ng-template ngx-datatable-cell-template let-value="value">
+              {{value}}
+            </ng-template>
+          </ngx-datatable-column>
+        </ngx-datatable>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="showblock">
+  <ahs-create-mplocation></ahs-create-mplocation>
+</div>

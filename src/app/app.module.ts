@@ -25,6 +25,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './shared/utils/auth-interceptor';
 
 import { ConfigService } from './shared/utils/config.service';
+import { CreateMplocationComponent } from './pages/admin-console/mp-locations/create-mplocation/create-mplocation.component';
 
 export function tokenGetter() {
     return sessionStorage.getItem('auth_token');
@@ -35,7 +36,7 @@ export function tokenGetter() {
 @NgModule({
   declarations: [
     AppComponent,
-    ErrorComponent,
+    ErrorComponent
   ],
   imports: [
     BrowserModule,
