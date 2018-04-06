@@ -183,7 +183,7 @@
                                                 <div class="col-sm-12 text-right">
                                                     <button class="btn" (click)="cancelme($event)">Cancel</button>
                                                     <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                                                    <button class="btn btn-main" type="submit">Save</button>
+                                                    <button class="btn btn-main" type="submit" [disabled]="!form.valid">Save</button>
                                                 </div>
                                             </div>
                                         </form>
