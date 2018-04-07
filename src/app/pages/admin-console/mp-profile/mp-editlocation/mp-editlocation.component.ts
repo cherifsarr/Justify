@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, AbstractControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import {ActivatedRoute} from "@angular/router";
 import { Mplocation } from '../../../../shared/models/mplocation';
@@ -7,6 +7,7 @@ import { MpLocationsService } from '../services/mp-locations.service';
 import {MPProfileService} from "../services/mp-profile.service";
 import {MPProfile} from "../../../../shared/models/mpprofile";
 import { BusinessEntity } from '../../../../shared/models/business-entity';
+import {MPValidatorService} from "../services/mp-validators.service";
 
 @Component({
   selector: 'ahs-mp-editlocation',
@@ -39,6 +40,9 @@ export class MpEditlocationComponent implements OnInit {
   private location: Mplocation;
   isAnUpdate: boolean = false;
 
+  @Output() listMPLocations = new EventEmitter<any>();
+
+
   @Input()
    idLocation: string;
 
@@ -49,15 +53,15 @@ export class MpEditlocationComponent implements OnInit {
       private formBuilder: FormBuilder,
       private mpLocationsService: MpLocationsService,
       private mpProfileService: MPProfileService
-  ) {
-
+  )
+  {
       this.router = router;
 
       this.form = formBuilder.group({
           name: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
           contact: ['', Validators.required],
-          email: [''],
-          phone: ['', Validators.required],
+          email: ['', MPValidatorService.emailValidator],
+          phone: ['', Validators.compose([Validators.required, MPValidatorService.numberValidator])],
           address1: ['', Validators.required],
           address2: [''],
           city: ['', Validators.required],
@@ -67,6 +71,7 @@ export class MpEditlocationComponent implements OnInit {
 
       this.mpLocation = new Mplocation();
       this.mpProfile = new MPProfile();
+
   }
 
   ngOnInit() {
@@ -90,6 +95,9 @@ export class MpEditlocationComponent implements OnInit {
 
                           }
                       )
+              }
+              else  {
+                  this.form.reset();
               }
 
           }
@@ -120,7 +128,21 @@ export class MpEditlocationComponent implements OnInit {
          this.mpLocationsService.createLocation(this.mpLocation)
              .subscribe(resp=>{
                  this.form.reset();
-             });
+
+             },
+                 resp=>{
+
+                 },
+                 ()=>{
+                     this.mpLocationsService.getMPLocationsByIdProfil(this.id)
+                         .subscribe(resp=>{
+                             console.log('this.listMPLocations.emit(resp)');
+                             this.listMPLocations.emit(resp)
+                         });
+                 }
+
+             );
+
       }
 
   }

@@ -43,5 +43,5 @@
 </div>
 
 <div *ngIf="showblock">
-  <ahs-mp-editlocation [idLocation]="idLocation"></ahs-mp-editlocation>
+  <ahs-mp-editlocation [idLocation]="idLocation" (listMPLocations)="listMPLocations($event)"></ahs-mp-editlocation>
 </div>

@@ -52,16 +52,28 @@ export class MpListlocationComponent implements OnInit {
       this.mpLocationsService.getMPLocationsByIdProfil(id)
           .subscribe(
               resp =>{
-                  console.log(resp);
                   let data2 = JSON.parse(JSON.stringify(resp));
-                  console.log(data2);
                   this.rows =  data2;
-                  console.log(this.rows);
+                  this.listMPLocations(this.rows);
               }
           )
   }
 
+    /**
+     *
+     * @param listMPLocations
+     */
+    listMPLocations(listMPLocations){
+        this.rows = listMPLocations;
+    }
+
+    /**
+     *
+     * @param event
+     * @param id
+     */
   onclickShow(event, id){
+        console.log(event);
       event.preventDefault();
       this.showblock = true;
       this.idLocation = id;
