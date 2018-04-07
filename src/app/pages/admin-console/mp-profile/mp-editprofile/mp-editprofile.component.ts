@@ -7,7 +7,8 @@ import { LabProfileService } from '../services/lab-profile.service';
 import { LabProfile } from '../../../../shared/models/lab-profile';
 import { MPProfileService } from '../services/mp-profile.service';
 import { BusinessEntity } from '../../../../shared/models/business-entity';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
+import { MPValidatorService } from '../services/mp-validators.service';
 
 @Component({
   selector: 'ahs-mp-editprofile',
@@ -26,7 +27,8 @@ export class MpEditprofileComponent implements OnInit {
   public isCheckedPgx:boolean = false;
   public isCheckedCan:boolean = false;
   public isCheckedTox:boolean = false;
-  constructor(private router: ActivatedRoute, formBuilder: FormBuilder, private mpProfileService: MPProfileService, private labProfileService: LabProfileService) {
+  public isUpdate: boolean ;
+  constructor(private router: ActivatedRoute, private route: Router, formBuilder: FormBuilder, private mpProfileService: MPProfileService, private labProfileService: LabProfileService) {
 
     this.form = formBuilder.group({
       name: ['', Validators.required],
@@ -36,18 +38,19 @@ export class MpEditprofileComponent implements OnInit {
       state: ['', Validators.required],
       zip: ['', Validators.required],
       npi: ['', Validators.required],
-      phone: ['', Validators.required],
-      fax: ['', Validators.required],
+      phone: ['',  Validators.compose([Validators.required, MPValidatorService.numberValidator])],
+      fax: ['', Validators.compose([Validators.required, MPValidatorService.numberValidator])],
       contactName: ['', Validators.required],
-      email: [''],
+      email: ['', MPValidatorService.emailValidator],
       testRights: [''],
-      website: [''],
+      website: ['', MPValidatorService.websiteValidator],
       logo: ['']
 
     });
     this.mpProfile = new MPProfile();
     this.mpProfile.businessEntity = new BusinessEntity();
     this.labProfile = new LabProfile();
+    this.isUpdate = true;
    }
 
    /**
@@ -55,6 +58,7 @@ export class MpEditprofileComponent implements OnInit {
     * @param form - MPProfile form builder
     */
    onFormSubmit(form) {
+     console.log(form);
      this.labProfile = this.labProfiles.length > 0 ? this.labProfiles[0] : null 
      this.mpProfile.businessEntity.name = form.name;
      this.mpProfile.businessEntity.displayName = form.displayName;
@@ -73,11 +77,20 @@ export class MpEditprofileComponent implements OnInit {
      this.mpProfile.labProfileId = this.labProfile.id;
      this.mpProfile.lab = null;
      this.mpProfile.taxPayerId = null;
-
-     this.mpProfileService.saveMPProfile(this.mpProfile)
-       .subscribe((resp) => {
-         
-       })
+     //if create new MP Profile
+     if(!this.isUpdate) {
+      this.mpProfileService.saveMPProfile(this.mpProfile).subscribe(resp => {
+            this.route.navigate(['../edit',resp.id], {relativeTo: this.router})
+      })
+     }
+     else {
+       //if update MP Profile
+      this.mpProfileService.updateMPProfile(this.mpProfile)
+        .subscribe(resp => {
+          this.form.reset();
+        })
+     }
+     
    }
   ngOnInit() {
     this.getLabProfile();
@@ -85,10 +98,15 @@ export class MpEditprofileComponent implements OnInit {
         if(params['id']) {
           this.id = params['id'];
           this.setMPProfile(this.id);
+          this.isUpdate = true;
+          
+        }
+        else {
+          this.isUpdate = false;
         }
       });
   }
-  
+ 
   /**
    * Set MPProfile in form
    * @param id - id MPProfile
@@ -112,6 +130,8 @@ export class MpEditprofileComponent implements OnInit {
           mpProfile.testRights === this.testRight.PGx ? this.isCheckedPgx = true : this.isCheckedPgx = false;
           mpProfile.testRights === this.testRight.Cancer ? this.isCheckedCan = true : this.isCheckedCan = false;
           mpProfile.testRights === this.testRight.Toxicology ? this.isCheckedTox = true : this.isCheckedTox = false;
+
+          this.mpProfile = mpProfile;
       })
   }
   /**
@@ -130,4 +150,11 @@ export class MpEditprofileComponent implements OnInit {
   onLogo(image: any) {
     this.form.get('logo').setValue(image);
   }
+
+  cancelme(e) {
+    e.preventDefault();
+  }
+
+
+
 }

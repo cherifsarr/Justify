@@ -38,15 +38,17 @@ export class MpListprofileComponent implements OnInit {
   getMPProfiles() {
     this.mpProfileService.getMPProfiles()
     .subscribe(resp => { 
-      console.log(resp);
      // this.mpProfiles = resp;
      let data = this.populate(resp);
       this.rows =  data;
       this.temp = [...data];
-      console.log(this.temp);
     })
   }
 
+  /**
+   * Populate List
+   * @param profile 
+   */
   populate(profile: MPProfile[]) {
     let result = [];
     profile.forEach(element => {
@@ -63,6 +65,10 @@ export class MpListprofileComponent implements OnInit {
     return result;
   }
 
+  /**
+   * Filter function
+   * @param event 
+   */
   updateFilter(event) {
     const val = event.target.value.toLowerCase();
     const temp = this.temp.filter(function(d) {
@@ -70,9 +76,5 @@ export class MpListprofileComponent implements OnInit {
     });
     this.rows = temp;
     this.table.offset = 0;
-  }
-  createNew(event) {
-    event.preventDefault();
-    this.isCreatedNew = true
   }
 }

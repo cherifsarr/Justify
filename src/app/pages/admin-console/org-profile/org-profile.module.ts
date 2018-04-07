@@ -27,7 +27,7 @@ export const routes = [
       NgxDatatableModule,
       RouterModule.forChild(routes)
   ],
-  declarations: [OrgProfileComponent],
+  declarations: [],
 
   providers: [OrgProfileService]
 })
