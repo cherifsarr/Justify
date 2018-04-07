@@ -150,7 +150,6 @@ export class MpEditprofileComponent implements OnInit {
   onLogo(image: any) {
     this.form.get('logo').setValue(image);
   }
-
   cancelme(e) {
     e.preventDefault();
   }
