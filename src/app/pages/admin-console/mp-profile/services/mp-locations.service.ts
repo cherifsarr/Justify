@@ -1,44 +1,54 @@
 import { Injectable } from '@angular/core';
 import {Observable} from "rxjs/Observable";
 import {of} from "rxjs/observable/of";
+import { pipe } from 'rxjs';
 import {HttpClient} from "@angular/common/http";
-import {catchError} from "rxjs/operators";
+import {catchError, tap} from "rxjs/operators";
 import { ConfigService } from '../../../../shared/utils/config.service';
 import { Mplocation } from '../../../../shared/models/mplocation';
+import {ToastrService} from "ngx-toastr";
 
 @Injectable()
 export class MpLocationsService {
 
-    private url:string = '/MPLocations';
+    private url:string = '/MPLocations/profile/';
 
-    constructor(private http: HttpClient, private configService: ConfigService) {}
+    constructor(private http: HttpClient, private configService: ConfigService, public toastrService: ToastrService) {}
 
     /**
      * Return the Medical Practices List
      *
      * @returns {Observable<MPLocation[]>}
      */
-    getMPLocations():Observable<Mplocation[]> {
-        return this.http.get<Mplocation[]>(this.configService.getApiURI() + this.url)
+    getMPLocationsByIdProfil(id: string ):Observable<Mplocation[]> {
+        return this.http.get<Mplocation[]>(this.configService.getApiURI() + this.url + id)
             .pipe(
                 catchError(this.handleError('getMPLocations', []))
             );
     }
 
+    getMPLocationById(id: string):Observable<Mplocation>{
+        return this.http.get<Mplocation>(this.configService.getApiURI() + '/MPLocations/' + id)
+            .pipe(
+                catchError(this.handleError<Mplocation>('getMPLocationById'))
+            )
+
+    }
+
+    /**
+     *
+     * @param {Mplocation} location
+     * @returns {Observable<Mplocation | any>}
+     */
     createLocation(location: Mplocation){
+
         return this.http.post(
             this.configService.getApiURI() + '/MPLocations',
-            JSON.stringify(location)
-        ).subscribe(
-            (val) => {
-                return true;
-            },
-            response => {
-                //  console.log("POST call in error", response);
-            },
-            () => {
-                // console.log("The POST observable is now completed.");
-            });
+            JSON.stringify(location))
+                .pipe(
+                    tap(_ => this.toastrService.success("Location created")),
+                    catchError(this.handleError<Mplocation>('createLocation'))
+                )
     }
 
     /**
@@ -51,7 +61,7 @@ export class MpLocationsService {
         return (error: any): Observable<T> => {
             console.log(error);
 
-            //this.log(`${operation} failed: ${error.message}`);
+            this.toastrService.error(`${operation} failed: ${error.message}`);
 
             return of(result as T);
         };

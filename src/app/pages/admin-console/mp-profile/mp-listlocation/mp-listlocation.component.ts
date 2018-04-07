@@ -1,6 +1,7 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import {Component, OnInit, Output, ViewChild} from '@angular/core';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { MpLocationsService } from '../services/mp-locations.service';
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'ahs-mp-listlocation',
@@ -9,7 +10,13 @@ import { MpLocationsService } from '../services/mp-locations.service';
 })
 export class MpListlocationComponent implements OnInit {
 
-  showblock: boolean =false;
+    id: string;
+    private sub: any;
+    public router: ActivatedRoute;
+
+   showblock: boolean =false;
+
+   idLocation: string;
 
   rows = [];
   temp = [];
@@ -17,35 +24,47 @@ export class MpListlocationComponent implements OnInit {
   result = [];
   columns = [
       { prop: 'id' },
-      { name: 'location' },
-      { name: 'address' },
+      { name: 'name' },
+      { name: 'address1' },
       { name: 'city' },
       { name: 'state' }
   ];
   @ViewChild(DatatableComponent) table: DatatableComponent;
-  constructor(private mpLocationsService: MpLocationsService) {
+  constructor(router: ActivatedRoute, private mpLocationsService: MpLocationsService) {
       this.showblock = false;
+
+      this.router = router;
   }
 
   ngOnInit() {
-      this.getMPLocations();
+
+          this.sub = this.router.params.subscribe(params => {
+              this.id = params['id'];
+              this.getMPLocationsByIdProfil(this.id);
+      });
   }
 
-  getMPLocations() {
-      this.mpLocationsService.getMPLocations()
+    /**
+     *
+     * @param id
+     */
+    getMPLocationsByIdProfil(id) {
+      this.mpLocationsService.getMPLocationsByIdProfil(id)
           .subscribe(
               resp =>{
                   console.log(resp);
                   let data2 = JSON.parse(JSON.stringify(resp));
+                  console.log(data2);
                   this.rows =  data2;
+                  console.log(this.rows);
               }
           )
   }
 
-  onclickShow(event){
+  onclickShow(event, id){
       event.preventDefault();
       this.showblock = true;
-      console.log(this.showblock);
+      this.idLocation = id;
   }
 
 }

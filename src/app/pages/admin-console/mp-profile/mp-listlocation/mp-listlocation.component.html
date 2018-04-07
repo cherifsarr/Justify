@@ -6,7 +6,7 @@
       </div>
       <div class="card-body widget-body">
         <div class="input-group input-group-sm my-3">
-          <a (click)="onclickShow($event)" href="#">Add a Location</a>
+          <a (click)="onclickShow($event, '')" href="#">Add a Location</a>
         </div>
         <ngx-datatable #table
                        class="bootstrap"
@@ -16,12 +16,12 @@
                        [footerHeight]="30"
                        [rowHeight]="'auto'"
                        [rows]="rows">
-          <ngx-datatable-column name="Location" prop="location">
+          <ngx-datatable-column name="Location" prop="name">
             <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
-              <a [routerLink]="['../editrole', row.id]"> {{value}} </a>
+              <a href="#" (click)="onclickShow($event, row.id)"> {{value}} </a>
             </ng-template>
           </ngx-datatable-column>
-          <ngx-datatable-column name="Address" prop="address">
+          <ngx-datatable-column name="Address" prop="address1">
             <ng-template ngx-datatable-cell-template let-value="value">
               {{value}}
             </ng-template>
@@ -43,5 +43,5 @@
 </div>
 
 <div *ngIf="showblock">
-  <ahs-mp-editlocation></ahs-mp-editlocation>
+  <ahs-mp-editlocation [idLocation]="idLocation"></ahs-mp-editlocation>
 </div>

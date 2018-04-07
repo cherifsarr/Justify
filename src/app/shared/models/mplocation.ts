@@ -10,7 +10,6 @@ export class Mplocation {
     state: string;
     zip: string;
     country: string;
-    fax: string;
     contact: string;
     mpProfileId: string;
     mpProfile: MPProfile;
