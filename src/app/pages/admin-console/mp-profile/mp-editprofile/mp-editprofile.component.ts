@@ -39,7 +39,7 @@ export class MpEditprofileComponent implements OnInit {
       phone: ['', Validators.required],
       fax: ['', Validators.required],
       contactName: ['', Validators.required],
-      email: [''],
+      email: ['', [this.emailValidator.bind(this)]],
       testRights: [''],
       website: [''],
       logo: ['']
@@ -132,5 +132,12 @@ export class MpEditprofileComponent implements OnInit {
   }
   cancelme(e) {
     e.preventDefault();
+  }
+
+  emailValidator(control: FormControl): { [key: string]: any } {
+      var emailRegexp = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/;
+      if (control.value && !emailRegexp.test(control.value)) {
+          return { invalidEmail: true };
+      }
   }
 }
