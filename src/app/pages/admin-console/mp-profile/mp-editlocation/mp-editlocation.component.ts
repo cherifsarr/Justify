@@ -42,8 +42,6 @@ export class MpEditlocationComponent implements OnInit {
 
   @Output() listMPLocations = new EventEmitter<any>();
 
-
-  @Input()
    idLocation: string;
 
   public states = STATES;
@@ -59,14 +57,14 @@ export class MpEditlocationComponent implements OnInit {
 
       this.form = formBuilder.group({
           name: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-          contact: ['', Validators.required],
+          contact: [''],
           email: ['', MPValidatorService.emailValidator],
           phone: ['', Validators.compose([Validators.required, MPValidatorService.numberValidator])],
           address1: ['', Validators.required],
           address2: [''],
           city: ['', Validators.required],
           state: ['', Validators.required],
-          zip: ['', Validators.required]
+          zip: ['', Validators.compose([Validators.required, MPValidatorService.numberValidator])]
       });
 
       this.mpLocation = new Mplocation();
@@ -75,33 +73,35 @@ export class MpEditlocationComponent implements OnInit {
   }
 
   ngOnInit() {
-      this.sub = this.router.params.subscribe(params => {
-          if(params['id']){
-              this.id = params['id'];
-              console.log(this.idLocation);
-              if(this.idLocation){
-                  this.mpLocationsService.getMPLocationById(this.idLocation)
-                      .subscribe(resp =>{
-                          this.location = resp;
-                          this.form.get('name').setValue(this.location.name);
-                          this.form.get('address1').setValue(this.location.address1);
-                          this.form.get('city').setValue(this.location.city);
-                          this.form.get('state').setValue(this.location.state);
-                          this.form.get('zip').setValue(this.location.zip);
-                          this.form.get('phone').setValue(this.location.phone);
-                          this.form.get('state').setValue(this.location.state);
-                          this.form.get('contact').setValue(this.location.contact);
-                          this.form.get('email').setValue(this.location.email);
+      /**
+       * get parent id = id Pm Profile
+       */
+    let sub2 = this.router.parent.params.subscribe(parentParams => {
+            this.id =  parentParams.id;
+    });
+    this.sub = this.router.params.subscribe(params => {
+        if(params['idLocation']){
+            this.isAnUpdate = true;
+            this.idLocation = params['idLocation']
+            this.mpLocationsService.getMPLocationById(this.idLocation)
+                .subscribe(resp =>{
+                    this.location = resp;
+                    this.form.get('name').setValue(this.location.name);
+                    this.form.get('address1').setValue(this.location.address1);
+                    this.form.get('city').setValue(this.location.city);
+                    this.form.get('state').setValue(this.location.state);
+                    this.form.get('zip').setValue(this.location.zip);
+                    this.form.get('phone').setValue(this.location.phone);
+                    this.form.get('state').setValue(this.location.state);
+                    this.form.get('contact').setValue(this.location.contact);
+                    this.form.get('email').setValue(this.location.email);
 
-                          }
-                      )
-              }
-              else  {
-                  this.form.reset();
-              }
-
-          }
-
+                    this.mpLocation = resp;
+                    }
+                )
+        }
+        else {this.isAnUpdate = false}
+    
       });
   }
 
@@ -109,10 +109,6 @@ export class MpEditlocationComponent implements OnInit {
   public onSubmit(values: Object): void {
 
       if (this.form.valid) {
-         /* this.mpProfileService.getMPProfileById(this.id).subscribe(resp => {
-              this.mpProfile = resp;
-          });*/
-
           this.mpLocation.name = this.form.get('name').value;
           this.mpLocation.address1 = this.form.get('address1').value;
           this.mpLocation.city = this.form.get('city').value;
@@ -122,33 +118,33 @@ export class MpEditlocationComponent implements OnInit {
           this.mpLocation.contact = this.form.get('contact').value;
           this.mpLocation.email = this.form.get('email').value;
           this.mpLocation.mpProfileId = this.id;
+          if (!this.isAnUpdate) {
+            this.mpLocationsService.createLocation(this.mpLocation)
+            .subscribe(resp=>{
+                this.form.reset();
+            },
+                ()=>{
 
-          console.log(this.id);
-          console.log(this.mpLocation);
-         this.mpLocationsService.createLocation(this.mpLocation)
-             .subscribe(resp=>{
-                 this.form.reset();
+                },
+                ()=>{
+                    this.mpLocationsService.getMPLocationsByIdProfil(this.id)
+                        .subscribe(resp=>{
+                            this.listMPLocations.emit(resp)
+                        });
+                }
 
-             },
-                 resp=>{
+            );
 
-                 },
-                 ()=>{
-                     this.mpLocationsService.getMPLocationsByIdProfil(this.id)
-                         .subscribe(resp=>{
-                             console.log('this.listMPLocations.emit(resp)');
-                             this.listMPLocations.emit(resp)
-                         });
-                 }
-
-             );
-
+          }
+          else {
+            this.mpLocationsService.updateLocation(this.mpLocation)
+            .subscribe(resp=>{
+                
+            })
+          }
+          
       }
 
-  }
-
-  setMPProfile(){
-      this.mpLocation.mpProfile.businessEntityId = this.mpProfile.businessEntityId;
   }
 
   public cancelme(e) {

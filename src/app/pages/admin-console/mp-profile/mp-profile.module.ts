@@ -21,7 +21,14 @@ export const routes = [
   { path: '', redirectTo: 'list', pathMatch: 'full' },
   { path: 'list', component: MpListprofileComponent, data: { breadcrumb: 'List Medical Practice Profile' } },
   { path: 'create', component: MpEditprofileComponent, data: { breadcrumb: 'Create Medical Practice Profile' } },
-  { path: 'edit/:id', component: MpEditprofileComponent, data: { breadcrumb: 'Edit Medical Practice Profile' } },
+  { path: 'edit/:id', component: MpEditprofileComponent, data: { breadcrumb: 'Edit Medical Practice Profile' }, 
+      children: [
+        {path: 'listlocations', component: MpListlocationComponent, data: { breadcrumb: 'List locations' } },
+        {path: 'addlocation', component: MpEditlocationComponent, data: { breadcrumb: 'add location' } },
+        {path: 'mpeditlocation/:idLocation', component: MpEditlocationComponent, data: { breadcrumb: 'Edit location' } },
+      ]
+  },
+ 
 ];
 @NgModule({
   imports: [

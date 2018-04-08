@@ -2,12 +2,14 @@ import { Injectable } from '@angular/core';
 import {Observable} from "rxjs/Observable";
 import {of} from "rxjs/observable/of";
 import { pipe } from 'rxjs';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {catchError, tap} from "rxjs/operators";
 import { ConfigService } from '../../../../shared/utils/config.service';
 import { Mplocation } from '../../../../shared/models/mplocation';
 import {ToastrService} from "ngx-toastr";
-
+const httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
 @Injectable()
 export class MpLocationsService {
 
@@ -50,7 +52,14 @@ export class MpLocationsService {
                     catchError(this.handleError<Mplocation>('createLocation'))
                 )
     }
-
+    updateLocation(mpLocation: Mplocation) {
+        return this.http.put(this.configService.getApiURI() + '/MPLocations/'+ mpLocation.id, mpLocation, httpOptions)
+        .pipe(
+            tap(_ => this.toastrService.success("Location updated successfully")),
+            catchError(this.handleError<Mplocation>('updateLocation'))
+        )
+    }
+    
     /**
      * Handle the http operation that failed
      * Let the app continue

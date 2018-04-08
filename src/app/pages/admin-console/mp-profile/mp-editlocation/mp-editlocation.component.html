@@ -53,8 +53,9 @@
             <div class="col-sm-9">
               <input formControlName="zip" type="text" class="form-control checking-field" required />
               <span class="help-block" *ngIf="form.get('zip').touched">
-                                            <span class="text-danger" *ngIf="form.get('zip').hasError('required')">Zip code is required</span>
-                                        </span>
+                  <span class="text-danger" *ngIf="form.get('zip').hasError('required')">Zip code is required</span>
+                  <span class="help-block text-danger" *ngIf="form.get('zip').touched && form.get('zip').hasError('invalidNumber')">Invalid zip code number</span>
+              </span>
             </div>
           </div>
 
@@ -63,8 +64,9 @@
             <div class="col-sm-9">
               <input formControlName="phone" type="text" class="form-control checking-field" required />
               <span class="help-block" *ngIf="form.get('phone').touched">
-                                            <span class="text-danger" *ngIf="form.get('phone').hasError('required')">Phone is required</span>
-                                        </span>
+                  <span class="text-danger" *ngIf="form.get('phone').hasError('required')">Phone is required</span>
+                  <span class="help-block text-danger" *ngIf="form.get('phone').touched && form.get('phone').hasError('invalidNumber')">Invalid phone number</span>
+              </span>
             </div>
           </div>
           <div class="form-group row">
@@ -76,7 +78,8 @@
           <div class="form-group row">
             <label for="email" class="col-sm-3 form-control-label m-t-5">Contact Email</label>
             <div class="col-sm-9">
-              <input formControlName="email" type="text" class="form-control" />
+              <input formControlName="email" type="text" class="form-control checking-field" />
+              <span class="help-block text-danger" *ngIf="form.get('email').touched && form.get('email').hasError('invalidEmail')">Invalid email address</span>
             </div>
           </div>
 
@@ -85,7 +88,10 @@
             <div class="col-sm-12 text-right">
               <button class="btn" (click)="cancelme($event)">Cancel</button>
               <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
-              <button class="btn btn-main" type="submit">Save</button>
+              <button *ngIf="!isAnUpdate; else elseTemplate" class="btn btn-main" type="submit" [disabled]="!form.valid">Save</button>
+              <ng-template #elseTemplate>
+                  <button  class="btn btn-main" type="submit"  [disabled]="!form.valid">Update</button>
+              </ng-template>
             </div>
           </div>
         </form>

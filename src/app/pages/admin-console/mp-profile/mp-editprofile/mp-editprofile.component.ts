@@ -58,7 +58,6 @@ export class MpEditprofileComponent implements OnInit {
     * @param form - MPProfile form builder
     */
    onFormSubmit(form) {
-     console.log(form);
      this.labProfile = this.labProfiles.length > 0 ? this.labProfiles[0] : null 
      this.mpProfile.businessEntity.name = form.name;
      this.mpProfile.businessEntity.displayName = form.displayName;
@@ -154,6 +153,8 @@ export class MpEditprofileComponent implements OnInit {
     e.preventDefault();
   }
 
-
+  onLocation() {
+    this.route.navigate(['listlocations'], {relativeTo: this.router})
+  }
 
 }
