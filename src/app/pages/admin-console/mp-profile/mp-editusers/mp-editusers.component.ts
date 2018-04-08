@@ -69,4 +69,10 @@ export class MpEditusersComponent implements OnInit {
     })
   }
 
+  onSubmit(form) {
+
+  }
+  onPasswordGenerate (e) {
+
+  }
 }
