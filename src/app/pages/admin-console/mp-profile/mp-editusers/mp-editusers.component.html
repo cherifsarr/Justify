@@ -37,7 +37,7 @@
                             <div class="col-lg-9">
                                 <select class="form-control" formControlName="role">
                                     <option value="">Select role</option>
-                                    <option *ngFor="let role of Roles" [value]="role.id">{{role.name}}</option>
+                                    <option *ngFor="let role of roles" [value]="role.id">{{role.name}}</option>
                                 </select>
                             </div>
                         </div>
@@ -131,27 +131,6 @@
                         <button class="btn btn-primary" (click)="onPasswordGenerate($event)">Generate</button>
                     </div>
                 </div>
-
-                <!--<div class="row ">
-                    <div class="col-md-6">
-                        <div class="form-group row text-lg-right">
-                            <label for="confirmPassword" class="col-lg-3 form-control-label m-t-5">Confirm Password</label>
-                            <div class="col-lg-9">
-                                <input formControlName="confirmPassword" class="form-control checking-field" placeholder="Confirm Password" type="password">
-                                <span class="help-block" *ngIf="form.get('confirmPassword').touched">
-                                    <span class="text-danger" *ngIf="form.get('confirmPassword').hasError('required')">Confirm Password is required</span>
-                                    <span class="text-danger" *ngIf="form.get('confirmPassword').hasError('mismatchedPasswords')">Passwords do not match</span>
-                                </span>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div class="col-md-6">
-
-                    </div>
-                </div>-->
-
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="col-lg-12 p-0">

@@ -8,6 +8,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 
 import { pipe } from 'rxjs';
 import { MpUser } from '../../../../shared/models/mpuser';
+import { AppRole } from '../../../../shared/models/appRole';
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
@@ -25,6 +26,12 @@ export class MpUsersService {
          )
    }
 
+   getRoles(scope: number): Observable<AppRole[]> {
+    return this.http.get<AppRole[]>(this.configService.getApiURI() + '/AppRoles/list/' + scope)
+            .pipe(
+              catchError(this.handleError('getRoles', []))
+             )
+   }
     /**
    * Handle the http operation that failed
    * Let the app continue

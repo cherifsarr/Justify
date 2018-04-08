@@ -2,6 +2,10 @@ import { Component, OnInit, Input, ViewEncapsulation, ViewChild } from '@angular
 import {ActivatedRoute, Router} from "@angular/router";
 import { MpUsersService } from '../services/mp-users.service';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
+import { AppRole } from '../../../../shared/models/appRole';
+import { Scope } from '../../../../shared/utils/scope.enum';
+import { MpLocationsService } from '../services/mp-locations.service';
+import { Mplocation } from '../../../../shared/models/mplocation';
 @Component({
   selector: 'ahs-mp-listusers',
   encapsulation: ViewEncapsulation.None,
@@ -13,6 +17,8 @@ export class MpListusersComponent implements OnInit {
   sub: any;
   temp = [];
   rows = [];
+  roles: AppRole[];
+  locations:Mplocation[];
 
   columns = [
     { prop: 'id' },
@@ -25,7 +31,7 @@ export class MpListusersComponent implements OnInit {
 ];
 
 @ViewChild(DatatableComponent) table: DatatableComponent;
-  constructor(private router: ActivatedRoute, route: Router, private mpuserService: MpUsersService) { }
+  constructor(private router: ActivatedRoute, route: Router, private mpuserService: MpUsersService, private locationService: MpLocationsService) { }
 
   ngOnInit() {
     this.sub = this.router.parent.params.subscribe(params => {
@@ -49,6 +55,7 @@ export class MpListusersComponent implements OnInit {
     })
 
   }
+  
 
     /**
    * Filter function
