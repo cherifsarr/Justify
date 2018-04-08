@@ -6,7 +6,7 @@
       </div>
       <div class="card-body widget-body">
         <div class="input-group input-group-sm my-3">
-          <a [routerLink]="['../addlocation']">Add a Location</a>
+          <a [routerLink]="['../addlocation']" skipLocationChange>Add a Location</a>
         </div>
         <ngx-datatable #table
                        class="bootstrap"
@@ -18,7 +18,7 @@
                        [rows]="rows">
           <ngx-datatable-column name="Location" prop="name">
             <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
-              <a [routerLink]="['../mpeditlocation', row.id]"> {{value}} </a>
+              <a [routerLink]="['../mpeditlocation', row.id]" skipLocationChange> {{value}} </a>
             </ng-template>
           </ngx-datatable-column>
           <ngx-datatable-column name="Address" prop="address1">

@@ -1,0 +1,60 @@
+<div class="row">    
+    <div class="col bottom-30">
+        <div widget class="card">
+            <div class="card-header">
+              <span>List of Medical practice users</span>
+            </div>
+            <div class="card-body widget-body">
+                <div class="input-group input-group-sm my-3">
+                    <a [routerLink]="['../adduser']" skipLocationChange>Create a Medical Practice User</a>
+            </div>
+              <div class="input-group input-group-sm my-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fa fa-search"></i></span>
+                </div>
+                <input class="form-control" type="text" placeholder="Search ..." (keyup)="updateFilter($event)" />
+              </div>
+              <ngx-datatable #table
+                                 class="bootstrap"
+                                 [headerHeight]="30"
+                                 [limit]="10"
+                                 [columnMode]="'force'"
+                                 [footerHeight]="30"
+                                 [rowHeight]="'auto'"
+                                 [rows]="rows">
+                      <ngx-datatable-column name="Name" prop="userName">
+                          <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
+                              <a [routerLink]="['../edit', row.id]"> {{value}} </a>
+                          </ng-template>
+                      </ngx-datatable-column>
+                      <ngx-datatable-column name="First Name" prop="firstName">
+                          <ng-template ngx-datatable-cell-template let-value="value">
+                              {{value}}
+                          </ng-template>
+                      </ngx-datatable-column>
+                      <ngx-datatable-column name="Last Name" prop="lastName">
+                          <ng-template ngx-datatable-cell-template let-value="value">
+                              {{value}}
+                          </ng-template>
+                      </ngx-datatable-column>
+                      <ngx-datatable-column name="Title" prop="title">
+                          <ng-template ngx-datatable-cell-template let-value="value">
+                              {{value}}
+                          </ng-template>
+                      </ngx-datatable-column>
+                      <ngx-datatable-column name="Role" prop="role">
+                          <ng-template ngx-datatable-cell-template let-value="value">
+                              {{value}}
+                          </ng-template>
+                      </ngx-datatable-column>
+                      <ngx-datatable-column name="Status" prop="isEnabled">
+                          <ng-template ngx-datatable-cell-template let-value="value">
+                              {{value}}
+                          </ng-template>
+                      </ngx-datatable-column>
+                  </ngx-datatable>
+            </div>
+        </div>
+    </div>
+  </div>
+  

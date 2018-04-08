@@ -15,6 +15,9 @@ import { MPProfileService } from './services/mp-profile.service';
 import { MpLocationsService } from './services/mp-locations.service';
 import { ImageUploaderComponent } from '../image-uploader/image-uploader.component';
 import { LabProfileService } from './services/lab-profile.service';
+import { MpListusersComponent } from './mp-listusers/mp-listusers.component';
+import { MpEditusersComponent } from './mp-editusers/mp-editusers.component';
+import { MpUsersService } from './services/mp-users.service';
 
 
 export const routes = [
@@ -23,9 +26,11 @@ export const routes = [
   { path: 'create', component: MpEditprofileComponent, data: { breadcrumb: 'Create Medical Practice Profile' } },
   { path: 'edit/:id', component: MpEditprofileComponent, data: { breadcrumb: 'Edit Medical Practice Profile' }, 
       children: [
-        {path: 'listlocations', component: MpListlocationComponent, data: { breadcrumb: 'List locations' } },
-        {path: 'addlocation', component: MpEditlocationComponent, data: { breadcrumb: 'add location' } },
-        {path: 'mpeditlocation/:idLocation', component: MpEditlocationComponent, data: { breadcrumb: 'Edit location' } },
+        {path: 'listlocations',outlet: "locationOutlet", component: MpListlocationComponent, data: { breadcrumb: 'List locations' } },
+        {path: 'addlocation', outlet: "locationOutlet", component: MpEditlocationComponent, data: { breadcrumb: 'add location' } },
+        {path: 'mpeditlocation/:idLocation', outlet: "locationOutlet", component: MpEditlocationComponent, data: { breadcrumb: 'Edit location' } },
+        { path: 'listusers', outlet: "userOutlet", component:MpListusersComponent, data: { breadcrumb: 'Medical Practice Users' } },
+        { path: 'adduser', outlet: "userOutlet", component:MpEditusersComponent, data: { breadcrumb: 'Edit Medical Practice Users' } },
       ]
   },
  
@@ -45,8 +50,10 @@ export const routes = [
     MpEditprofileComponent, 
     MpListlocationComponent, 
     MpEditlocationComponent,
-    ImageUploaderComponent 
+    ImageUploaderComponent ,
+    MpListusersComponent,
+    MpEditusersComponent
   ],
-  providers: [MPProfileService, MpLocationsService, LabProfileService]
+  providers: [MPProfileService, MpLocationsService, LabProfileService, MpUsersService]
 })
 export class MpProfileModule { }

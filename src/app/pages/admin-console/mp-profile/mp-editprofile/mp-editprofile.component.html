@@ -10,7 +10,7 @@
                                 <a class="nav-link" href="#p2"  role="tab" (click)="onLocation()" data-toggle="tab">Locations</a>
                             </li>
                             <li class="nav-item" *ngIf="isUpdate">
-                                <a class="nav-link" href="#p3" role="tab" data-toggle="tab">Users</a>
+                                <a class="nav-link" href="#p3" (click)="onUsers()" role="tab" data-toggle="tab">Users</a>
                             </li>
                         
                             
@@ -171,11 +171,11 @@
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="p2">
-                                    <router-outlet></router-outlet>
+                                <router-outlet name="locationOutlet"></router-outlet>
                                 <!-- <ahs-mp-listlocation (listMPLocations)="listMPLocations($event)"></ahs-mp-listlocation> -->
                             </div>
                             <div class="tab-pane fade" id="p3">
-                              <!--  <ahs-list-mpusers></ahs-list-mpusers>-->
+                               <router-outlet name="userOutlet"></router-outlet>
                             </div>
                         </div>
                     </div>

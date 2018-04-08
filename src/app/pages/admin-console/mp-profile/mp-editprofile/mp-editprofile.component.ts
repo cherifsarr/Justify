@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, AbstractControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { STATES } from '../../../../shared/utils/states-titlecase';
 import { Ancillary } from '../../../../shared/utils/ancillary.enum';
@@ -28,6 +28,7 @@ export class MpEditprofileComponent implements OnInit {
   public isCheckedCan:boolean = false;
   public isCheckedTox:boolean = false;
   public isUpdate: boolean ;
+  
   constructor(private router: ActivatedRoute, private route: Router, formBuilder: FormBuilder, private mpProfileService: MPProfileService, private labProfileService: LabProfileService) {
 
     this.form = formBuilder.group({
@@ -93,17 +94,17 @@ export class MpEditprofileComponent implements OnInit {
    }
   ngOnInit() {
     this.getLabProfile();
-      this.sub = this.router.params.subscribe(params => {
-        if(params['id']) {
-          this.id = params['id'];
-          this.setMPProfile(this.id);
-          this.isUpdate = true;
-          
-        }
-        else {
-          this.isUpdate = false;
-        }
-      });
+    this.sub = this.router.params.subscribe(params => {
+      if(params['id']) {
+        this.id = params['id'];
+        this.setMPProfile(this.id);
+        this.isUpdate = true;
+        
+      }
+      else {
+        this.isUpdate = false;
+      }
+    });
   }
  
   /**
@@ -154,7 +155,9 @@ export class MpEditprofileComponent implements OnInit {
   }
 
   onLocation() {
-    this.route.navigate(['listlocations'], {relativeTo: this.router})
+    this.route.navigate([{ outlets: { locationOutlet: [ 'listlocations' ] }}], {relativeTo: this.router, skipLocationChange:true})
   }
-
+  onUsers() {
+    this.route.navigate([{ outlets: { userOutlet: [ 'listusers' ] }}], {relativeTo: this.router, skipLocationChange:true})
+  }
 }
