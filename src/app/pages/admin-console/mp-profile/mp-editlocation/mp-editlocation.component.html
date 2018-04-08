@@ -2,7 +2,8 @@
   <div class="col">
     <div widget class="card">
       <div class="card-header">
-        <span>Add a Location</span>
+        <span *ngIf="!isAnUpdate">Add a Location</span>
+        <span *ngIf="isAnUpdate">Update a Location</span>
       </div>
       <div class="card-body widget-body">
         <form [formGroup]="form" class="form-horizontal" (ngSubmit)="onSubmit(form.value)">

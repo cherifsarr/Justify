@@ -43,7 +43,6 @@ export class MpEditlocationComponent implements OnInit {
   @Output() listMPLocations = new EventEmitter<any>();
 
    idLocation: string;
-
   public states = STATES;
 
   constructor(
