@@ -19,10 +19,10 @@ export class MpListprofileComponent implements OnInit {
   columns = [
       { prop: 'id' },
       { name: 'name' },
-      { name: 'address' },
-      { name: 'city' },
+      { name: 'contactName' },
       { name: 'phone' },
-      { name: 'testRights' }
+      { name: 'city' },
+      { name: 'state' }
   ];
   isCreatedNew:boolean=  false;
   @ViewChild(DatatableComponent) table: DatatableComponent;
@@ -54,10 +54,10 @@ export class MpListprofileComponent implements OnInit {
     profile.forEach(element => {
       let obj:any = {
         id:element.id, 
-        testRights: element.testRights,
+        contactName	: element.businessEntity.contactName,
         name: element.businessEntity.name,
         city: element.businessEntity.city,
-        address: element.businessEntity.address1,
+        state: element.businessEntity.state,
         phone: element.businessEntity.phone
       }
       result.push(obj);

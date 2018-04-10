@@ -18,7 +18,7 @@ import { LabProfileService } from './services/lab-profile.service';
 import { MpListusersComponent } from './mp-listusers/mp-listusers.component';
 import { MpEditusersComponent } from './mp-editusers/mp-editusers.component';
 import { MpUsersService } from './services/mp-users.service';
-
+import { InternationalPhoneModule } from 'ng4-intl-phone';
 
 export const routes = [
   { path: '', redirectTo: 'list', pathMatch: 'full' },
@@ -43,6 +43,7 @@ export const routes = [
     DirectivesModule,
     PipesModule,
     NgxDatatableModule,
+    InternationalPhoneModule,
     RouterModule.forChild(routes)
   ],
   declarations: [

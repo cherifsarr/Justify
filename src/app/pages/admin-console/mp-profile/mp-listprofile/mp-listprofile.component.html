@@ -27,22 +27,22 @@
                             <a [routerLink]="['../edit', row.id]"> {{value}} </a>
                         </ng-template>
                     </ngx-datatable-column>
-                    <ngx-datatable-column name="Address" prop="address">
-                        <ng-template ngx-datatable-cell-template let-value="value">
-                            {{value}}
-                        </ng-template>
-                    </ngx-datatable-column>
-                    <ngx-datatable-column name="City" prop="city">
+                    <ngx-datatable-column name="Conatact" prop="contactName">
                         <ng-template ngx-datatable-cell-template let-value="value">
                             {{value}}
                         </ng-template>
                     </ngx-datatable-column>
                     <ngx-datatable-column name="Phone" prop="phone">
+                            <ng-template ngx-datatable-cell-template let-value="value">
+                                {{value}}
+                            </ng-template>
+                        </ngx-datatable-column>
+                    <ngx-datatable-column name="City" prop="city">
                         <ng-template ngx-datatable-cell-template let-value="value">
                             {{value}}
                         </ng-template>
                     </ngx-datatable-column>
-                    <ngx-datatable-column name="Test Rights" prop="testRights">
+                    <ngx-datatable-column name="State" prop="state">
                         <ng-template ngx-datatable-cell-template let-value="value">
                             {{value}}
                         </ng-template>

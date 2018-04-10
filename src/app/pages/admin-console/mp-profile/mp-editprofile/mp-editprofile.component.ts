@@ -28,7 +28,7 @@ export class MpEditprofileComponent implements OnInit {
   public isCheckedCan:boolean = false;
   public isCheckedTox:boolean = false;
   public isUpdate: boolean ;
-  
+  @Input() defaultCountry;
   constructor(private router: ActivatedRoute, private route: Router, formBuilder: FormBuilder, private mpProfileService: MPProfileService, private labProfileService: LabProfileService) {
 
     this.form = formBuilder.group({
@@ -39,11 +39,14 @@ export class MpEditprofileComponent implements OnInit {
       state: ['', Validators.required],
       zip: ['', Validators.required],
       npi: ['', Validators.required],
-      phone: ['',  Validators.compose([Validators.required, MPValidatorService.numberValidator])],
+      phone: ['',  Validators.required],
       fax: ['', Validators.compose([Validators.required, MPValidatorService.numberValidator])],
       contactName: ['', Validators.required],
       email: ['', MPValidatorService.emailValidator],
       testRights: [''],
+      testRightsPGx: [''],
+      testRightsCancer: [''],
+      testRightsToxicology: [''],
       website: ['', MPValidatorService.websiteValidator],
       logo: ['']
 
@@ -53,12 +56,18 @@ export class MpEditprofileComponent implements OnInit {
     this.labProfile = new LabProfile();
     this.isUpdate = true;
    }
-
+  phoneNumberValidation(control): {[key: string]: boolean} {
+    let phoneRegexp = /^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$/;
+    if (control.value && phoneRegexp.test(control.value)) {
+      return {invalidPhoneNumber: true};
+    }
+  } 
    /**
     * Create MPProfile
     * @param form - MPProfile form builder
     */
    onFormSubmit(form) {
+     console.log(form);
      this.labProfile = this.labProfiles.length > 0 ? this.labProfiles[0] : null 
      this.mpProfile.businessEntity.name = form.name;
      this.mpProfile.businessEntity.displayName = form.displayName;
@@ -70,13 +79,22 @@ export class MpEditprofileComponent implements OnInit {
      this.mpProfile.businessEntity.fax = form.fax;
      this.mpProfile.businessEntity.contactName = form.contactName;
      this.mpProfile.businessEntity.email = form.email;
-     this.mpProfile.testRights = form.testRights;
+     this.mpProfile.testRights = 0 ;
+     if(form.testRightsPGx) {
+       this.mpProfile.testRights += this.testRight.PGx;
+     }
+     if(form.testRightsCancer) {
+      this.mpProfile.testRights += this.testRight.Cancer;
+     }
+     if(form.testRightsToxicology) {
+      this.mpProfile.testRights += this.testRight.Toxicology;
+     }
      this.mpProfile.businessEntity.website = form.website;
      this.mpProfile.npi = form.npi;
      //this.mpProfile.lab.logoUrl = form.logo;
      this.mpProfile.labProfileId = this.labProfile.id;
-     this.mpProfile.lab = null;
      this.mpProfile.taxPayerId = null;
+     console.log(this.mpProfile);
      //if create new MP Profile
      if(!this.isUpdate) {
       this.mpProfileService.saveMPProfile(this.mpProfile).subscribe(resp => {
