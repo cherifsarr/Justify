@@ -86,7 +86,7 @@ export class EditLabUserComponent implements OnInit, OnDestroy {
 
             this.user.email = this.form.get('email').value;
             this.user.password = this.form.get('password').value;
-            this.user.passwordConfirmation = this.form.get('confirmPassword').value;
+            //this.user.passwordConfirmation = this.form.get('confirmPassword').value;
             this.user.title = this.form.get('title').value;
             this.user.role = this.form.get('role').value;
             this.user.scope = 2;

@@ -31,6 +31,7 @@ export const routes = [
         {path: 'mpeditlocation/:idLocation', outlet: "locationOutlet", component: MpEditlocationComponent, data: { breadcrumb: 'Edit location' } },
         { path: 'listusers', outlet: "userOutlet", component:MpListusersComponent, data: { breadcrumb: 'Medical Practice Users' } },
         { path: 'adduser', outlet: "userOutlet", component:MpEditusersComponent, data: { breadcrumb: 'Edit Medical Practice Users' } },
+        { path: 'edituser/:idUser', outlet: "userOutlet", component:MpEditusersComponent, data: { breadcrumb: 'Edit Medical Practice Users' } },
       ]
   },
  

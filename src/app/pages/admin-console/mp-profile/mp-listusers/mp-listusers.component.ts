@@ -6,6 +6,7 @@ import { AppRole } from '../../../../shared/models/appRole';
 import { Scope } from '../../../../shared/utils/scope.enum';
 import { MpLocationsService } from '../services/mp-locations.service';
 import { Mplocation } from '../../../../shared/models/mplocation';
+import {Users} from "../user-list";
 @Component({
   selector: 'ahs-mp-listusers',
   encapsulation: ViewEncapsulation.None,
@@ -19,6 +20,8 @@ export class MpListusersComponent implements OnInit {
   rows = [];
   roles: AppRole[];
   locations:Mplocation[];
+
+    public users = Users;
 
   columns = [
     { prop: 'id' },
@@ -48,10 +51,12 @@ export class MpListusersComponent implements OnInit {
    * @param id 
    */
   getListMpUsersByIdProfile(id){
+
     this.mpuserService.getMpUsersByProfileId(id).subscribe(resp=>{
-              let data = JSON.parse(JSON.stringify(resp));
+              let data = JSON.parse(JSON.stringify(this.users));
               this.rows =  data;
               this.temp = [...data];
+              console.log(this.rows);
     })
 
   }

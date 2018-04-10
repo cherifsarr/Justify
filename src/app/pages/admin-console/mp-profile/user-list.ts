@@ -1,0 +1,40 @@
+export const Users = [
+    {
+        "id": "12345678900",
+        "businessProfileId": "1d3d6b26-a6d8-4a4d-67d4-08d592219d61",
+        "userName": "cherif",
+        "title": "Mr",
+        "firstName": "cherif",
+        "lastName": "sarr",
+        "scope": 1,
+        "email": "cherif@gmail.com",
+        "confirmEmail": "cherif@gmail.com",
+        "password": "p3nge1pdgHPO",
+        "confirmPassword": "p3nge1pdgHPO",
+        "role": "30b6d7d7-2d7a-4fef-4551-08d59c6852f4",
+        "randomPassword": true,
+        "isLockedOut": true,
+        "sendActivationEmail": true,
+        "forcePasswordChange": true,
+        "isEnabled": true
+},
+    {
+        "id": "5689854623",
+        "businessProfileId": "1d3d6b26-a6d8-4a4d-67d4-08d592219d61",
+        "userName": "Cheikh",
+        "title": "Mr",
+        "firstName": "Cheikh",
+        "lastName": "LO",
+        "scope": 1,
+        "email": "cheikh@gmail.com",
+        "confirmEmail": "cheikh@gmail.com",
+        "password": "p3nge1pdgHPO",
+        "confirmPassword": "p3nge1pdgHPO",
+        "role": "30b6d7d7-2d7a-4fef-4551-08d59c6852f4",
+        "randomPassword": true,
+        "isLockedOut": true,
+        "sendActivationEmail": true,
+        "forcePasswordChange": true,
+        "isEnabled": true
+    }
+]

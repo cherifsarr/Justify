@@ -13,7 +13,7 @@ export class User {
         this.role = role;
     }*/
 
-    constructor() {}
+ /*   constructor() {}
 
 
     get friendlyName(): string {
@@ -42,5 +42,25 @@ export class User {
     public scope: number;
     public isEnabled: boolean;
     public LastLogin: Date;
+
+    */
+
+    id: string;
+    businessProfileId: string;
+    userName: string;
+    title: string;
+    firstName: string;
+    lastName: string;
+    scope: number;
+    email: string;
+    confirmEmail: string;
+    password: string;
+    confirmPassword: string;
+    role: string;
+    randomPassword: boolean;
+    isLockedOut: boolean;
+    sendActivationEmail: boolean;
+    forcePasswordChang: boolean;
+    isEnabled: boolean;
 
 }
