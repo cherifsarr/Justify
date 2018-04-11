@@ -22,7 +22,7 @@
                                  [footerHeight]="30"
                                  [rowHeight]="'auto'"
                                  [rows]="rows">
-                      <ngx-datatable-column name="Name" prop="userName">
+                      <ngx-datatable-column name="User name" prop="userName">
                           <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
                               <a [routerLink]="['../edituser', row.id]" skipLocationChange> {{value}} </a>
                           </ng-template>
