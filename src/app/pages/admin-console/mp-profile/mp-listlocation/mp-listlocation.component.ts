@@ -11,14 +11,13 @@ import {ActivatedRoute} from "@angular/router";
 })
 export class MpListlocationComponent implements OnInit {
 
-    id: string;
-    private sub: any;
-    public router: ActivatedRoute;
+  id: string;
+  private sub: any;
+  public router: ActivatedRoute;
 
-   showblock: boolean =false;
+  showblock: boolean =false;
 
-   idLocation: string;
-
+  idLocation: string;
   rows = [];
   temp = [];
   selected = [];
@@ -45,7 +44,7 @@ export class MpListlocationComponent implements OnInit {
   }
 
     /**
-     *
+     * Get Mp Location by id Profile
      * @param id
      */
     getMPLocationsByIdProfil(id) {
@@ -60,7 +59,7 @@ export class MpListlocationComponent implements OnInit {
   }
 
     /**
-     *
+     * 
      * @param listMPLocations
      */
     listMPLocations(listMPLocations){

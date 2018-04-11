@@ -29,6 +29,11 @@ export class MpLocationsService {
             );
     }
 
+    /**
+     * Get MpLocaion by id
+     * @param id - locationId
+     * @returns {Observable<MPLocation>}
+     */
     getMPLocationById(id: string):Observable<Mplocation>{
         return this.http.get<Mplocation>(this.configService.getApiURI() + '/MPLocations/' + id)
             .pipe(
@@ -38,7 +43,7 @@ export class MpLocationsService {
     }
 
     /**
-     *
+     * Create MpLocation
      * @param {Mplocation} location
      * @returns {Observable<Mplocation | any>}
      */
@@ -52,6 +57,10 @@ export class MpLocationsService {
                     catchError(this.handleError<Mplocation>('createLocation'))
                 )
     }
+    /**
+     * Update MpLocation
+     * @param mpLocation - Mplocation 
+     */
     updateLocation(mpLocation: Mplocation) {
         return this.http.put(this.configService.getApiURI() + '/MPLocations/'+ mpLocation.id, mpLocation, httpOptions)
         .pipe(
@@ -68,9 +77,9 @@ export class MpLocationsService {
      */
     private handleError<T>(operation = 'operation', result?: T) {
         return (error: any): Observable<T> => {
-            console.log(error);
+           // console.log(error);
 
-            this.toastrService.error(`${operation} failed: ${error.message}`);
+            this.toastrService.error(`${operation} failed: ${error.statusText}, status:${error.status}`);
 
             return of(result as T);
         };

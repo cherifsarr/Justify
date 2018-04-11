@@ -77,7 +77,7 @@
                                                     <input formControlName="zip" type="text" class="form-control checking-field" />
                                                     <span class="help-block" *ngIf="form.get('zip').touched">
                                                         <span class="text-danger" *ngIf="form.get('zip').touched && form.get('zip').hasError('required')">Zip code is required</span>
-                                                        <span class="help-block text-danger" *ngIf="form.get('zip').touched && form.get('zip').hasError('invalidZipCode')">Invalid zip code number</span>
+                                                        <span class="text-danger" *ngIf="form.get('zip').touched && form.get('zip').hasError('pattern')">Invalid zip code </span>
                                                     </span>
                                                 </div>
                                             </div>
@@ -94,7 +94,7 @@
                                                 <label for="phone" class="col-sm-3 form-control-label m-t-5"><span>*</span>Phone</label>
                                                 <div class="col-sm-9">
                                                     <!-- <input formControlName="phone" type="text" class="form-control checking-field" /> -->
-                                                    <int-phone-prefix #phoneComponent class="form-control checking-field" maxLength="11" showDropdown="false"  defaultCountry="us" [locale]="'en'"  formControlName="phone"></int-phone-prefix>
+                                                    <int-phone-prefix #phoneComponent class="form-control checking-field" maxLength="15" showDropdown="false"  defaultCountry="us" [locale]="'en'"  formControlName="phone"></int-phone-prefix>
                                                     <span class="help-block" *ngIf="form.get('phone').touched">
                                                         <span class="text-danger" *ngIf="form.get('phone').touched && form.get('phone').hasError('required')">Phone is required</span>
                                                         <span class="help-block text-danger" *ngIf="form.get('phone').touched && form.get('phone').hasError('invalidPhoneNumber')">Invalid phone number</span>

@@ -43,6 +43,10 @@ export class MPValidatorService {
     }
   }
 
+  /**
+   * Phone number validator
+   * @param control 
+   */
   static phoneNumberValidation(control): {[key: string]: boolean} {
     let phoneRegexp = /^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$/;
     if (control.value && phoneRegexp.test(control.value)) {

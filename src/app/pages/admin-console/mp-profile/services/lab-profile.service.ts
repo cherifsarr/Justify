@@ -27,7 +27,7 @@ export class LabProfileService {
    */
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
-        console.log(error);
+       // console.log(error);
 
         //this.log(`${operation} failed: ${error.message}`);
 

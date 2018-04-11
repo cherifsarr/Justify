@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewEncapsulation  } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, AbstractControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { STATES } from '../../../../shared/utils/states-titlecase';
 import { Ancillary } from '../../../../shared/utils/ancillary.enum';
@@ -12,6 +12,7 @@ import { MPValidatorService } from '../services/mp-validators.service';
 
 @Component({
   selector: 'ahs-mp-editprofile',
+  encapsulation: ViewEncapsulation.None,
   templateUrl: './mp-editprofile.component.html',
   styleUrls: ['./mp-editprofile.component.scss']
 })
@@ -28,7 +29,6 @@ export class MpEditprofileComponent implements OnInit {
   public isCheckedCan:boolean = false;
   public isCheckedTox:boolean = false;
   public isUpdate: boolean ;
-  @Input() defaultCountry;
   constructor(private router: ActivatedRoute, private route: Router, formBuilder: FormBuilder, private mpProfileService: MPProfileService, private labProfileService: LabProfileService) {
 
     this.form = formBuilder.group({
@@ -37,7 +37,7 @@ export class MpEditprofileComponent implements OnInit {
       address: ['', Validators.required],
       city: ['', Validators.required],
       state: ['', Validators.required],
-      zip: ['', Validators.required],
+      zip: ['', Validators.compose([Validators.required, Validators.pattern(/^\d{5}(-?\d{4})?$/)])],
       npi: ['', Validators.required],
       phone: ['',  Validators.required],
       fax: ['', Validators.compose([Validators.required, MPValidatorService.numberValidator])],
@@ -56,18 +56,12 @@ export class MpEditprofileComponent implements OnInit {
     this.labProfile = new LabProfile();
     this.isUpdate = true;
    }
-  phoneNumberValidation(control): {[key: string]: boolean} {
-    let phoneRegexp = /^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$/;
-    if (control.value && phoneRegexp.test(control.value)) {
-      return {invalidPhoneNumber: true};
-    }
-  } 
+ 
    /**
     * Create MPProfile
     * @param form - MPProfile form builder
     */
    onFormSubmit(form) {
-     console.log(form);
      this.labProfile = this.labProfiles.length > 0 ? this.labProfiles[0] : null 
      this.mpProfile.businessEntity.name = form.name;
      this.mpProfile.businessEntity.displayName = form.displayName;
@@ -94,11 +88,12 @@ export class MpEditprofileComponent implements OnInit {
      //this.mpProfile.lab.logoUrl = form.logo;
      this.mpProfile.labProfileId = this.labProfile.id;
      this.mpProfile.taxPayerId = null;
-     console.log(this.mpProfile);
      //if create new MP Profile
      if(!this.isUpdate) {
       this.mpProfileService.saveMPProfile(this.mpProfile).subscribe(resp => {
-            this.route.navigate(['../edit',resp.id], {relativeTo: this.router})
+        if (resp) {
+          this.route.navigate(['../edit',resp.id], {relativeTo: this.router})
+        }
       })
      }
      else {
@@ -172,9 +167,15 @@ export class MpEditprofileComponent implements OnInit {
     e.preventDefault();
   }
 
+  /**
+   * Redirect to list of locations route
+   */
   onLocation() {
     this.route.navigate([{ outlets: { locationOutlet: [ 'listlocations' ] }}], {relativeTo: this.router, skipLocationChange:true})
   }
+  /**
+   * Redirect to list of users route
+   */
   onUsers() {
     this.route.navigate([{ outlets: { userOutlet: [ 'listusers' ] }}], {relativeTo: this.router, skipLocationChange:true})
   }

@@ -7,6 +7,7 @@ import { ConfigService } from '../../../../shared/utils/config.service';
 import { MPProfile } from '../../../../shared/models/mpprofile';
 import { pipe } from 'rxjs';
 import { ToastrService, GlobalConfig } from 'ngx-toastr';
+import { LabProfile } from '../../../../shared/models/lab-profile';
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
@@ -20,6 +21,7 @@ export class MPProfileService {
   
    /**
     * get all Medicale Practice Profile
+    * @returns {Observable<MPProfile[]>}
     */
   getMPProfiles(): Observable<MPProfile[]> {
     return this.http.get<MPProfile[]>(this.configService.getApiURI() + '/MPProfiles')
@@ -28,11 +30,26 @@ export class MPProfileService {
     );
   }
   
+  /**
+   * Get MpProfile by Id
+   * @param id - id MpProfile
+   */
   getMPProfileById(id: string):Observable<MPProfile> {
     return this.http.get<MPProfile>(this.configService.getApiURI() + '/MPProfiles/'+id)
         .pipe(
           catchError(this.handleError<MPProfile>('getMPProfileById'))
         )
+  }
+
+  /**
+   * Get LabProfile by id
+   * @param idLab - laProfileId
+   */
+  getLabProfileById(idLab: string): Observable<LabProfile> {
+      return this.http.get<LabProfile>(this.configService.getApiURI() + '/LabProfiles/'+idLab)
+      .pipe(
+        catchError(this.handleError<LabProfile>('getLabProfileById'))
+      ) 
   }
   /**
    * Save MPProfile
@@ -64,9 +81,9 @@ export class MPProfileService {
    */
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
-        console.log(error);
+      //  console.log(error);
 
-        this.toastrService.error(`${operation} failed: ${error.message}`);
+        this.toastrService.error(`${operation} failed: ${error.statusText}, status:${error.status}`);
 
         return of(result as T);
     };

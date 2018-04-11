@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation} from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, AbstractControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import {ActivatedRoute} from "@angular/router";
 import { Mplocation } from '../../../../shared/models/mplocation';
@@ -11,6 +11,7 @@ import {MPValidatorService} from "../services/mp-validators.service";
 
 @Component({
   selector: 'ahs-mp-editlocation',
+  encapsulation: ViewEncapsulation.None,
   templateUrl: './mp-editlocation.component.html',
   styleUrls: ['./mp-editlocation.component.scss']
 })
@@ -58,12 +59,12 @@ export class MpEditlocationComponent implements OnInit {
           name: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
           contact: [''],
           email: ['', MPValidatorService.emailValidator],
-          phone: ['', Validators.compose([Validators.required, MPValidatorService.numberValidator])],
+          phone: ['', Validators.required],
           address1: ['', Validators.required],
           address2: [''],
           city: ['', Validators.required],
           state: ['', Validators.required],
-          zip: ['', Validators.compose([Validators.required, MPValidatorService.numberValidator])]
+          zip: ['', Validators.compose([Validators.required, Validators.pattern(/^\d{5}(-?\d{4})?$/)])]
       });
 
       this.mpLocation = new Mplocation();

@@ -10,6 +10,8 @@ import { pipe } from 'rxjs';
 import { MpUser } from '../../../../shared/models/mpuser';
 import { AppRole } from '../../../../shared/models/appRole';
 import {User} from "../../../../shared/models/user";
+import { Mplocation } from '../../../../shared/models/mplocation';
+import { MPProfile } from '../../../../shared/models/mpprofile';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -35,7 +37,17 @@ export class MpUsersService {
                 catchError(this.handleError<User>('saveMPUser'))
             )
    }
-
+   /**
+    * Update MP User
+    * @param mpUser 
+    */
+   updateMPUser(mpUser: User) {
+        return this.http.put(this.configService.getApiURI() + '/MPUsers/'+ mpUser.id, httpOptions)
+        .pipe(
+          tap(_ => this.toastrService.success("User updated successfully")),
+          catchError(this.handleError<User>('updateMPUser'))
+        )
+   }
     /**
      *
      * @param {string} idProfile
@@ -71,6 +83,26 @@ export class MpUsersService {
              )
    }
 
+   getRoleById(idRole: string): Observable<AppRole> {
+    return this.http.get<AppRole>(this.configService.getApiURI() + '/AppRoles/' + idRole)
+            .pipe(
+              catchError(this.handleError<AppRole>('getRoleById'))
+             )
+   }
+
+  //  getLocationById(idLocation: string) :Observable<Mplocation> {
+  //   return this.http.get<Mplocation>(this.configService.getApiURI() + '/MPLocations/' + idLocation)
+  //     .pipe(
+  //       catchError(this.handleError<Mplocation>('getLocationById'))
+  //      )
+  //  }
+  //  getMPProfileById(idProfile: string) :Observable<MPProfile> {
+  //   return this.http.get<MPProfile>(this.configService.getApiURI() + '/MPProfiles/' + idProfile)
+  //     .pipe(
+  //       catchError(this.handleError<MPProfile>('getMPProfileById'))
+  //      )
+  //  }
+
    /**
    * Handle the http operation that failed
    * Let the app continue
@@ -79,9 +111,9 @@ export class MpUsersService {
    */
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
-        console.log(error);
+       // console.log(error);
 
-        this.toastrService.error(`${operation} failed: ${error.message}`);
+        this.toastrService.error(`${operation} failed: ${error.statusText}, status:${error.status}`);
 
         return of(result as T);
     };

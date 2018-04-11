@@ -29,7 +29,6 @@ export class MpListusersComponent implements OnInit {
     { name: 'firstName' },
     { name: 'lastName' },
     { name: 'title' },
-    { name: 'role' },
     { name: 'isEnabled' }
 ];
 
@@ -39,7 +38,6 @@ export class MpListusersComponent implements OnInit {
   ngOnInit() {
     this.sub = this.router.parent.params.subscribe(params => {
       if (params.id) {
-        console.log(params);
         this.idProfile = params.id;
         this.getListMpUsersByIdProfile(this.idProfile);
       }
@@ -47,22 +45,21 @@ export class MpListusersComponent implements OnInit {
   }
 
   /**
-   * 
+   * Get All MPUser by Mp Profile id
    * @param id 
    */
   getListMpUsersByIdProfile(id){
 
     this.mpuserService.getMpUsersByProfileId(id).subscribe(resp=>{
-              let data = JSON.parse(JSON.stringify(this.users));
+              let data = resp;
               this.rows =  data;
               this.temp = [...data];
-              console.log(this.rows);
     })
 
   }
   
 
-    /**
+  /**
    * Filter function
    * @param event 
    */

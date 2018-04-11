@@ -1,3 +1,4 @@
+import { AppRole } from "./appRole";
 
 
 export class User {
@@ -56,11 +57,14 @@ export class User {
     confirmEmail: string;
     password: string;
     confirmPassword: string;
-    role: string;
+    role: AppRole;
+    roleId: string;
+    locationId: string;
     randomPassword: boolean;
     isLockedOut: boolean;
     sendActivationEmail: boolean;
     forcePasswordChang: boolean;
+    passwordConfirmation: string;
     isEnabled: boolean;
-
+    lastAccess: Date;
 }
