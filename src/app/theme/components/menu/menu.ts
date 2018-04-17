@@ -68,7 +68,7 @@ export const menuItems = [
           //},
           {
               title: 'Labs',
-              routerLink: 'admin-console/lab-profile',
+              routerLink: 'admin-console/labs',
           },
           //{
           //    title: 'Lab Preferences',

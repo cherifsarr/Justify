@@ -5,12 +5,12 @@ import { FormsModule } from '@angular/forms';
 import { DirectivesModule } from '../../theme/directives/directives.module';
 import { PipesModule } from '../../theme/pipes/pipes.module';
 import { OrgUsersModule } from './org-users/org-users.module';
-import { LabProfileComponent } from './lab-profile/lab-profile.component';
-import { LabPreferencesComponent } from './lab-preferences/lab-preferences.component';
+import { LabPreferencesComponent } from './labs/lab-preferences/lab-preferences.component';
 
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 import { ImageUploaderComponent } from './image-uploader/image-uploader.component';
+import {LabProfileComponent} from "./labs/lab-profile/lab-profile.component";
 
 
 
@@ -28,8 +28,8 @@ export const routes = [
 
     //{ path: 'org-profile', component: OrgProfileComponent, data: { breadcrumb: 'AHS Profiles' } },
     { path: 'org-users', loadChildren: 'app/pages/admin-console/org-users/org-users.module#OrgUsersModule', data: { breadcrumb: 'AHS Users' } },
-    { path: 'lab-profile', component: LabProfileComponent, data: { breadcrumb: 'Lab Profiles' } },
-    { path: 'lab-preferences', component: LabPreferencesComponent, data: { breadcrumb: 'Lab Preferences' } },
+    { path: 'labs', loadChildren: 'app/pages/admin-console/labs/labs.module#LabsModule', data: { breadcrumb: 'Lab Profiles' } },
+    //{ path: 'lab-preferences', component: LabPreferencesComponent, data: { breadcrumb: 'Lab Preferences' } },
     { path: 'lab-users', loadChildren: 'app/pages/admin-console/lab-users/lab-users.module#LabUsersModule', data: { breadcrumb: 'Lab Users' } },
     { path: 'mp-profile', loadChildren: 'app/pages/admin-console/mp-profile/mp-profile.module#MpProfileModule', data: { breadcrumb: 'Medical Practice Profiles' } },
   //  { path: 'mp-locations', component: MpLocationsComponent, data: { breadcrumb: 'Medical Practice Locations' } },
@@ -51,7 +51,7 @@ export const routes = [
       RouterModule.forChild(routes)
     ],
     declarations: [
-        LabProfileComponent, LabPreferencesComponent
+
     ]
 })
 export class AdminConsoleModule { }
