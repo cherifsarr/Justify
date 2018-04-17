@@ -30,7 +30,7 @@
                             <i *ngIf="image" class="fa fa-times delete-img" (click)="removeImage()"></i>
                             <img [attr.src]="image" *ngIf="image" width="100">
                             <!--<img src="assets/img/app/no-image.png" *ngIf="!image" width="100" height="100">-->
-                            <img [attr.src]="logoUrl$" *ngIf="!image && logoUrl$" width="100">
+                            <img [attr.src]="logoUrl" *ngIf="!image && logoUrl" width="100">
                         </div>
                       </div>
                       <div col="col-sm-3">
