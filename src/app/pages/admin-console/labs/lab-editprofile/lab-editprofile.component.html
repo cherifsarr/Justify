@@ -1,0 +1,176 @@
+<div class="row">
+    <div class="col">
+        <div widget class="card">
+            <div class="card-body widget-body">
+                <form [formGroup]="form" class="form-horizontal" (ngSubmit)="onFormSubmit(form.value)">
+                    <div class="form-group row">
+                        <label for="name" class="col-sm-3 form-control-label m-t-5"><span>*</span>Name</label>
+                        <div class="col-sm-9">
+                            <input formControlName="labName" type="text" class="form-control checking-field" required />
+                            <span class="help-block" *ngIf="form.get('labName').touched">
+                                <span class="text-danger" *ngIf="form.get('labName').touched && form.get('labName').hasError('required')">Name is required</span>
+                                <span class="text-danger" *ngIf="form.get('labName').touched && form.get('labName').hasError('minlength')">Minimum of 1 character</span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="displayName" class="col-sm-3 form-control-label m-t-5"><span>*</span>Display Name</label>
+                        <div class="col-sm-9">
+                            <input formControlName="displayName" type="text" class="form-control checking-field" required />
+                            <span class="help-block" *ngIf="form.get('displayName').touched">
+                                <span class="text-danger" *ngIf="form.get('displayName').touched && form.get('displayName').hasError('required')">Display name is required</span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                      <label for="logo" class="col-sm-3 form-control-label m-t-5">Logo</label>
+                      <div col="col-sm-6" style="padding-left:20px;">
+                        <input id="logoImage" type="file" (change)="fileChange(input)" #input class="img-upload-btn" />
+                        <div class="image-wrapper">
+                            <i *ngIf="image" class="fa fa-times delete-img" (click)="removeImage()"></i>
+                            <img [attr.src]="image" *ngIf="image" width="100">
+                            <!--<img src="assets/img/app/no-image.png" *ngIf="!image" width="100" height="100">-->
+                            <img [attr.src]="logoUrl$" *ngIf="!image && logoUrl$" width="100">
+                        </div>
+                      </div>
+                      <div col="col-sm-3">
+                          <button class="btn btn-main btn-block" style="width:100px;margin-top:0px;" type="button">
+                              <span *ngIf="logoUrl === defaultLogo"><i class="fa fa-upload"></i> Upload</span>
+                              <span *ngIf="logoUrl != defaultLogo"><i class="fa fa-refresh"></i> Change</span>
+                          </button>
+                      </div>
+                  </div>
+                    <div class="form-group row">
+                      <label for="phone" class="col-sm-3 form-control-label m-t-5"><span>*</span>Phone</label>
+                      <div class="col-sm-9">
+                          <!-- <input formControlName="phone" type="text" class="form-control checking-field" /> -->
+                          <int-phone-prefix #phoneComponent class="form-control checking-field" maxLength="15" showDropdown="false"  defaultCountry="us" [locale]="'en'"  formControlName="phone"></int-phone-prefix>
+                          <span class="help-block" *ngIf="form.get('phone').touched">
+                              <span class="text-danger" *ngIf="form.get('phone').touched && form.get('phone').hasError('required')">Phone is required</span>
+                              <span class="help-block text-danger" *ngIf="form.get('phone').touched && form.get('phone').hasError('invalidPhoneNumber')">Invalid phone number</span>
+                          </span>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label for="fax" class="col-sm-3 form-control-label m-t-5"><span>*</span>Fax</label>
+                      <div class="col-sm-9">
+                          <input formControlName="fax" type="text" class="form-control checking-field" />
+                          <span class="help-block" *ngIf="form.get('fax').touched">
+                              <span class="text-danger" *ngIf="form.get('fax').touched && form.get('fax').hasError('required')">Fax is required</span>
+                              <span class="help-block text-danger" *ngIf="form.get('fax').touched && form.get('fax').hasError('invalidNumber')">Invalid fax number</span>
+                          </span>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label for="fax" class="col-sm-3 form-control-label m-t-5"><span>*</span>Owner Name</label>
+                      <div class="col-sm-9">
+                          <input formControlName="ownerName" type="text" class="form-control checking-field" />
+                          <span class="help-block" *ngIf="form.get('ownerName').touched">
+                              <span class="text-danger" *ngIf="form.get('ownerName').touched && form.get('ownerName').hasError('required')">Owner name is required</span>
+                          </span>
+                      </div>
+                    </div>
+                    <div class="form-group row" >
+                      <label for="email" class="col-sm-3 form-control-label m-t-5">Owner Email</label>
+                      <div class="form-group col-sm-9">
+                          <input formControlName="ownerEmail" type="text" class="form-control checking-field" />
+                          <span class="text-danger" *ngIf="form.get('ownerEmail').touched && form.get('ownerEmail').hasError('required')">Owner email is required</span>
+                          <span class="help-block text-danger" *ngIf="form.get('ownerEmail').touched && form.get('ownerEmail').hasError('invalidEmail')">Invalid email address</span>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label for="fax" class="col-sm-3 form-control-label m-t-5"><span>*</span>Billing Name</label>
+                      <div class="col-sm-9">
+                          <input formControlName="billingName" type="text" class="form-control checking-field" />
+                          <span class="help-block" *ngIf="form.get('billingName').touched">
+                              <span class="text-danger" *ngIf="form.get('billingName').touched && form.get('billingName').hasError('required')">Billing name is required</span>
+                          </span>
+                      </div>
+                    </div>
+                    <div class="form-group row" >
+                        <label for="email" class="col-sm-3 form-control-label m-t-5">Billing Email</label>
+                        <div class="form-group col-sm-9">
+                            <input formControlName="billingEmail" type="text" class="form-control checking-field" />
+                            <span class="text-danger" *ngIf="form.get('billingEmail').touched && form.get('billingEmail').hasError('required')">Billing email is required</span>
+                            <span class="help-block text-danger" *ngIf="form.get('billingEmail').touched && form.get('billingEmail').hasError('invalidEmail')">Invalid email address</span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                      <label for="phone" class="col-sm-3 form-control-label m-t-5"><span>*</span>Billing Phone</label>
+                      <div class="col-sm-9">
+                          <!-- <input formControlName="phone" type="text" class="form-control checking-field" /> -->
+                          <int-phone-prefix #phoneComponent class="form-control checking-field" maxLength="15" showDropdown="false"  defaultCountry="us" [locale]="'en'"  formControlName="billingPhone"></int-phone-prefix>
+                          <span class="help-block" *ngIf="form.get('phone').touched">
+                              <span class="text-danger" *ngIf="form.get('billingPhone').touched && form.get('billingPhone').hasError('required')">Billing phone is required</span>
+                              <span class="help-block text-danger" *ngIf="form.get('billingPhone').touched && form.get('billingPhone').hasError('invalidPhoneNumber')">Invalid billing phone number</span>
+                          </span>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="address" class="col-sm-3 form-control-label m-t-5"><span>*</span>Address</label>
+                        <div class="col-sm-9">
+                            <input formControlName="address" type="text" class="form-control checking-field" />
+                            <span class="help-block" *ngIf="form.get('address').touched">
+                                <span class="text-danger" *ngIf="form.get('address').touched && form.get('address').hasError('required')">Address is required</span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="city" class="col-sm-3 form-control-label m-t-5"><span>*</span>City</label>
+                        <div class="col-sm-9">
+                            <input formControlName="city" type="text" class="form-control checking-field" />
+                            <span class="help-block" *ngIf="form.get('city').touched">
+                                <span class="text-danger" *ngIf="form.get('city').touched && form.get('city').hasError('required')">City is required</span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="state" class="col-sm-3 form-control-label m-t-5"><span>*</span>State</label>
+                        <div class="col-sm-9">
+                          <select formControlName="state" id="exampleSelect3" class="form-control custom-select checking-field">
+                              <option *ngFor="let state of states" value="{{state.abbreviation}}">{{state.name}}</option>
+                          </select>
+                          <span class="help-block" *ngIf="form.get('state').touched">
+                              <span class="text-danger" *ngIf="form.get('state').touched && form.get('state').hasError('required')">State is required</span>
+                          </span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="zip" class="col-sm-3 form-control-label m-t-5"><span>*</span>Zip Code</label>
+                        <div class="col-sm-9">
+                            <input formControlName="zip" type="text" class="form-control checking-field" />
+                            <span class="help-block" *ngIf="form.get('zip').touched">
+                                <span class="text-danger" *ngIf="form.get('zip').touched && form.get('zip').hasError('required')">Zip code is required</span>
+                                <span class="text-danger" *ngIf="form.get('zip').touched && form.get('zip').hasError('pattern')">Invalid zip code </span>
+                            </span>
+                        </div>
+                    </div>  
+                    <div class="form-group row">
+                        <label for="website" class="col-sm-3 form-control-label m-t-5">Website URL</label>
+                        <div class="col-sm-9">
+                            <input formControlName="website" type="text" class="form-control checking-field" />
+                            <span class="help-block text-danger" *ngIf="form.get('website').touched && form.get('website').hasError('invalidUrl')">Invalid url address</span>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group row">
+                        <div class="col-sm-12 text-right">
+                            <button class="btn" [routerLink]="['../../listlabprofiles']">Cancel</button>
+                            <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                            <button *ngIf="isUpdate; else elseTemplate" class="btn btn-main" type="submit" [disabled]="!form.valid">Update</button>
+                            <ng-template #elseTemplate>
+                                <button  class="btn btn-main"  type="submit" [disabled]="!form.valid">Save</button>
+                            </ng-template>
+                        </div>
+                    </div>
+                  </form>
+                  
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="my-loading">
+    <ngx-loading [show]="loading">
+    </ngx-loading>
+</div>

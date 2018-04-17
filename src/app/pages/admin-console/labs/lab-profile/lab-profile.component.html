@@ -1,3 +1,45 @@
-<p>
-  lab-profile works!
-</p>
+<div class="row">
+  <div class="col bottom-30">
+    <div widget class="card">
+      <div class="card-body widget-body">
+        <div class="input-group input-group-sm my-3">
+          <a class="btn btn-main" [routerLink]="['../editlabprofile', '']">Add a Lab Profile</a>
+        </div>
+        <ngx-datatable #table
+                       class="bootstrap"
+                       [headerHeight]="30"
+                       [limit]="10"
+                       [columnMode]="'force'"
+                       [footerHeight]="30"
+                       [rowHeight]="'auto'"
+                       [rows]="rows">
+          <ngx-datatable-column name="Name" prop="uniqueName">
+            <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
+              <a [routerLink]="['../editlabprofile', row.id]"> {{value}} </a>
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="Billing Name" prop="billingName">
+            <ng-template ngx-datatable-cell-template let-value="value">
+              {{value}}
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="Billing Email" prop="billingEmail">
+            <ng-template ngx-datatable-cell-template let-value="value">
+              {{value}}
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="Billing Phone" prop="billingPhone">
+            <ng-template ngx-datatable-cell-template let-value="value">
+              {{value}}
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="State" prop="state">
+            <ng-template ngx-datatable-cell-template let-value="value">
+              {{value}}
+            </ng-template>
+          </ngx-datatable-column>
+        </ngx-datatable>
+      </div>
+    </div>
+  </div>
+</div>
