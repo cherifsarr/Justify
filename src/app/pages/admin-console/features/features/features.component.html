@@ -19,40 +19,42 @@
                 <ngx-datatable #table
                                class="bootstrap"
                                [headerHeight]="30"
-                               [limit]="10"
-                               [columnMode]="'force'"
+                               [limit]="20000"
+                               [columnMode]="'flex'"
                                [footerHeight]="30"
-                               [rowHeight]="'auto'"
+                               [rowHeight]="30"
+                               [loadingIndicator]="true"
+                               [sorts]="[{prop: 'name', dir: 'asc'}]"
                                [rows]="rows">
-                    <ngx-datatable-column [width]="30"
+                    <!--<ngx-datatable-column [width]="30"
                                           [sortable]="false"
                                           [canAutoResize]="false"
                                           [draggable]="false"
                                           [resizeable]="false"
                                           [headerCheckboxable]="false"
                                           [checkboxable]="false">
-                    </ngx-datatable-column>
-                    <ngx-datatable-column name="Feature Id" prop="code">
+                    </ngx-datatable-column>-->
+                    <ngx-datatable-column name="Feature Name" prop="name" [flexGrow]="6">
                         <ng-template ngx-datatable-cell-template let-value="value">
                             {{value}}
                         </ng-template>
                     </ngx-datatable-column>
-                    <ngx-datatable-column name="Feature Name" prop="name">
+                    <ngx-datatable-column name="Feature Id" prop="code" [flexGrow]="1">
                         <ng-template ngx-datatable-cell-template let-value="value">
                             {{value}}
                         </ng-template>
                     </ngx-datatable-column>
-                    <ngx-datatable-column name="AHS" prop="orgLevel">
+                    <ngx-datatable-column name="AHS" prop="orgLevel" [flexGrow]="1">
                         <ng-template ngx-datatable-cell-template let-value="value">
                             <input type="checkbox" [checked]="value" disabled="disabled" />
                         </ng-template>
                     </ngx-datatable-column>
-                    <ngx-datatable-column name="Lab" prop="labLevel">
+                    <ngx-datatable-column name="Lab" prop="labLevel" [flexGrow]="1">
                         <ng-template ngx-datatable-cell-template let-value="value">
                             <input type="checkbox" [checked]="value" disabled="disabled" />
                         </ng-template>
                     </ngx-datatable-column>
-                    <ngx-datatable-column name="MP" prop="scopemp">
+                    <ngx-datatable-column name="MP" prop="scopemp" [flexGrow]="1">
                         <ng-template ngx-datatable-cell-template let-value="value">
                             <input type="checkbox" [checked]="mpLevel" disabled="disabled" />
                         </ng-template>

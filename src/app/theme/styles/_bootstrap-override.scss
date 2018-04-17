@@ -654,7 +654,7 @@ code{
 }
 
 
-/*Tabs*/
+/*Tabs
 .nav-tabs {    
     background-color: $gray-light;
     border: 1px solid $gray-light;  
@@ -771,43 +771,52 @@ code{
         }
     }
 }
+*/
 .tab-content {
     position: relative;
     z-index: 1;
     border: 1px solid $gray-light;
     background: #fff;
+
     .tab-pane {
         padding: 1rem;
     }
-    &.tab-content-primary{
+
+    &.tab-content-primary {
         background-color: $primary-color;
         color: $default-color;
         border-color: $primary-color;
     }
-    &.tab-content-success{
+
+    &.tab-content-success {
         background-color: $success-color;
         color: $default-color;
         border-color: $success-color;
     }
-    &.tab-content-info{
+
+    &.tab-content-info {
         background-color: $info-color;
         color: $default-color;
         border-color: $info-color;
     }
-    &.tab-content-warning{
+
+    &.tab-content-warning {
         background-color: $warning-color;
         color: $default-color;
         border-color: $warning-color;
     }
-    &.tab-content-danger{
+
+    &.tab-content-danger {
         background-color: $danger-color;
         color: $default-color;
         border-color: $danger-color;
     }
-    &.top{
+
+    &.top {
         border-top: none;
     }
-    &.bottom{
+
+    &.bottom {
         border-bottom: none;
     }
 }

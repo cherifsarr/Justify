@@ -1,6 +1,7 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { AppState } from '../../../app.state';
 import { SidebarService } from '../sidebar/sidebar.service';
+import { UserConfig } from '../../../shared/models/userConfig';
 
 @Component({
   selector: 'az-navbar',
@@ -11,12 +12,15 @@ import { SidebarService } from '../sidebar/sidebar.service';
 })
 
 export class NavbarComponent {
-    public isMenuCollapsed:boolean = false;
+    public isMenuCollapsed: boolean = false;
+    public userConfig: UserConfig;
 
     constructor(private _state:AppState, private _sidebarService:SidebarService) {
         this._state.subscribe('menu.isCollapsed', (isCollapsed) => {
             this.isMenuCollapsed = isCollapsed;
         });
+
+        this.userConfig = <UserConfig>JSON.parse(sessionStorage.getItem('currentUser'));
     }
 
     public closeSubMenus(){

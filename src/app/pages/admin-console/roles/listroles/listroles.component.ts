@@ -23,7 +23,7 @@ import { Role } from '../role';
 import { RolesService } from '../roles.service';
 
 @Component({
-    selector: 'az-listroles',
+    selector: 'ahs-roleslistroles',
     encapsulation: ViewEncapsulation.None,
     templateUrl: './Listroles.component.html',
     styleUrls: ['../../../../theme/styles/table-styling.scss', '../../../../theme/styles/AhsStyles.css']

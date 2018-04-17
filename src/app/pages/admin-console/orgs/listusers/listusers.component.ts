@@ -1,36 +1,28 @@
-//import { Component, OnInit } from '@angular/core';
-//
-//@Component({
-//  selector: 'ahs-listorgusers',
-//  templateUrl: './listusers.component.html',
-//  styleUrls: ['./listusers.component.scss']
-//})
-//export class ListusersComponent implements OnInit {
-//
-//  constructor() { }
-//
-//  ngOnInit() {
-//  }
-//
-//}
-
-
-import { Component, OnInit, ViewEncapsulation, ViewChild } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewEncapsulation, ViewChild } from '@angular/core';
 import { RouterModule, ActivatedRoute, Router } from '@angular/router';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
 
 import { User } from "../../../../shared/models/user";
 import { RoleListItem } from "../../../../shared/models/rolelistitem";
-import {UserService } from "../user.service";
+import { UserService } from "../user.service";
 
 
 @Component({
-    selector: 'ahs-listorguser',
+    selector: 'ahs-orgslistusers',
     encapsulation: ViewEncapsulation.None,
     templateUrl: './listusers.component.html',
-    styleUrls: ['./listusers.component.scss', '../../../../theme/styles/table-styling.scss', '../../../../theme/styles/AhsStyles.css']
+    styleUrls: [
+        './listusers.component.scss',
+        '../../../../theme/styles/table-styling.scss',
+        '../../../../theme/styles/AhsStyles.css'
+    ]
 })
-export class ListusersComponent implements OnInit {
+export class ListusersComponent implements OnInit,OnDestroy {
+    //oid: string;    // Org-Id
+    //param1: any;
+    param2: any;
+    userService: UserService;
+    route: ActivatedRoute;
 
     editing = {};
     rows = [];
@@ -47,18 +39,31 @@ export class ListusersComponent implements OnInit {
 
     @ViewChild(DatatableComponent) table: DatatableComponent;
 
-    constructor(router: Router, route: ActivatedRoute, private userService: UserService) { }
+    constructor(_router: Router, _route: ActivatedRoute, _userService: UserService) {
+        this.userService = _userService;
+        this.route = _route;
+        //this.param1 = _route.queryParams.subscribe(params => {
+        //    this.oid = params['oid'];
+        //    //console.log(params);
+        //});
+        //console.log('Parent: ' + this.oid);
+    }
 
     ngOnInit() {
-        this.userService.getOrgUsers()
-            .subscribe(
+        this.param2 = this.userService.getOrgUsers().subscribe((data) => {
+            let data2 = JSON.parse(JSON.stringify(data));
+            this.temp = [...data2];
+            this.rows = data2;
+        });
+        //console.log(this.oid);       
+        //console.log('Snapshot: ' + this.route.snapshot.params["id"]);
 
-            (data) => {
-                let data2 = JSON.parse(JSON.stringify(data));
-                this.temp = [...data2];
-                this.rows = data2;
-            });
+    }
 
+
+    ngOnDestroy() {
+        //this.param1.unsubscribe();
+        this.param2.unsubscribe();
     }
 
 

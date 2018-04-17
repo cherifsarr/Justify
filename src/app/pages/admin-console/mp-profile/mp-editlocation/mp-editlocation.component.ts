@@ -1,8 +1,10 @@
 import {Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation} from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, AbstractControl, ReactiveFormsModule, Validators } from '@angular/forms';
-import {ActivatedRoute} from "@angular/router";
+import { ActivatedRoute } from "@angular/router";
+
+import { STATES } from '../../../../shared/utils/states-titlecase'
 import { Mplocation } from '../../../../shared/models/mplocation';
-import { STATES } from '../../../../shared/utils/states-titlecase';
+//import { STATES } from '../../../../shared/utils/states-titlecase';
 import { MpLocationsService } from '../services/mp-locations.service';
 import {MPProfileService} from "../services/mp-profile.service";
 import {MPProfile} from "../../../../shared/models/mpprofile";

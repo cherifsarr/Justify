@@ -12,6 +12,8 @@ import { BaseService } from "./base.service";
 import { Observable } from 'rxjs/Rx';
 import { BehaviorSubject } from 'rxjs/Rx';
 
+import { PasswordReset } from '../models/passwordReset';
+
 // Add the RxJS Observable operators we need in this app.
 import 'rxjs/operators';
 
@@ -46,7 +48,7 @@ export class UserService extends BaseService {
     // Observable navItem stream
     authNavStatus$ = this._authNavStatusSource.asObservable();
 
-    private loggedIn = false;
+    public loggedIn = false;
 
     constructor(private http: HttpClient, private configService: ConfigService) {
         super();
@@ -57,35 +59,38 @@ export class UserService extends BaseService {
         this.baseUrl = configService.getApiURI();
     }
 
- 
+
     login(userName: string, password: string) {
-
-
         let strCred = '{ "username" : "' + userName + '" , "password" : "' + password + '"}'
-
-     //   const credentials = JSON.stringify({ UserName: userName, Password: password });
-     //   alert(userName);
         return this.http.post<AuthResult>(
             this.baseUrl + '/auth/login',
             strCred,
             httpOptions
-        ).subscribe(
+        );
+    }
 
-            (val) => {
-              //  let result: AuthResult = JSON.parse(val.toString());
-             //   console.log("POST call successful value returned in body",val.auth_token);
-                sessionStorage.setItem('auth_token', val.auth_token);
-                this.loggedIn = true;
-                this._authNavStatusSource.next(true);
-                return true;
-            },
-            response => {
-              //  console.log("POST call in error", response);
-            },
-            () => {
-               // console.log("The POST observable is now completed.");
-            });
+    requestPassword(email: string) {
+        let strCred = '"' + email +  '"'
+        return this.http.post<any>(
+            this.baseUrl + '/auth/forgotpassword',
+            strCred,
+            httpOptions
+        );
+    }
 
+    resetPassword(model: PasswordReset) {
+        return this.http.post<any>(
+            this.baseUrl + '/auth/resetpassword',
+            JSON.stringify(model),
+            httpOptions
+        );
+    }
+
+    isUserNameExists(userName: string) {
+        return this.http.get<any>(
+            this.baseUrl + '/Utilities/user/Exists/' + userName,
+            httpOptions
+        );
     }
 
     logout() {

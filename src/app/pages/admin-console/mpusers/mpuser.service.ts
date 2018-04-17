@@ -59,4 +59,7 @@ export class MpuserService extends BaseService {
         );
     }
 
+    getUser(id) {
+        return this.http.get<User>(this.baseUrl + '/OrgUsers/' + id);
+    }
 }

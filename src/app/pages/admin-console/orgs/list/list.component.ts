@@ -22,12 +22,13 @@ import { Org } from '../org';
 import { OrgService } from '../org.service';
 
 @Component({
-    selector: 'az-dynamic-tables',
+    selector: 'ahs-orgslist',
     encapsulation: ViewEncapsulation.None,
     templateUrl: './list.component.html',
     styleUrls: ['../../../../theme/styles/table-styling.scss', '../../../../theme/styles/AhsStyles.css']
 
 })
+
 export class ListComponent {
 
     editing = {};

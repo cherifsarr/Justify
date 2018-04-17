@@ -24,21 +24,30 @@
     enabled: boolean;
 }*/
 
+export class LogoImage {
+    filename: string;
+    filetype: string;
+    value: string;
+}
 
-export class Org
-{
+export class Org {
     id: string;
     businessEntityId: string;
-    businessEntity: BusinessEntity;
+    public businessEntity: BusinessEntity;
     uniqueName: string;
     logoUrl: string;
     customDomain: string;
+    logoImage: LogoImage;
+    constructor() {
+        this.id = this.businessEntityId = this.uniqueName = this.logoUrl = this.customDomain = '';
+        this.businessEntity = new BusinessEntity();
+    }
 }
 
 
 
-
 export class BusinessEntity {
+    businessEntityId: string;
     name: string;
     displayName: string;
     level: number;
@@ -57,6 +66,9 @@ export class BusinessEntity {
     createdAt: string;
     createdBy: string;
 }
+
+
+
 
 export class OrgLabs {
 

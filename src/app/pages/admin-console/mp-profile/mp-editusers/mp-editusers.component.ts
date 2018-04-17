@@ -103,7 +103,7 @@ export class MpEditusersComponent implements OnInit {
         this.form.get('password').setValue(this.mpUser.password);
         this.form.get('sendActivationMail').setValue(this.mpUser.sendActivationEmail);
         this.form.get('locked').setValue(this.mpUser.isLockedOut);
-        this.form.get('passwordChange').setValue(this.mpUser.forcePasswordChang);
+        this.form.get('passwordChange').setValue(this.mpUser.forcePasswordChange);
      
     })
   }
@@ -183,7 +183,7 @@ export class MpEditusersComponent implements OnInit {
         this.mpUser.sendActivationEmail = form.sendActivationMail;
         this.mpUser.isLockedOut = form.locked;
         this.mpUser.scope = Scope.MP;
-        this.mpUser.forcePasswordChang = form.passwordChange;
+        this.mpUser.forcePasswordChange = form.passwordChange;
         this.mpUser.businessProfileId = this.idProfile;
         this.mpUser.title = 'Mr';
         this.mpUser.lastAccess = lastaccess;

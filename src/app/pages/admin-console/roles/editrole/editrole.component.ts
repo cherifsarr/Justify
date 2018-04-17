@@ -23,9 +23,10 @@ import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup, AbstractControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Role, RoleDetail, RolePermission } from '../role';
 import { RolesService } from '../roles.service';
+import { AutofocusDirective } from '../../../../autofocus.directive';
 
 @Component({
-    selector: 'az-dynamic-tables',
+    selector: 'ahs-roleeditrole',
     encapsulation: ViewEncapsulation.None,
     templateUrl: './editrole.component.html',
     styleUrls: ['../../../../theme/styles/table-styling.scss', '../../../../theme/styles/AhsStyles.css']
@@ -75,7 +76,7 @@ export class EditroleComponent implements OnInit, OnDestroy {
             orgLevel: [''],
             labLevel: [''],
             mpLevel: [''],
-            enabled: [''],
+            enabled: [true],
             custom: ['']
         });
         this.roledetail = new RoleDetail;

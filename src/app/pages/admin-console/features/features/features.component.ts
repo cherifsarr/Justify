@@ -22,7 +22,7 @@ import { FeaturesService } from '../features.service';
 
 
 @Component({
-    selector: 'az-dynamic-tables',
+    selector: 'ahs-features',
     encapsulation: ViewEncapsulation.None,
     templateUrl: './features.component.html',
     styleUrls: ['../../../../theme/styles/table-styling.scss', '../../../../theme/styles/AhsStyles.css']

@@ -9,7 +9,7 @@ export class AuthService {
     public isAuthenticated(): boolean {
         try {
             const token = sessionStorage.getItem('auth_token');
-            console.log(token);
+        //    console.log(token);
             // Check whether the token is expired and return
             // true or false
             if (this.jwtHelper.isTokenExpired(token)) {
@@ -22,6 +22,19 @@ export class AuthService {
         catch (e) {
             sessionStorage.removeItem('auth_token');
             return false;
+        }
+    }
+
+    public getUserClaims(): any {
+
+        try {
+            const token = sessionStorage.getItem('auth_token');
+       //     var decoded = JSON.stringify(this.jwtHelper.decodeToken(token));
+            return this.jwtHelper.decodeToken(token);
+
+        }
+        catch (e) {
+            return '';
         }
     }
 }

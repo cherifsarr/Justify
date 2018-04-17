@@ -23,8 +23,13 @@ import { UserService } from './shared/services/user.service';
 import { JwtModule } from '@auth0/angular-jwt';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './shared/utils/auth-interceptor';
+import { LoadingModule, ANIMATION_TYPES } from 'ngx-loading';
 
 import { ConfigService } from './shared/utils/config.service';
+import { AutofocusDirective } from './autofocus.directive';
+
+import { ExistingUsernameValidatorDirective } from './shared/services/validation.service';
+
 
 export function tokenGetter() {
     return sessionStorage.getItem('auth_token');
@@ -34,8 +39,10 @@ export function tokenGetter() {
 
 @NgModule({
   declarations: [
-    AppComponent,
-    ErrorComponent,
+        AppComponent,
+        ErrorComponent,
+        AutofocusDirective,
+        ExistingUsernameValidatorDirective
   ],
   imports: [
     BrowserModule,
@@ -45,6 +52,19 @@ export function tokenGetter() {
   //  }),
       routing,
       HttpClientModule,
+      LoadingModule.forRoot({
+          animationType: ANIMATION_TYPES.circle,
+          //backdropBackgroundColour: 'rgba(0,0,0,0.1)',
+          backdropBackgroundColour: 'rgba(128,128,128,0.8)',
+          backdropBorderRadius: '4px',
+          //primaryColour: '#ffffff',
+          //secondaryColour: '#ffffff',
+          //tertiaryColour: '#ffffff'
+          primaryColour: '#DCDCDC',     // lightgray / lightgrey
+          secondaryColour: '#000000',   // black    '#C0C0C0',   // silver
+          //tertiaryColour: '#808080'   // gray/grey
+          tertiaryColour: '#25383C'     // dark slate gray
+      }),
       JwtModule.forRoot({
           config: {
               tokenGetter: tokenGetter,

@@ -19,7 +19,7 @@ export class EditLabUserComponent implements OnInit, OnDestroy {
     public router: ActivatedRoute;
     public form: FormGroup;
     public username: AbstractControl;
-    public role: AbstractControl;
+    public roleId: AbstractControl;
     public title: AbstractControl;
     public firstname: AbstractControl;
     public lastname: AbstractControl;
@@ -43,7 +43,7 @@ export class EditLabUserComponent implements OnInit, OnDestroy {
         this.router = router;
         this.form = fb.group({
             username: ['', Validators.compose([Validators.required, Validators.minLength(3)])],
-            role: ['', Validators.required],
+            roleId: ['', Validators.required],
             title: '',
             firstname: ['', Validators.required],
             lastname: ['', Validators.required],
@@ -86,9 +86,9 @@ export class EditLabUserComponent implements OnInit, OnDestroy {
 
             this.user.email = this.form.get('email').value;
             this.user.password = this.form.get('password').value;
-            this.user.passwordConfirmation = this.form.get('confirmPassword').value;
+            this.user.confirmPassword = this.form.get('confirmPassword').value;
             this.user.title = this.form.get('title').value;
-            this.user.role = this.form.get('role').value;
+            this.user.roleId = this.form.get('roleId').value;
             this.user.scope = 2;
 
             this.userService.createUser(this.user);

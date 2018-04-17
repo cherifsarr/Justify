@@ -15,14 +15,11 @@ import 'rxjs/operators';
 
 @Injectable()
 export class OrgUserService extends BaseService {
-
     baseUrl: string = '';
 
     constructor(private http: HttpClient, private configService: ConfigService) {
         super();
-
         this.baseUrl = configService.getApiURI();
-
     }
 
     
@@ -31,21 +28,30 @@ export class OrgUserService extends BaseService {
         return this.http.post(
             this.baseUrl + '/accounts',
             JSON.stringify(user),
-
-          //  { responseType: 'text' }
+            //{ responseType: 'text' }
         );
     }
 
     getOrgUsers() {
-        return this.http.get<User[]>(
-            this.baseUrl + '/orgusers'
+        return this.http.get<User[]>(this.baseUrl + '/orgusers');
+    }
+
+
+    getOrgUser(id) {
+        return this.http.get<User>(this.baseUrl + '/orgusers/' + id);
+    }
+
+
+    getRoles(scope: number) {
+        return this.http.get<RoleListItem[]>(this.baseUrl + '/approles/list/' + scope,);
+    }
+
+    saveUser(id: string, user: User) {
+        return this.http.put(
+            this.baseUrl + '/orgusers/'+id,
+            JSON.stringify(user),
         );
     }
 
-    getRoles(scope: number) {
-        return this.http.get<RoleListItem[]>(
-            this.baseUrl + '/approles/list/' + scope,
-        );
-    }
 
 }

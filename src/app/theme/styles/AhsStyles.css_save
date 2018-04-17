@@ -1,0 +1,31 @@
+﻿body {
+    /*font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size:13px;*/
+}
+
+.card-header {
+    text-align:center;
+    background-color:cadetblue;
+}
+.datatable-header-row {
+    background-color: azure;
+}
+.datatable-header-cell {
+
+}
+.tbaslabel {
+    outline: none;
+    border: none;
+}
+
+.btnGW {
+    background-color: darkgreen;
+    color: white;
+}
+
+/*.form-control {
+    font-size: 13px;
+    padding:2px;
+    height:20px;
+}*/

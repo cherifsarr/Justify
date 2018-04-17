@@ -63,8 +63,10 @@ export class User {
     randomPassword: boolean;
     isLockedOut: boolean;
     sendActivationEmail: boolean;
-    forcePasswordChang: boolean;
+    forcePasswordChange: boolean;
     passwordConfirmation: string;
     isEnabled: boolean;
     lastAccess: Date;
 }
+
+

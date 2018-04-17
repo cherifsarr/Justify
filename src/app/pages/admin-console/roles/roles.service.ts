@@ -1,48 +1,40 @@
-//import { Injectable } from '@angular/core';
-//
-//@Injectable()
-//export class RolesService {
-//
-//  constructor() { }
-//
-//}
-//
-
-
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams, HttpHeaders, HttpResponse } from '@angular/common/http';
+
+// Add the RxJS Observable operators we need in this app.
+import 'rxjs/operators';
 import { Observable } from 'rxjs/Observable';
 
 import { Role, RoleDetail } from './role';
 import { ConfigService } from '../../../shared/utils/config.service';
-
+import { BaseService } from "../../../shared/services/base.service";
 
 @Injectable()
-export class RolesService {
-    constructor(private http: HttpClient, private oConfigService: ConfigService) { }
+export class RolesService extends BaseService {
+    baseUrl: string = '';
+    constructor(private http: HttpClient, private oConfigService: ConfigService) {
+        super();
+        this.baseUrl = oConfigService.getApiURI();
+    }
 
     getRoles() {
-        return this.http.get(this.oConfigService.getApiURI() + '/approles');
+        return this.http.get(this.baseUrl + '/approles');
     }
     getAppRoles(id) {
-        return this.http.get<RoleDetail>(this.oConfigService.getApiURI() + '/AppRoles/' + id);
+        return this.http.get<RoleDetail>(this.baseUrl + '/AppRoles/' + id);
+    }
+
+    createRole(roledetail: RoleDetail) {
+        return this.http.post(
+            this.baseUrl + '/AppRoles',
+            JSON.stringify(roledetail),
+        );
     }
 
     saveRole(roledetail: RoleDetail) {
-        return this.http.post(
-            this.oConfigService.getApiURI() + '/RoleDetail',
+        return this.http.put(
+            this.baseUrl + '/AppRoles/' + roledetail.id,
             JSON.stringify(roledetail)
-        ).subscribe(
-
-            (val) => {
-                return true;
-            },
-            response => {
-                //  console.log("POST call in error", response);
-            },
-            () => {
-                // console.log("The POST observable is now completed.");
-            });
+        );
     }
-
 }

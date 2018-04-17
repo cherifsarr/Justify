@@ -1,11 +1,14 @@
-<a [routerLink]="['../create']">Add New</a>
+<!--<a [routerLink]="['../create']">Add New User</a>-->
 <div class="row">
     <div class="col">
         <div widget class="card">
-            <div class="card-header">
-                <span>List of AHS Users</span>
-            </div>
+            <!--<div class="card-header">
+                <span>List of Users</span>
+            </div>-->
             <div class="card-body widget-body">
+                <div class="input-group input-group-sm my-3">
+                    <a [routerLink]="['../edituser', '']">Add New User</a>
+                </div>
                 <div class="input-group input-group-sm my-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text"><i class="fa fa-search"></i></span>
@@ -15,40 +18,41 @@
                 <ngx-datatable #table
                                class="bootstrap"
                                [headerHeight]="30"
-                               [limit]="10"
-                               [columnMode]="'force'"
+                               [limit]="50"
+                               [columnMode]="'flex'"
                                [footerHeight]="30"
-                               [rowHeight]="'auto'"
+                               [rowHeight]="30"
+                               [loadingIndicator]="true"
+                               [sorts]="[{prop: 'userName', dir: 'asc'}]"
                                [rows]="rows">
-                    <ngx-datatable-column [width]="30"
+                    <!--<ngx-datatable-column [width]="30"
                                           [sortable]="false"
                                           [canAutoResize]="false"
                                           [draggable]="false"
                                           [resizeable]="false"
                                           [headerCheckboxable]="false"
                                           [checkboxable]="false">
-                    </ngx-datatable-column>
-                    <ngx-datatable-column name="Email" prop="email">
+                    </ngx-datatable-column>-->
+                    <ngx-datatable-column name="Username" prop="userName" [flexGrow]="2">
                         <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
-                            <a [routerLink]="['../create', row.id]"> {{value}} </a>
+                            <a [routerLink]="['../edituser', row.id]"> {{value}} </a>
                         </ng-template>
                     </ngx-datatable-column>
-                    <ngx-datatable-column name="Username" prop="userName">
+                    <ngx-datatable-column name="First Name" prop="firstName" [flexGrow]="2">
                         <ng-template ngx-datatable-cell-template let-value="value">
                             {{value}}
                         </ng-template>
                     </ngx-datatable-column>
-                    <ngx-datatable-column name="First Name" prop="firstName">
+                    <ngx-datatable-column name="Last Name" prop="lastName" [flexGrow]="2">
                         <ng-template ngx-datatable-cell-template let-value="value">
                             {{value}}
                         </ng-template>
                     </ngx-datatable-column>
-                    <ngx-datatable-column name="Last Name" prop="lastName">
+                    <ngx-datatable-column name="Email" prop="email" [flexGrow]="4">
                         <ng-template ngx-datatable-cell-template let-value="value">
                             {{value}}
                         </ng-template>
                     </ngx-datatable-column>
-
                 </ngx-datatable>
             </div>
         </div>

@@ -11,7 +11,8 @@
             </div>
             <div class="card-body widget-body">
                 <div class="input-group input-group-sm my-3">
-                    <a href="#">Create a New Role</a>
+                    <!--<a href="#">Create a New Role</a>-->
+                    <a [routerLink]="['../editrole', '']">Create a New Role</a>
                 </div>
                 <div class="input-group input-group-sm my-3">
                     <div class="input-group-prepend">
@@ -23,7 +24,7 @@
                 <ngx-datatable #table
                                class="bootstrap"
                                [headerHeight]="30"
-                               [limit]="10"
+                               [limit]="20000"
                                [columnMode]="'force'"
                                [footerHeight]="30"
                                [rowHeight]="'auto'"

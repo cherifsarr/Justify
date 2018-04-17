@@ -14,7 +14,7 @@
                         <label for="rolename" class="col-sm-3 form-control-label m-t-5">Name of Role</label>
                         <div class="col-sm-8">
                             <!--<input formControlName="rolename" type="text" class="form-control" [attr.disabled]="custom ? '' : 'disabled'" />-->
-                            <input formControlName="rolename" type="text" class="form-control" [disabled]="(custom) ? '' : 'disabled'" />
+                            <input ahsAutofocus required formControlName="rolename" type="text" class="form-control" [disabled]="(custom) ? '' : 'disabled'" autofocus />
                             <span class="help-block" *ngIf="form.get('rolename').touched">
                                 <span class="text-danger" *ngIf="form.get('rolename').hasError('required')">Rolename is required</span>
                                 <span class="text-danger" *ngIf="form.get('rolename').hasError('minlength')">Minimum of 3 characters</span>
@@ -88,7 +88,8 @@
                             <!--<input formControlName="enabled" type="checkbox" class="custom-control-input checkbox-main" [attr.disabled]="custom ? '' : 'disabled'" />
                                 <label class="custom-control-label" for="enabled">Disabled</label>
                             </div>-->
-                            <input type="checkbox" class="abc-checkbox abc-checkbox-primary" id="cbDisabled">
+                            <input type="checkbox" class="abc-checkbox abc-checkbox-primary" 
+                                   formControlName="enabled" [attr.disabled]="id==''" />
                             <label for="cbDisabled">Disabled</label>
                         </div>
                     </div>
@@ -97,9 +98,10 @@
                     <div class="form-group row">
                         <div class="col-sm-1">&nbsp;</div>
                         <div class="col-sm-11 text-right">
-                            <button class="btn" (click)="cancelme($event)">Cancel</button>
+                            <!--<button class="btn" (click)="cancelme($event)">Cancel</button>-->
+                            <button class="btn" [routerLink]="['../../listroles']">Cancel</button>
                             <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                            <button class="btn btn-main" type="submit" [attr.disabled]="custom ? '' : 'disabled'">
+                            <button class="btn btn-main btnGW" type="submit" [attr.disabled]="custom ? '' : 'disabled'">
                                 <span *ngIf="id==''">Create Role</span>
                                 <span *ngIf="id!=''">Update Role</span>
                             </button>

@@ -25,7 +25,7 @@ export const routes = [
       RouterModule.forChild(routes)
     ],
 //    entryComponents: [ListrolesComponent],
-  providers: [RolesService],
+    providers: [RolesService],
     declarations: [EditroleComponent, ListrolesComponent],
     //??
     exports: [EditroleComponent, ListrolesComponent]
