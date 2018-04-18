@@ -40,11 +40,11 @@
                           </button>
                       </div>
                   </div>
-                    <div class="form-group row">
+                    <div id="phoneStyle" class="form-group row phone">
                       <label for="phone" class="col-sm-3 form-control-label m-t-5"><span>*</span>Phone</label>
                       <div class="col-sm-9">
                           <!-- <input formControlName="phone" type="text" class="form-control checking-field" /> -->
-                          <int-phone-prefix #phoneComponent class="form-control checking-field" maxLength="15" showDropdown="false"  defaultCountry="us" [locale]="'en'"  formControlName="phone"></int-phone-prefix>
+                          <int-phone-prefix #phoneComponent class="checking-field" maxLength="15" showDropdown="false"  defaultCountry="us" [locale]="'en'"  formControlName="phone"></int-phone-prefix>
                           <span class="help-block" *ngIf="form.get('phone').touched">
                               <span class="text-danger" *ngIf="form.get('phone').touched && form.get('phone').hasError('required')">Phone is required</span>
                               <span class="help-block text-danger" *ngIf="form.get('phone').touched && form.get('phone').hasError('invalidPhoneNumber')">Invalid phone number</span>
@@ -95,11 +95,11 @@
                             <span class="help-block text-danger" *ngIf="form.get('billingEmail').touched && form.get('billingEmail').hasError('invalidEmail')">Invalid email address</span>
                         </div>
                     </div>
-                    <div class="form-group row">
+                    <div id="billingPhone" class="form-group row phone">
                       <label for="phone" class="col-sm-3 form-control-label m-t-5"><span>*</span>Billing Phone</label>
                       <div class="col-sm-9">
                           <!-- <input formControlName="phone" type="text" class="form-control checking-field" /> -->
-                          <int-phone-prefix #phoneComponent class="form-control checking-field" maxLength="15" showDropdown="false"  defaultCountry="us" [locale]="'en'"  formControlName="billingPhone"></int-phone-prefix>
+                          <int-phone-prefix  class="checking-field" maxLength="15" showDropdown="false"  defaultCountry="us" [locale]="'en'"  formControlName="billingPhone"></int-phone-prefix>
                           <span class="help-block" *ngIf="form.get('phone').touched">
                               <span class="text-danger" *ngIf="form.get('billingPhone').touched && form.get('billingPhone').hasError('required')">Billing phone is required</span>
                               <span class="help-block text-danger" *ngIf="form.get('billingPhone').touched && form.get('billingPhone').hasError('invalidPhoneNumber')">Invalid billing phone number</span>

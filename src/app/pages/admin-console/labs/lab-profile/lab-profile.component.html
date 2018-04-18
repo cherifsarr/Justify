@@ -13,27 +13,27 @@
                        [footerHeight]="30"
                        [rowHeight]="'auto'"
                        [rows]="rows">
-          <ngx-datatable-column name="Name" prop="uniqueName">
+          <ngx-datatable-column name="Name" prop="businessEntity.name">
             <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
               <a [routerLink]="['../editlabprofile', row.id]"> {{value}} </a>
             </ng-template>
           </ngx-datatable-column>
-          <ngx-datatable-column name="Billing Name" prop="billingName">
+          <ngx-datatable-column name="Contact" prop="businessEntity.contactName">
             <ng-template ngx-datatable-cell-template let-value="value">
               {{value}}
             </ng-template>
           </ngx-datatable-column>
-          <ngx-datatable-column name="Billing Email" prop="billingEmail">
+          <ngx-datatable-column name="Phone" prop="businessEntity.phone">
             <ng-template ngx-datatable-cell-template let-value="value">
               {{value}}
             </ng-template>
           </ngx-datatable-column>
-          <ngx-datatable-column name="Billing Phone" prop="billingPhone">
+          <ngx-datatable-column name="City" prop="businessEntity.city">
             <ng-template ngx-datatable-cell-template let-value="value">
               {{value}}
             </ng-template>
           </ngx-datatable-column>
-          <ngx-datatable-column name="State" prop="state">
+          <ngx-datatable-column name="State" prop="businessEntity.state">
             <ng-template ngx-datatable-cell-template let-value="value">
               {{value}}
             </ng-template>
