@@ -29,6 +29,8 @@ import { ConfigService } from './shared/utils/config.service';
 import { AutofocusDirective } from './autofocus.directive';
 
 import { ExistingUsernameValidatorDirective } from './shared/services/validation.service';
+import { LabListusersComponent } from './pages/admin-console/labs/lab-listusers/lab-listusers.component';
+import { LabEdituserComponent } from './pages/admin-console/labs/lab-edituser/lab-edituser.component';
 
 export function tokenGetter() {
     return sessionStorage.getItem('auth_token');
@@ -41,7 +43,7 @@ export function tokenGetter() {
         AppComponent,
         ErrorComponent,
         AutofocusDirective,
-        ExistingUsernameValidatorDirective,
+        ExistingUsernameValidatorDirective
   ],
   imports: [
     BrowserModule,

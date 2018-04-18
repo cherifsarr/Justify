@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {LabPreferencesComponent} from "./lab-preferences/lab-preferences.component";
-import {LabUsersComponent} from "./lab-users/lab-users.component";
 import {LabProfileComponent} from "./lab-profile/lab-profile.component";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {DirectivesModule} from "../../../theme/directives/directives.module";
@@ -14,6 +13,9 @@ import { LabProfileService } from './services/lab-profile.service';
 import { LabEditprofileComponent } from './lab-editprofile/lab-editprofile.component';
 import { CommonService } from '../../../shared/utils/common.service';
 import { LoadingModule, ANIMATION_TYPES } from 'ngx-loading';
+import {LabListusersComponent} from "./lab-listusers/lab-listusers.component";
+import {LabUsersService} from "./services/lab-users.service";
+import {LabEdituserComponent} from "./lab-edituser/lab-edituser.component";
 
 
 
@@ -24,7 +26,8 @@ export const routes = [
             { path: '', redirectTo:'listlabprofiles', pathMatch:'full' },
             { path: 'listlabprofiles', component: LabProfileComponent, data: { breadcrumb: 'List lab profile' } },
             { path: 'editlabprofile/:id', component: LabEditprofileComponent, data: { breadcrumb: 'add/update lab profile' } },
-            { path: 'listlabusers', component: LabUsersComponent, data: { breadcrumb: 'List lab users' } },
+            { path: 'listlabusers', component: LabListusersComponent, data: { breadcrumb: 'List lab users' } },
+            { path: 'editlabuser/:id', component: LabEdituserComponent, data: { breadcrumb: 'add/update lab user' } },
             { path: 'labpreference', component: LabPreferencesComponent, data: { breadcrumb: 'lab preference' } },
         ]
     },
@@ -49,7 +52,7 @@ export const routes = [
         tertiaryColour: '#ffffff'
     }),
   ],
-  declarations: [LabPreferencesComponent, LabUsersComponent, LabProfileComponent, LabsNavComponent, LabEditprofileComponent],
-  providers: [LabProfileService, CommonService]
+  declarations: [LabPreferencesComponent, LabListusersComponent, LabProfileComponent, LabsNavComponent, LabEditprofileComponent, LabEdituserComponent],
+  providers: [LabProfileService, CommonService, LabUsersService]
 })
 export class LabsModule { }
