@@ -17,18 +17,15 @@ import {LabUsersService} from "./services/lab-users.service";
 import { LabEdituserComponent } from './lab-edituser/lab-edituser.component';
 
 
-
-
-
 export const routes = [
     { path: '', redirectTo: 'listlabprofiles', pathMatch: 'full' },
     { path: 'listlabprofiles', component: LabProfileComponent, data: { breadcrumb: 'List Lab Profile' } },
-    { path: 'editlabprofile', component: LabEditprofileComponent, data: { breadcrumb: 'Create Lab Profile' } },
+    { path: 'addlabprofile', component: LabEditprofileComponent, data: { breadcrumb: 'Create Lab Profile' } },
     { path: 'editlabprofile/:id', component: LabEditprofileComponent, data: { breadcrumb: 'Edit Lab Profile' }, 
         children: [
-            { path: 'labpreference',outlet: "preferenceOutlet", component: LabPreferencesComponent, data: { breadcrumb: 'Lab Preference' } },
             { path: 'listlabusers',outlet: "userOutlet", component: LabListusersComponent, data: { breadcrumb: 'List of lab users' } },
             { path: 'editlabuser/:idLabUser', outlet: "userOutlet", component: LabEdituserComponent, data: { breadcrumb: 'Edit Lab Users' } },
+            { path: 'labpreference',outlet: "preferenceOutlet", component: LabPreferencesComponent, data: { breadcrumb: 'Lab Preference' } },
         ]
     },
 ];

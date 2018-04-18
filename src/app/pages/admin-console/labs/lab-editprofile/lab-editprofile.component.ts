@@ -94,7 +94,12 @@ export class LabEditprofileComponent implements OnInit {
     if (this.isUpdate){
       this.labProfileService.updateLabProfile(this.labProfile)
        .subscribe(
-         () => {this.loading = false},
+         (resp: LabProfile) => {
+           this.loading = false
+           if (resp) {
+            this.router.navigate(['../editlabprofile', resp.id], {relativeTo: this.route})
+           }
+          },
          () => {this.loading = false},
          () => {
             this.loading = false;
@@ -157,12 +162,23 @@ export class LabEditprofileComponent implements OnInit {
           }
       }
   }
+  /**
+   * remove image
+   */
   removeImage(): void {
       this.image = '';
   }
   
+  /**
+   * Redirect to edit lab profile view
+   */
   onLabProfile() {
-    this.router.navigate(['./editlabprofile', this.idLab], {relativeTo: this.route, skipLocationChange:true})
+    if (this.idLab) {
+      this.router.navigate(['./editlabprofile', this.idLab], {relativeTo: this.route, skipLocationChange:true})
+    }
+     else {
+      this.router.navigate(['../listlabprofiles'], {relativeTo: this.route})
+     }
   }
   /**
    * Redirect to list of locations route
