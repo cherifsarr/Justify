@@ -16,7 +16,8 @@ export class LabListusersComponent implements OnInit {
     rows = [];
     temp = [];
     selected = [];
-
+    sub:any;
+    idLab:string;
     columns = [
         { prop: 'id' },
         { name: 'userName' },
@@ -27,13 +28,17 @@ export class LabListusersComponent implements OnInit {
 
     @ViewChild(DatatableComponent) table: DatatableComponent;
 
-  constructor(router: Router, route: ActivatedRoute,
+  constructor(private router: Router, private route: ActivatedRoute,
               private userService: LabUsersService) {
 
 
   }
 
   ngOnInit() {
+      this.sub = this.route.params.subscribe(params => {
+          console.log(params);
+          this.idLab = params.id;
+      })
     this.userService.getLabUsers()
         .subscribe(resp =>{
             let data2 = JSON.parse(JSON.stringify(resp));

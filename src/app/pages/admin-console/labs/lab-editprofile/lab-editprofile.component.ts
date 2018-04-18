@@ -33,7 +33,7 @@ export class LabEditprofileComponent implements OnInit {
   svcCMN: CommonService; 
   public states = STATES;
   labProfile: LabProfile;
-
+  idLab:string;
   constructor(oCS: CommonService, formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, private labProfileService: LabProfileService) { 
     this.isUpdate = false;
     this.form = formBuilder.group({
@@ -65,6 +65,7 @@ export class LabEditprofileComponent implements OnInit {
     this.sub = this.route.params.subscribe(params => {
       if(params.id) {
         this.isUpdate = true;
+        this.idLab = params.id;
         this.setLabProfile(params.id);
       }
     })
@@ -160,4 +161,19 @@ export class LabEditprofileComponent implements OnInit {
       this.image = '';
   }
   
+  onLabProfile() {
+    this.router.navigate(['./editlabprofile', this.idLab], {relativeTo: this.route, skipLocationChange:true})
+  }
+  /**
+   * Redirect to list of locations route
+   */
+  onLabUsers() {
+    this.router.navigate([{ outlets: { userOutlet: [ 'listlabusers' ] }}], {relativeTo: this.route, skipLocationChange:true})
+  }
+  /**
+   * Redirect to list of users route
+   */
+  onLabPrerefence() {
+    this.router.navigate([{ outlets: { preferenceOutlet: [ 'labpreference' ] }}], {relativeTo: this.route, skipLocationChange:true})
+  }
 }

@@ -39,3 +39,26 @@
     font-family: inherit;
     height: 34px;
 }
+
+#phoneStyle  input {
+    width: 100%;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-sizing: border-box;
+    font-size: 13px;
+    font-family: inherit;
+    height: 34px;
+}
+
+#phoneStyle .input-group  {
+   display: block;
+}
+
+#phoneStyle .input-group > span {
+    display: none
+}
+
+#billingPhone .input-group > span {
+    display: none
+}

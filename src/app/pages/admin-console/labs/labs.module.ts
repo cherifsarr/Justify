@@ -8,27 +8,27 @@ import {PipesModule} from "../../../theme/pipes/pipes.module";
 import {NgxDatatableModule} from "@swimlane/ngx-datatable";
 import {InternationalPhoneModule} from "ng4-intl-phone";
 import {RouterModule} from "@angular/router";
-import { LabsNavComponent } from './labs-nav.component';
 import { LabProfileService } from './services/lab-profile.service';
 import { LabEditprofileComponent } from './lab-editprofile/lab-editprofile.component';
 import { CommonService } from '../../../shared/utils/common.service';
 import { LoadingModule, ANIMATION_TYPES } from 'ngx-loading';
 import {LabListusersComponent} from "./lab-listusers/lab-listusers.component";
 import {LabUsersService} from "./services/lab-users.service";
-import {LabEdituserComponent} from "./lab-edituser/lab-edituser.component";
+import { LabEdituserComponent } from './lab-edituser/lab-edituser.component';
+
+
 
 
 
 export const routes = [
-    { path: '', redirectTo: 'labsnav', pathMatch: 'full' },
-    {
-        path: 'labsnav', component: LabsNavComponent, data: { breadcrumb: 'Lab Profile' }, children: [
-            { path: '', redirectTo:'listlabprofiles', pathMatch:'full' },
-            { path: 'listlabprofiles', component: LabProfileComponent, data: { breadcrumb: 'List lab profile' } },
-            { path: 'editlabprofile/:id', component: LabEditprofileComponent, data: { breadcrumb: 'add/update lab profile' } },
-            { path: 'listlabusers', component: LabListusersComponent, data: { breadcrumb: 'List lab users' } },
-            { path: 'editlabuser/:id', component: LabEdituserComponent, data: { breadcrumb: 'add/update lab user' } },
-            { path: 'labpreference', component: LabPreferencesComponent, data: { breadcrumb: 'lab preference' } },
+    { path: '', redirectTo: 'listlabprofiles', pathMatch: 'full' },
+    { path: 'listlabprofiles', component: LabProfileComponent, data: { breadcrumb: 'List Lab Profile' } },
+    { path: 'editlabprofile', component: LabEditprofileComponent, data: { breadcrumb: 'Create Lab Profile' } },
+    { path: 'editlabprofile/:id', component: LabEditprofileComponent, data: { breadcrumb: 'Edit Lab Profile' }, 
+        children: [
+            { path: 'labpreference',outlet: "preferenceOutlet", component: LabPreferencesComponent, data: { breadcrumb: 'Lab Preference' } },
+            { path: 'listlabusers',outlet: "userOutlet", component: LabListusersComponent, data: { breadcrumb: 'List of lab users' } },
+            { path: 'editlabuser/:idLabUser', outlet: "userOutlet", component: LabEdituserComponent, data: { breadcrumb: 'Edit Lab Users' } },
         ]
     },
 ];
@@ -52,7 +52,7 @@ export const routes = [
         tertiaryColour: '#ffffff'
     }),
   ],
-  declarations: [LabPreferencesComponent, LabListusersComponent, LabProfileComponent, LabsNavComponent, LabEditprofileComponent, LabEdituserComponent],
+  declarations: [LabPreferencesComponent, LabListusersComponent, LabProfileComponent, LabEditprofileComponent, LabEdituserComponent],
   providers: [LabProfileService, CommonService, LabUsersService]
 })
 export class LabsModule { }
