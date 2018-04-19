@@ -34,6 +34,7 @@ export class LabEditprofileComponent implements OnInit {
   public states = STATES;
   labProfile: LabProfile;
   idLab:string;
+  orgProfileId: string;
   constructor(oCS: CommonService, formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, private labProfileService: LabProfileService) { 
     this.isUpdate = false;
     this.form = formBuilder.group({
@@ -41,17 +42,19 @@ export class LabEditprofileComponent implements OnInit {
       displayName: ['', Validators.required],
       logo: [''],
       phone: ['', Validators.required],
-      fax: ['', Validators.compose([Validators.required, MPValidatorService.numberValidator])],
+      email: ['', Validators.required],
+      fax: ['', MPValidatorService.numberValidator],
+      taxPayerId: ['', Validators.required],
       ownerName: [''],
       ownerEmail: ['',  MPValidatorService.emailValidator],
       ownerPhone: [''],
-      billingName: ['', Validators.required],
-      billingEmail: ['', Validators.compose([Validators.required, MPValidatorService.emailValidator])],
-      billingPhone: ['', Validators.required],
-      address: ['', Validators.required],
-      city: ['', Validators.required],
-      state: ['', Validators.required],
-      zip: ['', Validators.compose([Validators.required, Validators.pattern(/^\d{5}(-?\d{4})?$/)])],
+      billingName: [''],
+      billingEmail: ['', MPValidatorService.emailValidator],
+      billingPhone: [''],
+      address: [''],
+      city: [''],
+      state: [''],
+      zip: ['', Validators.pattern(/^\d{5}(-?\d{4})?$/)],
       website: ['', MPValidatorService.websiteValidator],
       logoImage: null
     })
@@ -64,20 +67,23 @@ export class LabEditprofileComponent implements OnInit {
     this.logoUrl = this.defaultLogo;
     this.sub = this.route.params.subscribe(params => {
       if(params.id) {
-        console.log(params);
         this.isUpdate = true;
         this.idLab = params.id;
         this.setLabProfile(params.id);
       }
-    })
+    });
+    this.labProfileService.getOrgProfileId()
+      .subscribe((resp: string) => {
+        this.orgProfileId = resp;
+      })
   }
+  
   
   /**
    * Save or Update Lab Profile 
    * @param form  
    */
   onFormSubmit(form){
-    console.log(form);
     this.loading = true;
     this.labProfile.orgProfileId = '680b4638-e23c-4bd6-72cd-08d58e2d9e43';
     this.labProfile.businessEntity.name = form.labName;
@@ -96,8 +102,8 @@ export class LabEditprofileComponent implements OnInit {
     this.labProfile.businessEntity.state = form.state;
     this.labProfile.businessEntity.zip = form.zip
     this.labProfile.businessEntity.website = form.website;
-    this.labProfile.businessEntity.email = form.ownerEmail;
-    this.labProfile.taxPayerId = '1236485';
+    this.labProfile.businessEntity.email = form.email;
+    this.labProfile.taxPayerId = form.taxPayerId;
 
     if (this.isUpdate){
       this.labProfileService.updateLabProfile(this.labProfile)
@@ -137,7 +143,12 @@ export class LabEditprofileComponent implements OnInit {
         this.form.get('displayName').setValue(this.svcCMN.GetString(labprofile.businessEntity.displayName));
         this.logoUrl = this.svcCMN.GetString(labprofile.logoUrl);
         this.form.get('phone').setValue(this.svcCMN.GetString(labprofile.businessEntity.phone));
+        this.form.get('email').setValue(this.svcCMN.GetString(labprofile.businessEntity.email));
+        this.form.get('taxPayerId').setValue(this.svcCMN.GetString(labprofile.taxPayerId));
         this.form.get('fax').setValue(this.svcCMN.GetString(labprofile.businessEntity.fax));
+        this.form.get('ownerName').setValue(this.svcCMN.GetString(labprofile.ownerName));
+        this.form.get('ownerPhone').setValue(this.svcCMN.GetString(labprofile.ownerPhone));
+        this.form.get('ownerEmail').setValue(this.svcCMN.GetString(labprofile.ownerEmail));
         this.form.get('billingName').setValue(this.svcCMN.GetString(labprofile.billingName));
         this.form.get('billingEmail').setValue(this.svcCMN.GetString(labprofile.billingEmail));
         this.form.get('billingPhone').setValue(this.svcCMN.GetString(labprofile.billingPhone));
@@ -180,12 +191,14 @@ export class LabEditprofileComponent implements OnInit {
    * Redirect to edit lab profile view
    */
   onLabProfile() {
-    if (this.idLab) {
-      this.router.navigate(['./editlabprofile', this.idLab], {relativeTo: this.route, skipLocationChange:true})
+    if(this.idLab) {
+      console.log('laa');
+      this.router.navigate(['../../listlabprofiles'], {relativeTo: this.route});
     }
-     else {
-      this.router.navigate(['../listlabprofiles'], {relativeTo: this.route})
-     }
+    else {
+      console.log('ici');
+      this.router.navigate(['../listlabprofiles'], {relativeTo: this.route} );
+    }
   }
   /**
    * Redirect to list of locations route
@@ -200,9 +213,9 @@ export class LabEditprofileComponent implements OnInit {
     this.router.navigate([{ outlets: { preferenceOutlet: [ 'labpreference' ] }}], {relativeTo: this.route, skipLocationChange:true})
   }
 
-  /** Unsubscribe */
-  ngOnDestroy() {
-    this.sub.unsubscribe();
-  }
+  // /** Unsubscribe */
+  // ngOnDestroy() {
+  //   this.sub.unsubscribe();
+  // }
 
 }
