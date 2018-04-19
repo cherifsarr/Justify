@@ -47,6 +47,7 @@ export class User {
     */
 
     id: string;
+    identityId: string;
     businessProfileId: string;
     userName: string;
     title: string;
