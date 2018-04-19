@@ -28,13 +28,13 @@ export class LabProfileComponent implements OnInit {
   constructor(private labProfileService: LabProfileService) { }
 
   ngOnInit() {
-    this.getAllLabProfiles();
+    this.getAllLabProfilesByOrg();
   }
   
   /**
    * Get All Lab Profiles
    */
-  getAllLabProfiles() {
+  getAllLabProfilesByOrg() {
     this.labProfileService.getLabProfiles()
       .subscribe(labprofiles => {
         console.log(labprofiles);

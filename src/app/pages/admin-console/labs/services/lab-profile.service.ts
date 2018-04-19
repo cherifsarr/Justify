@@ -24,7 +24,7 @@ export class LabProfileService {
    * Get all Lab Profiles
    */
   getLabProfiles(): Observable<LabProfile[]> {
-    return this.http.get<LabProfile[]>(this.configService.getApiURI() + "/LabProfiles")
+    return this.http.get<LabProfile[]>(this.configService.getApiURI() + "/LabProfiles/org/"+'680b4638-e23c-4bd6-72cd-08d58e2d9e43')
             .pipe(
               catchError(this.handleError('getLabProfiles', []))
             );

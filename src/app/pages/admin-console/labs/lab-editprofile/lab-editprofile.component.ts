@@ -64,6 +64,7 @@ export class LabEditprofileComponent implements OnInit {
     this.logoUrl = this.defaultLogo;
     this.sub = this.route.params.subscribe(params => {
       if(params.id) {
+        console.log(params);
         this.isUpdate = true;
         this.idLab = params.id;
         this.setLabProfile(params.id);
@@ -76,12 +77,17 @@ export class LabEditprofileComponent implements OnInit {
    * @param form  
    */
   onFormSubmit(form){
+    console.log(form);
     this.loading = true;
-    this.labProfile.uniqueName = form.labName;
+    this.labProfile.orgProfileId = '680b4638-e23c-4bd6-72cd-08d58e2d9e43';
+    this.labProfile.businessEntity.name = form.labName;
     this.labProfile.businessEntity.displayName = form.displayName;
-    this.labProfile.logoUrl = form.logoImage ? form.logoImage.value : null;
+    this.labProfile.logoImage = form.logoImage ? form.logoImage : null;
     this.labProfile.businessEntity.phone = form.phone;
     this.labProfile.businessEntity.fax = form.fax;
+    this.labProfile.ownerName = form.ownerName;
+    this.labProfile.ownerEmail = form.ownerEmail;
+    this.labProfile.ownerPhone = form.ownerPhone;
     this.labProfile.billingName = form.billingName;
     this.labProfile.billingEmail = form.billingEmail;
     this.labProfile.billingPhone = form.billingPhone;
@@ -90,15 +96,14 @@ export class LabEditprofileComponent implements OnInit {
     this.labProfile.businessEntity.state = form.state;
     this.labProfile.businessEntity.zip = form.zip
     this.labProfile.businessEntity.website = form.website;
+    this.labProfile.businessEntity.email = form.ownerEmail;
+    this.labProfile.taxPayerId = '1236485';
 
     if (this.isUpdate){
       this.labProfileService.updateLabProfile(this.labProfile)
        .subscribe(
          (resp: LabProfile) => {
            this.loading = false
-           if (resp) {
-            this.router.navigate(['../editlabprofile', resp.id], {relativeTo: this.route})
-           }
           },
          () => {this.loading = false},
          () => {
@@ -110,8 +115,10 @@ export class LabEditprofileComponent implements OnInit {
       this.labProfileService.saveLabProfile(this.labProfile)
        .subscribe(
          (labprofile: LabProfile) => {
-           this.form.reset();
            this.loading = false;
+           if (labprofile) {
+            this.router.navigate(['../editlabprofile', labprofile.id], {relativeTo: this.route})
+           }
          },
          () => {this.loading = false;},
          () => {this.loading = false;}
@@ -126,7 +133,7 @@ export class LabEditprofileComponent implements OnInit {
   setLabProfile(id: string) {
     this.labProfileService.getLabProfileById(id)
       .subscribe((labprofile: LabProfile) => {
-        this.form.get('labName').setValue(this.svcCMN.GetString(labprofile.uniqueName));
+        this.form.get('labName').setValue(this.svcCMN.GetString(labprofile.businessEntity.name));
         this.form.get('displayName').setValue(this.svcCMN.GetString(labprofile.businessEntity.displayName));
         this.logoUrl = this.svcCMN.GetString(labprofile.logoUrl);
         this.form.get('phone').setValue(this.svcCMN.GetString(labprofile.businessEntity.phone));
@@ -192,4 +199,10 @@ export class LabEditprofileComponent implements OnInit {
   onLabPrerefence() {
     this.router.navigate([{ outlets: { preferenceOutlet: [ 'labpreference' ] }}], {relativeTo: this.route, skipLocationChange:true})
   }
+
+  /** Unsubscribe */
+  ngOnDestroy() {
+    this.sub.unsubscribe();
+  }
+
 }

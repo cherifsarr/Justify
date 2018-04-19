@@ -18,6 +18,9 @@ export class LabProfile {
     logoImage: LogoImage;
     customDomain: string;
     taxPayerId: string;
+    ownerName: string;
+    ownerEmail: string;
+    ownerPhone: string;
     billingName: string;
     billingEmail: string;
     billingPhone: string;
