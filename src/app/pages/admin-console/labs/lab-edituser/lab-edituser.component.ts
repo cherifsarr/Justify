@@ -1,16 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {LabUsersService} from "../services/lab-users.service";
 import {User} from "../../../../shared/models/user";
 import {MPValidatorService} from "../../mp-profile/services/mp-validators.service";
 import {RoleListItem} from "../../../../shared/models/rolelistitem";
 import {Scope} from "../../../../shared/utils/scope.enum";
+import {AppUser} from "../../../../shared/models/appUser";
+import {AppRole} from "../../../../shared/models/appRole";
+import { LoadingModule, ANIMATION_TYPES } from 'ngx-loading';
 
 @Component({
   selector: 'ahs-lab-edituser',
+    encapsulation: ViewEncapsulation.None,
   templateUrl: './lab-edituser.component.html',
-  styleUrls: ['./lab-edituser.component.scss']
+  styleUrls: ['../../../../theme/styles/table-styling.scss',
+      '../../../../theme/styles/AhsStyles.css']
 })
 export class LabEdituserComponent implements OnInit {
 
@@ -20,14 +25,15 @@ export class LabEdituserComponent implements OnInit {
     public form: FormGroup;
     public Roles: RoleListItem[];
     isUpdate: boolean;
+    loading: boolean;
     private user: User;
+
 
   constructor(router: ActivatedRoute, fb: FormBuilder, private userService: LabUsersService) {
       this.router = router;
       this.form = fb.group({
 
           username: ['', Validators.compose([Validators.required, Validators.minLength(3)])],
-          //roleId: ['', Validators.required],
           role: ['', Validators.required],
           firstname: ['', Validators.required],
           lastname: ['', Validators.required],
@@ -49,10 +55,12 @@ export class LabEdituserComponent implements OnInit {
           });
 
       this.user = new User();
+      //this.user.role = new AppRole();
   }
 
   ngOnInit() {
 
+      this.loading = true;
       /**
        * get parent id = id lab profile
        */
@@ -61,33 +69,50 @@ export class LabEdituserComponent implements OnInit {
       });
 
       this.sub = this.router.params.subscribe(params => {
-          if (params['id']){
-            this.setLabUser(params['id']);
+          if (params['idLabUser']){
+              console.log(params['idLabUser']);
+              this.isUpdate = true;
+            this.setLabUser(params['idLabUser']);
+          }else{
+              this.isUpdate = false;
           }
       });
   }
 
   setLabUser(id: string){
      this.userService.getUserLabById(id)
-         .subscribe(resp =>{
-          this.form.get('username').setValue(this.user.userName);
-          this.form.get('firstname').setValue(this.user.firstName);
-          this.form.get('lastname').setValue(this.user.lastName);
-          this.form.get('email').setValue(this.user.email);
-          this.form.get('password').setValue(this.user.password);
-          this.form.get('role').setValue(this.user.roleId);
+         .subscribe((user: User) =>{
+          this.form.get('username').setValue(user.userName);
+          //this.form.get('username').disable();
+          this.form.get('firstname').setValue(user.firstName);
+          this.form.get('lastname').setValue(user.lastName);
+          this.form.get('email').setValue(user.email);
+          this.form.get('password').setValue(user.password);
+          this.form.get('role').setValue(user.roleId);
+          this.form.get('sendActivationMail').setValue(user.sendActivationEmail);
+          this.form.get('isEnabled').setValue(user.isEnabled);
+          this.form.get('passwordChange').setValue(user.forcePasswordChange);
+          this.form.get('locked').setValue(user.isLockedOut);
 
+          this.user = user;
+             //console.log('userupdate ' + this.user);
          })
   }
 
     public onSubmit(form): void {
+            this.loading = true;
+            let identity = new AppUser();
             let lastaccess = new Date();
+
+            //this.form.get('username').setValue(this.user.userName);
             this.user.userName = form.username;
             this.user.firstName = form.firstname;
             this.user.lastName = form.lastname;
             this.user.email = form.email;
             this.user.password = form.password;
             this.user.role = form.role;
+            this.user.roleId = form.role;
+            this.user.identityId =identity.id? identity.id:'';
             this.user.scope = Scope.Lab;
             this.user.isLockedOut = form.locked;
             this.user.sendActivationEmail = form.sendActivationMail;
@@ -97,14 +122,25 @@ export class LabEdituserComponent implements OnInit {
             this.user.lastAccess = lastaccess;
             this.user.confirmEmail = form.email;
             this.user.confirmPassword = form.passwordChange;
-            this.user.isEnabled = form.isEnabled;
+            this.user.isEnabled = form.isEnabled? form.isEnabled :false;
+            this.user.locationId = '';
             console.log(this.user);
-            this.userService.saveLabUser(this.user)
-                .subscribe(resp =>{
-                   // this.form.reset();
-                })
+            if(!this.isUpdate){
+                this.userService.saveLabUser(this.user)
+                    .subscribe(resp =>{
+                        console.log(this.user);
+                        // this.form.reset();
+                    })
+            }else{
+                //this.user.userName = 'ahs_default_user';
+                console.log('user lab to update' + this.user.userName);
+                this.userService.updateLabUser(this.user)
+                    .subscribe(resp =>{
 
+                    })
+            }
     }
+
 
     public onPasswordGenerate(e) {
         e.preventDefault();

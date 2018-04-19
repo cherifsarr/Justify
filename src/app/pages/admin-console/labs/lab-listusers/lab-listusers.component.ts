@@ -35,16 +35,17 @@ export class LabListusersComponent implements OnInit {
   }
 
   ngOnInit() {
-      this.sub = this.route.params.subscribe(params => {
+      this.sub = this.route.parent.params.subscribe(params => {
           console.log(params);
           this.idLab = params.id;
+          this.userService.getLabUsers(params.id)
+              .subscribe(resp =>{
+                  let data2 = JSON.parse(JSON.stringify(resp));
+                  this.temp = [...data2];
+                  this.rows = data2;
+              })
       })
-    this.userService.getLabUsers()
-        .subscribe(resp =>{
-            let data2 = JSON.parse(JSON.stringify(resp));
-            this.temp = [...data2];
-            this.rows = data2;
-        })
+
   }
 
     updateFilter(event) {

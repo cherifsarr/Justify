@@ -1,15 +1,6 @@
 <div class="col-xl-12 col-lg-12 col-12 bottom-30">
   <div widget class="card">
-    <div class="card-header">
-      <span>Create Lab User</span>
-      <div class="widget-controls">
-        <!--<a data-widgster="expand" href="#" class="transition"><i class="fa fa-chevron-down"></i></a>
-        <a data-widgster="collapse" href="#" class="transition"><i class="fa fa-chevron-up"></i></a>-->
-        <a data-widgster="fullscreen" href="#" class="transition"><i class="fa fa-expand"></i></a>
-        <a data-widgster="restore" href="#" class="transition"><i class="fa fa-compress"></i></a>
-        <!--<a data-widgster="close" href="#" class="transition"><i class="fa fa-times"></i></a>-->
-      </div>
-    </div>
+
     <div class="card-body widget-body">
 
 
@@ -21,7 +12,7 @@
 
               <label for="username" class="col-lg-3 form-control-label m-t-5">Username</label>
               <div class="col-lg-9 ">
-                <input formControlName="username" class="form-control checking-field" placeholder="Username">
+                <input formControlName="username" class="form-control checking-field" placeholder="Username" type="text">
                 <span class="help-block" *ngIf="form.get('username').touched">
                                     <span class="text-danger" *ngIf="form.get('username').hasError('required')">Username is required</span>
                                     <span class="text-danger" *ngIf="form.get('username').hasError('minlength')">Minimum of 3 characters</span>
@@ -78,7 +69,7 @@
             <div class="form-group row ">
               <label for="firstname" class="col-lg-3 form-control-label m-t-5">First Name</label>
               <div class="col-lg-9">
-                <input formControlName="firstname" class="form-control checking-field" placeholder="First Name">
+                <input formControlName="firstname" class="form-control checking-field" placeholder="First Name" type="text">
                 <span class="help-block" *ngIf="form.get('firstname').touched">
                                     <span class="text-danger" *ngIf="form.get('firstname').hasError('required')">First Name is required</span>
                                 </span>
@@ -105,7 +96,7 @@
             <div class="form-group row ">
               <label for="lastname" class="col-lg-3 form-control-label m-t-5">Last Name</label>
               <div class="col-lg-9">
-                <input formControlName="lastname" class="form-control checking-field" placeholder="Last Name">
+                <input formControlName="lastname" class="form-control checking-field" placeholder="Last Name" type="text">
                 <span class="help-block" *ngIf="form.get('lastname').touched">
                                     <span class="text-danger" *ngIf="form.get('lastname').hasError('required')">Last Name is required</span>
                                 </span>
@@ -215,8 +206,9 @@
         <div class="form-group row">
           <div class="col-lg-6"></div>
           <div class="col-lg-6 text-lg-center">
-            <button class="btn btn-main  " type="submit">Cancel</button>
-            <button [disabled]="!form.valid" class="btn btn-main " type="submit">Create</button>
+            <button type="reset" class="btn btn-main" [routerLink]="['../../listlabusers']">Cancel</button>
+            <button [disabled]="!form.valid" class="btn btn-main " *ngIf="!isUpdate" type="submit">Create</button>
+            <button [disabled]="!form.valid" class="btn btn-main " *ngIf="isUpdate" type="submit">Update</button>
           </div>
         </div>
 

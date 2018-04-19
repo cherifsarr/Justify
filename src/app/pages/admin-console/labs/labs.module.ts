@@ -24,7 +24,7 @@ export const routes = [
     { path: 'editlabprofile/:id', component: LabEditprofileComponent, data: { breadcrumb: 'Edit Lab Profile' }, 
         children: [
             { path: 'listlabusers',outlet: "userOutlet", component: LabListusersComponent, data: { breadcrumb: 'List of lab users' } },
-            { path: 'editlabuser/:idLabUser', outlet: "userOutlet", component: LabEdituserComponent, data: { breadcrumb: 'Edit Lab Users' } },
+            { path: 'editlabuser/:idLabUser', outlet: "userOutlet", component: LabEdituserComponent, data: { breadcrumb: 'Add/Edit Lab User' } },
             { path: 'labpreference',outlet: "preferenceOutlet", component: LabPreferencesComponent, data: { breadcrumb: 'Lab Preference' } },
         ]
     },
