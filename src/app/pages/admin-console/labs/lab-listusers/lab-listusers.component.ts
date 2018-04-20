@@ -36,7 +36,6 @@ export class LabListusersComponent implements OnInit {
 
   ngOnInit() {
       this.sub = this.route.parent.params.subscribe(params => {
-          console.log(params);
           this.idLab = params.id;
           this.userService.getLabUsers(params.id)
               .subscribe(resp =>{
