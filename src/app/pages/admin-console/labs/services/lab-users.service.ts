@@ -72,7 +72,7 @@ export class LabUsersService {
      * @param user
      */
     updateLabUser(user: User){
-        return this.http.put(this.configService.getApiURI() + '/LabUsers/'+ user.id, httpOptions)
+        return this.http.put(this.configService.getApiURI() + '/LabUsers/'+ user.id, user, httpOptions)
             .pipe(
                 tap(_ => this.toastrService.success("User updated successfully")),
                 catchError(this.handleError<User>('updateLabUser'))

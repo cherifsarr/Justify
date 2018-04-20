@@ -192,11 +192,9 @@ export class LabEditprofileComponent implements OnInit {
    */
   onLabProfile() {
     if(this.idLab) {
-      console.log('laa');
       this.router.navigate(['../../listlabprofiles'], {relativeTo: this.route});
     }
     else {
-      console.log('ici');
       this.router.navigate(['../listlabprofiles'], {relativeTo: this.route} );
     }
   }
