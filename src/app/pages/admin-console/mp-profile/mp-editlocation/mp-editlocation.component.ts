@@ -10,7 +10,7 @@ import {MPProfileService} from "../services/mp-profile.service";
 import {MPProfile} from "../../../../shared/models/mpprofile";
 import { BusinessEntity } from '../../../../shared/models/business-entity';
 import {MPValidatorService} from "../services/mp-validators.service";
-
+import { LoadingModule, ANIMATION_TYPES } from 'ngx-loading';
 @Component({
   selector: 'ahs-mp-editlocation',
   encapsulation: ViewEncapsulation.None,
@@ -39,7 +39,7 @@ export class MpEditlocationComponent implements OnInit {
 
   private mpLocation: Mplocation;
   private mpProfile: MPProfile;
-
+  loading: boolean;
   private location: Mplocation;
   isAnUpdate: boolean = false;
 
@@ -108,9 +108,14 @@ export class MpEditlocationComponent implements OnInit {
   }
 
 
+  /**
+   * Save and Update MPLocation
+   * @param values 
+   */
   public onSubmit(values: Object): void {
 
       if (this.form.valid) {
+          this.loading = true;
           this.mpLocation.name = this.form.get('name').value;
           this.mpLocation.address1 = this.form.get('address1').value;
           this.mpLocation.city = this.form.get('city').value;
@@ -124,11 +129,8 @@ export class MpEditlocationComponent implements OnInit {
             this.mpLocationsService.createLocation(this.mpLocation)
             .subscribe(resp=>{
                 this.form.reset();
-            },
-                ()=>{
-
-                },
-                ()=>{
+            },()=>{this.loading = false;},()=>{
+                this.loading = false;
                     this.mpLocationsService.getMPLocationsByIdProfil(this.id)
                         .subscribe(resp=>{
                             this.listMPLocations.emit(resp)
@@ -141,8 +143,8 @@ export class MpEditlocationComponent implements OnInit {
           else {
             this.mpLocationsService.updateLocation(this.mpLocation)
             .subscribe(resp=>{
-                
-            })
+                this.loading = false;
+            }, () => {}, () => {this.loading = false})
           }
           
       }

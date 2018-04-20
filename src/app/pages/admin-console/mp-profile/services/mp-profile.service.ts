@@ -17,6 +17,7 @@ export class MPProfileService {
   
   constructor(private http: HttpClient, private configService: ConfigService, public toastrService: ToastrService) {
     this.options = this.toastrService.toastrConfig;
+    this.options.positionClass = 'toast-bottom-full-width';
    }
   
    /**

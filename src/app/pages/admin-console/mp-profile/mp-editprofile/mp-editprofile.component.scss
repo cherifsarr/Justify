@@ -1,4 +1,47 @@
-.dropdown {
+.img-upload-btn{
+    position: absolute;
+    padding: 0;
+    width: calc(100% - 30px);
+    height: 38px;
+    opacity: 0;
+}
+
+.image-wrapper{
+    position: relative;
+    .delete-img{
+        position: absolute;
+        top: 8px;
+        right: 10px;
+        border: 2px solid #fff;
+        color: #fff;
+        padding: 3px 5px;
+        border-radius: 50%;
+        visibility: hidden;
+        cursor: pointer;
+    }
+    &:hover .delete-img{
+        visibility: visible;
+    }
+}
+
+#idPhoneMP input {
+    width: 100%;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-sizing: border-box;
+    font-size: 13px;
+    font-family: inherit;
+    height: 34px;
+}
+#idPhoneMP .input-group  {
+    display: block;
+ }
+ 
+ #idPhoneMP .input-group > span {
+     display: none
+ }
+ .dropdown {
     opacity: 0.6;
     pointer-events: none;
 }

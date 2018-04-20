@@ -15,6 +15,7 @@ import { AppUser } from '../../../../shared/models/appUser';
 import { MPProfile } from '../../../../shared/models/mpprofile';
 import { DatePipe } from '@angular/common';
 import { MPProfileService } from '../services/mp-profile.service';
+import { LoadingModule, ANIMATION_TYPES } from 'ngx-loading';
 @Component({
   selector: 'ahs-mp-editusers',
   templateUrl: './mp-editusers.component.html',
@@ -37,7 +38,7 @@ export class MpEditusersComponent implements OnInit {
   private mpProfile: MPProfile;
   private location: Mplocation;
   isDisabled: boolean;
-
+  loading: boolean;
   constructor(private router: ActivatedRoute, route: Router,
     formBuilder: FormBuilder, 
     private mpuserService: MpUsersService, 
@@ -158,6 +159,7 @@ export class MpEditusersComponent implements OnInit {
    * @param form 
    */
   onSubmit(form) {
+      this.loading = true;
       let lastaccess = new Date();
       if(!this.isAnUpdate) {
         this.mpUser.userName = form.username;
@@ -181,7 +183,8 @@ export class MpEditusersComponent implements OnInit {
         this.mpuserService.saveMPUser(this.mpUser)
         .subscribe(resp =>{
             this.form.reset();
-        });
+            this.loading = false;
+        }, () => {this.loading = false;}, () => {this.loading = false;});
       }
        else {
         this.getMPProfile(this.idProfile);
@@ -203,9 +206,10 @@ export class MpEditusersComponent implements OnInit {
         //this.mpUserUpdate.identity.passwordHash = form.password;
         this.mpUserUpdate.isEnabled = form.isEnabled;
         this.mpUserUpdate.title = '';
-        console.log(this.mpUserUpdate);
          this.mpuserService.updateMPUser(this.mpUserUpdate)
-         .subscribe(resp => {})
+         .subscribe(resp => {this.loading = false;},
+                    () => {this.loading = false;}, 
+                    () => {this.loading = false})
        }
 
   }

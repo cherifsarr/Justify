@@ -43,7 +43,7 @@ export class LabProfileComponent implements OnInit {
           () => {
             this.labProfileService.getLabProfiles(this.orgProfileId)
             .subscribe(labprofiles => {
-              console.log(labprofiles);
+            //  console.log(labprofiles);
             //  let data = this.populate(labprofiles);
               this.rows = labprofiles;
             })

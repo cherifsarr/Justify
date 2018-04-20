@@ -9,7 +9,8 @@ import { MPProfileService } from '../services/mp-profile.service';
 import { BusinessEntity } from '../../../../shared/models/business-entity';
 import {ActivatedRoute, Router} from "@angular/router";
 import { MPValidatorService } from '../services/mp-validators.service';
-
+import { LoadingModule, ANIMATION_TYPES } from 'ngx-loading';
+import { CommonService } from '../../../../shared/utils/common.service';
 @Component({
   selector: 'ahs-mp-editprofile',
   encapsulation: ViewEncapsulation.None,
@@ -30,7 +31,12 @@ export class MpEditprofileComponent implements OnInit {
   public isCheckedTox:boolean = false;
   public isUpdate: boolean ;
   orgProfileId: string;
-  constructor(private router: ActivatedRoute, private route: Router, formBuilder: FormBuilder, private mpProfileService: MPProfileService, private labProfileService: LabProfileService) {
+  loading: boolean;
+  // Image related
+  public image: any;
+  public logoUrl: string;
+  defaultLogo:string = 'assets/img/app/no-image.png';
+  constructor(private oCS: CommonService, private router: ActivatedRoute, private route: Router, formBuilder: FormBuilder, private mpProfileService: MPProfileService, private labProfileService: LabProfileService) {
 
     this.form = formBuilder.group({
       name: ['', Validators.required],
@@ -49,13 +55,14 @@ export class MpEditprofileComponent implements OnInit {
       testRightsCancer: [''],
       testRightsToxicology: [''],
       website: ['', MPValidatorService.websiteValidator],
-      logo: ['']
-
+      logo: [''],
+      logoImage: null
     });
     this.mpProfile = new MPProfile();
     this.mpProfile.businessEntity = new BusinessEntity();
     this.labProfile = new LabProfile();
     this.isUpdate = true;
+    this.loading = false;
    }
  
    /**
@@ -63,6 +70,7 @@ export class MpEditprofileComponent implements OnInit {
     * @param form - MPProfile form builder
     */
    onFormSubmit(form) {
+     this.loading = true;
      this.labProfile = this.labProfiles.length > 0 ? this.labProfiles[0] : null 
      this.mpProfile.businessEntity.name = form.name;
      this.mpProfile.businessEntity.displayName = form.displayName;
@@ -75,6 +83,7 @@ export class MpEditprofileComponent implements OnInit {
      this.mpProfile.businessEntity.contactName = form.contactName;
      this.mpProfile.businessEntity.email = form.email;
      this.mpProfile.testRights = 0 ;
+     this.mpProfile.logoImage = form.logoImage ? form.logoImage : null;
      if(form.testRightsPGx) {
        this.mpProfile.testRights += this.testRight.PGx;
      }
@@ -93,21 +102,23 @@ export class MpEditprofileComponent implements OnInit {
      if(!this.isUpdate) {
       this.mpProfileService.saveMPProfile(this.mpProfile).subscribe(resp => {
         if (resp) {
+          this.loading = false;
           this.route.navigate(['../edit',resp.id], {relativeTo: this.router})
         }
-      })
+      }, () => {this.loading = false;}, () => {this.loading = false;})
      }
      else {
        //if update MP Profile
       this.mpProfileService.updateMPProfile(this.mpProfile)
         .subscribe(resp => {
-          this.form.reset();
+          this.loading = false;
+          //this.form.reset();
         })
      }
      
    }
   ngOnInit() {
-
+    this.logoUrl = this.defaultLogo;
     this.sub = this.router.params.subscribe(params => {
       if(params['id']) {
         this.id = params['id'];
@@ -120,7 +131,7 @@ export class MpEditprofileComponent implements OnInit {
       }
     });
 
-      this.labProfileService.getOrgProfileId()
+    this.labProfileService.getOrgProfileId()
           .subscribe((resp: string) => {
               this.orgProfileId = resp;
           },()=>{}, ()=>{
@@ -128,7 +139,7 @@ export class MpEditprofileComponent implements OnInit {
                   .subscribe(resp => {
                       this.labProfiles = resp;
                   })
-          })
+    })
 
   }
  
@@ -152,20 +163,59 @@ export class MpEditprofileComponent implements OnInit {
           this.form.get('email').setValue(mpProfile.businessEntity.email);
           this.form.get('testRights').setValue(mpProfile.testRights);
           this.form.get('website').setValue(mpProfile.businessEntity.website);
+          this.logoUrl = this.oCS.GetString(mpProfile.logoUrl);
           mpProfile.testRights === this.testRight.PGx ? this.isCheckedPgx = true : this.isCheckedPgx = false;
           mpProfile.testRights === this.testRight.Cancer ? this.isCheckedCan = true : this.isCheckedCan = false;
           mpProfile.testRights === this.testRight.Toxicology ? this.isCheckedTox = true : this.isCheckedTox = false;
+          
+          if (mpProfile.testRights == (this.testRight.PGx + this.testRight.Cancer)) {
+             this.isCheckedPgx = true;
+             this.isCheckedCan = true ;
+          }
+          if (mpProfile.testRights == (this.testRight.PGx + this.testRight.Toxicology)) {
+            this.isCheckedPgx = true;
+            this.isCheckedTox = true;
+          }
+          if (mpProfile.testRights == (this.testRight.Cancer + this.testRight.Toxicology)) {
+            this.isCheckedCan = true;
+            this.isCheckedTox = true;
+          }
 
+          if (mpProfile.testRights == (this.testRight.Cancer + this.testRight.Toxicology + this.testRight.PGx)) {
+            this.isCheckedCan = true;
+            this.isCheckedTox = true;
+            this.isCheckedPgx = true;
+          }
+          if (!mpProfile.logoUrl) {
+            this.logoUrl = this.defaultLogo;
+          }
           this.mpProfile = mpProfile;
       })
   }
-
+   // Image related
+   fileChange(input) {
+    const reader = new FileReader();
+    if (input.files.length) {
+        const file = input.files[0];
+        reader.readAsDataURL(file);
+        reader.onload = () => {
+            this.image = reader.result;
+            this.form.get('logoImage').setValue({
+                filename: file.name,
+                filetype: file.type,
+                value: reader.result.split(',')[1]
+            });
+            this.logoUrl = reader.result.split(',')[1];
+        }
+    }
+}
   /**
    * Set logo
    * @param image - logo image base64
    */
   onLogo(image: any) {
-    this.form.get('logo').setValue(image);
+    console.log(JSON.parse(image))
+    //this.form.get('logo').setValue(image);
   }
   cancelme(e) {
     e.preventDefault();

@@ -24,7 +24,7 @@
                                     <div class="card-body widget-body">
                                         <form [formGroup]="form" class="form-horizontal" (ngSubmit)="onFormSubmit(form.value)">
                                             <div class="form-group row">
-                                                <label for="name" class="col-sm-3 form-control-label m-t-5"><span>*</span>Name</label>
+                                                <label for="name" class="col-sm-3 form-control-label m-t-5"><span class="text-danger font-weight-bold">*</span>Name</label>
                                                 <div class="col-sm-9">
                                                     <input formControlName="name" type="text" class="form-control checking-field" required />
                                                     <span class="help-block" *ngIf="form.get('name').touched">
@@ -34,7 +34,7 @@
                                                 </div>
                                             </div>
                                             <div class="form-group row">
-                                                <label for="displayName" class="col-sm-3 form-control-label m-t-5"><span>*</span>Display Name</label>
+                                                <label for="displayName" class="col-sm-3 form-control-label m-t-5"><span class="text-danger font-weight-bold">*</span>Display Name</label>
                                                 <div class="col-sm-9">
                                                     <input formControlName="displayName" type="text" class="form-control checking-field" required />
                                                     <span class="help-block" *ngIf="form.get('displayName').touched">
@@ -43,7 +43,7 @@
                                                 </div>
                                             </div>
                                             <div class="form-group row">
-                                                <label for="address" class="col-sm-3 form-control-label m-t-5"><span>*</span>Address</label>
+                                                <label for="address" class="col-sm-3 form-control-label m-t-5"><span class="text-danger font-weight-bold">*</span>Address</label>
                                                 <div class="col-sm-9">
                                                     <input formControlName="address" type="text" class="form-control checking-field" />
                                                     <span class="help-block" *ngIf="form.get('address').touched">
@@ -52,7 +52,7 @@
                                                 </div>
                                             </div>
                                             <div class="form-group row">
-                                                <label for="city" class="col-sm-3 form-control-label m-t-5"><span>*</span>City</label>
+                                                <label for="city" class="col-sm-3 form-control-label m-t-5"><span class="text-danger font-weight-bold">*</span>City</label>
                                                 <div class="col-sm-9">
                                                     <input formControlName="city" type="text" class="form-control checking-field" />
                                                     <span class="help-block" *ngIf="form.get('city').touched">
@@ -61,7 +61,7 @@
                                                 </div>
                                             </div>
                                             <div class="form-group row">
-                                                <label for="state" class="col-sm-3 form-control-label m-t-5"><span>*</span>State</label>
+                                                <label for="state" class="col-sm-3 form-control-label m-t-5"><span class="text-danger font-weight-bold">*</span>State</label>
                                                 <div class="col-sm-9">
                                                   <select formControlName="state" id="exampleSelect3" class="form-control custom-select checking-field">
                                                       <option *ngFor="let state of states" value="{{state.abbreviation}}">{{state.name}}</option>
@@ -72,7 +72,7 @@
                                                 </div>
                                             </div>
                                             <div class="form-group row">
-                                                <label for="zip" class="col-sm-3 form-control-label m-t-5"><span>*</span>Zip Code</label>
+                                                <label for="zip" class="col-sm-3 form-control-label m-t-5"><span class="text-danger font-weight-bold">*</span>Zip Code</label>
                                                 <div class="col-sm-9">
                                                     <input formControlName="zip" type="text" class="form-control checking-field" />
                                                     <span class="help-block" *ngIf="form.get('zip').touched">
@@ -82,7 +82,7 @@
                                                 </div>
                                             </div>
                                             <div class="form-group row">
-                                                <label for="npi" class="col-sm-3 form-control-label m-t-5"><span>*</span>NPI</label>
+                                                <label for="npi" class="col-sm-3 form-control-label m-t-5"><span class="text-danger font-weight-bold">*</span>NPI</label>
                                                 <div class="col-sm-9">
                                                     <input formControlName="npi" type="text" class="form-control checking-field" />
                                                     <span class="help-block" *ngIf="form.get('npi').touched">
@@ -90,11 +90,11 @@
                                                     </span>
                                                 </div>
                                             </div>
-                                            <div class="form-group row">
-                                                <label for="phone" class="col-sm-3 form-control-label m-t-5"><span>*</span>Phone</label>
+                                            <div id="idPhoneMP" class="form-group row">
+                                                <label for="phone" class="col-sm-3 form-control-label m-t-5"><span class="text-danger font-weight-bold">*</span>Phone</label>
                                                 <div class="col-sm-9">
                                                     <!-- <input formControlName="phone" type="text" class="form-control checking-field" /> -->
-                                                    <int-phone-prefix #phoneComponent class="form-control checking-field" maxLength="15" showDropdown="false"  defaultCountry="us" [locale]="'en'"  formControlName="phone"></int-phone-prefix>
+                                                    <int-phone-prefix class="checking-field" maxLength="15" showDropdown="false"  defaultCountry="us" [locale]="'en'"  formControlName="phone"></int-phone-prefix>
                                                     <span class="help-block" *ngIf="form.get('phone').touched">
                                                         <span class="text-danger" *ngIf="form.get('phone').touched && form.get('phone').hasError('required')">Phone is required</span>
                                                         <span class="help-block text-danger" *ngIf="form.get('phone').touched && form.get('phone').hasError('invalidPhoneNumber')">Invalid phone number</span>
@@ -102,7 +102,7 @@
                                                 </div>
                                             </div>
                                             <div class="form-group row">
-                                                <label for="fax" class="col-sm-3 form-control-label m-t-5"><span>*</span>Fax</label>
+                                                <label for="fax" class="col-sm-3 form-control-label m-t-5"><span class="text-danger font-weight-bold">*</span>Fax</label>
                                                 <div class="col-sm-9">
                                                     <input formControlName="fax" type="text" class="form-control checking-field" />
                                                     <span class="help-block" *ngIf="form.get('fax').touched">
@@ -112,7 +112,7 @@
                                                 </div>
                                             </div>
                                             <div class="form-group row">
-                                                <label for="contactName" class="col-sm-3 form-control-label m-t-5"><span>*</span>Contact</label>
+                                                <label for="contactName" class="col-sm-3 form-control-label m-t-5"><span class="text-danger font-weight-bold">*</span>Contact</label>
                                                 <div class="col-sm-9">
                                                     <input formControlName="contactName" type="text" class="form-control checking-field" placeholder="First name, Last name" />
                                                     <span class="help-block" *ngIf="form.get('contactName').touched">
@@ -165,8 +165,20 @@
                                             </div>
                                             <div class="form-group row">
                                                 <label for="logo" class="col-sm-3 form-control-label m-t-5">Logo</label>
-                                                <div class="col-sm-9">
-                                                   <az-image-uploader (onLogo)="onLogo($event)"></az-image-uploader>
+                                                <div col="col-sm-6" style="padding-left:20px;">
+                                                  <input id="logoImage" type="file" (change)="fileChange(input)" #input class="img-upload-btn" />
+                                                  <div class="image-wrapper">
+                                                      <i *ngIf="image" class="fa fa-times delete-img" (click)="removeImage()"></i>
+                                                      <img [attr.src]="image" *ngIf="image" width="100">
+                                                      <!--<img src="assets/img/app/no-image.png" *ngIf="!image" width="100" height="100">-->
+                                                      <img [attr.src]="logoUrl" *ngIf="!image && logoUrl" width="100">
+                                                  </div>
+                                                </div>
+                                                <div col="col-sm-3">
+                                                    <button class="btn btn-main btn-block" style="width:100px;margin-top:0px;" type="button">
+                                                        <span *ngIf="logoUrl === defaultLogo"><i class="fa fa-upload"></i> Upload</span>
+                                                        <span *ngIf="logoUrl != defaultLogo"><i class="fa fa-refresh"></i> Change</span>
+                                                    </button>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
@@ -195,3 +207,8 @@
                 </div>
     </div>
   </div>
+
+<div class="my-loading">
+    <ngx-loading [show]="loading">
+    </ngx-loading>
+</div>

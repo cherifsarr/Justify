@@ -19,6 +19,8 @@ import { MpListusersComponent } from './mp-listusers/mp-listusers.component';
 import { MpEditusersComponent } from './mp-editusers/mp-editusers.component';
 import { MpUsersService } from './services/mp-users.service';
 import { InternationalPhoneModule } from 'ng4-intl-phone';
+import { LoadingModule, ANIMATION_TYPES } from 'ngx-loading';
+import { CommonService } from '../../../shared/utils/common.service';
 
 export const routes = [
   { path: '', redirectTo: 'list', pathMatch: 'full' },
@@ -45,7 +47,15 @@ export const routes = [
     PipesModule,
     NgxDatatableModule,
     InternationalPhoneModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    LoadingModule.forRoot({
+      animationType: ANIMATION_TYPES.wanderingCubes,
+      backdropBackgroundColour: 'rgba(0,0,0,0.1)',
+      backdropBorderRadius: '4px',
+      primaryColour: '#ffffff',
+      secondaryColour: '#ffffff',
+      tertiaryColour: '#ffffff'
+  }),
   ],
   declarations: [
     MpListprofileComponent, 
@@ -56,6 +66,6 @@ export const routes = [
     MpListusersComponent,
     MpEditusersComponent
   ],
-  providers: [MPProfileService, MpLocationsService, LabProfileService, MpUsersService]
+  providers: [MPProfileService, MpLocationsService, LabProfileService, MpUsersService, CommonService]
 })
 export class MpProfileModule { }
