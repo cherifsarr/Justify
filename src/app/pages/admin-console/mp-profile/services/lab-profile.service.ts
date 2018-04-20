@@ -13,12 +13,23 @@ export class LabProfileService {
   /**
    * Get all Lab Profiles
    */
-  getLabProfiles(): Observable<LabProfile[]> {
-    return this.http.get<LabProfile[]>(this.configService.getApiURI() + "/LabProfiles")
+  getLabProfiles(orgId: string): Observable<LabProfile[]> {
+    return this.http.get<LabProfile[]>(this.configService.getApiURI() + "/LabProfiles/org/" +orgId)
             .pipe(
               catchError(this.handleError('getLabProfiles', []))
             );
   }
+
+    /**
+     * Get Org Profile Id
+     */
+    getOrgProfileId() {
+        return this.http.get(this.configService.getApiURI() + '/Utilities/config/default/orgprofileId')
+            .pipe(
+                catchError(this.handleError('getOrgProfileId'))
+            )
+    }
+
 /**
    * Handle the http operation that failed
    * Let the app continue

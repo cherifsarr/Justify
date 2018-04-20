@@ -22,7 +22,7 @@
 
                             <label for="username" class="col-lg-3 form-control-label m-t-5">Username</label>
                             <div class="col-lg-9 ">
-                                <input formControlName="username" class="form-control checking-field" placeholder="Username">
+                                <input formControlName="username" [readonly]="isDisabled" class="form-control checking-field" placeholder="Username">
                                 <span class="help-block" *ngIf="form.get('username').touched">
                                     <span class="text-danger" *ngIf="form.get('username').hasError('required')">Username is required</span>
                                     <span class="text-danger" *ngIf="form.get('username').hasError('minlength')">Minimum of 3 characters</span>

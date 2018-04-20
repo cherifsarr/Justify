@@ -29,6 +29,7 @@ export class MpEditprofileComponent implements OnInit {
   public isCheckedCan:boolean = false;
   public isCheckedTox:boolean = false;
   public isUpdate: boolean ;
+  orgProfileId: string;
   constructor(private router: ActivatedRoute, private route: Router, formBuilder: FormBuilder, private mpProfileService: MPProfileService, private labProfileService: LabProfileService) {
 
     this.form = formBuilder.group({
@@ -106,7 +107,7 @@ export class MpEditprofileComponent implements OnInit {
      
    }
   ngOnInit() {
-    this.getLabProfile();
+
     this.sub = this.router.params.subscribe(params => {
       if(params['id']) {
         this.id = params['id'];
@@ -118,6 +119,17 @@ export class MpEditprofileComponent implements OnInit {
         this.isUpdate = false;
       }
     });
+
+      this.labProfileService.getOrgProfileId()
+          .subscribe((resp: string) => {
+              this.orgProfileId = resp;
+          },()=>{}, ()=>{
+              this.labProfileService.getLabProfiles(this.orgProfileId)
+                  .subscribe(resp => {
+                      this.labProfiles = resp;
+                  })
+          })
+
   }
  
   /**
@@ -147,15 +159,7 @@ export class MpEditprofileComponent implements OnInit {
           this.mpProfile = mpProfile;
       })
   }
-  /**
-   * get Lab Profile
-   */
-  getLabProfile() {
-    this.labProfileService.getLabProfiles()
-    .subscribe(resp => {
-       this.labProfiles = resp;
-    })
-  }
+
   /**
    * Set logo
    * @param image - logo image base64

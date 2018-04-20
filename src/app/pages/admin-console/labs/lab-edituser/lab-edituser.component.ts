@@ -81,7 +81,7 @@ export class LabEdituserComponent implements OnInit {
   }
 
   /**
-   * Set Lab User 
+   * Set Lab User
    * @param id - LabUserId
    */
   setLabUser(id: string){
@@ -105,7 +105,7 @@ export class LabEdituserComponent implements OnInit {
 
   /**
    * Create lab user
-   * @param form 
+   * @param form
    */
    onSubmit(form): void {
         this.loading = true;
@@ -149,7 +149,7 @@ export class LabEdituserComponent implements OnInit {
 
   /**
    * set password generated
-   * @param e 
+   * @param e
    */
   public onPasswordGenerate(e) {
     e.preventDefault();

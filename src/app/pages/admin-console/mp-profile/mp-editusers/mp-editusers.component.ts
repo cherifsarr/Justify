@@ -32,10 +32,12 @@ export class MpEditusersComponent implements OnInit {
   isAnUpdate: boolean = false;
   idUser: string;
   sub2: any;
-  mpUserUpdate: MpUser;
+  mpUserUpdate: User;
   private role:AppRole;
   private mpProfile: MPProfile;
   private location: Mplocation;
+  isDisabled: boolean;
+
   constructor(private router: ActivatedRoute, route: Router,
     formBuilder: FormBuilder, 
     private mpuserService: MpUsersService, 
@@ -56,12 +58,10 @@ export class MpEditusersComponent implements OnInit {
       passwordChange: ['']
     });
 
+      this.isDisabled = false;
       this.mpUser = new User();
-      this.mpUserUpdate = new MpUser();
-      this.mpUserUpdate.identity = new AppUser();
+      this.mpUserUpdate = new User();
       this.mpUserUpdate.role = new AppRole();
-      this.mpUserUpdate.mpProfile = new MPProfile();
-      this.mpUserUpdate.location = new Mplocation();
    }
 
   ngOnInit() {
@@ -78,6 +78,7 @@ export class MpEditusersComponent implements OnInit {
       if (params.idUser) {
         this.isAnUpdate = true;
          this.idUser = params.idUser;
+         console.log(this.idUser);
          this.setMpUser();
       }
       else {
@@ -104,7 +105,7 @@ export class MpEditusersComponent implements OnInit {
         this.form.get('sendActivationMail').setValue(this.mpUser.sendActivationEmail);
         this.form.get('locked').setValue(this.mpUser.isLockedOut);
         this.form.get('passwordChange').setValue(this.mpUser.forcePasswordChange);
-     
+        this.isDisabled = true;
     })
   }
   /**
@@ -116,19 +117,7 @@ export class MpEditusersComponent implements OnInit {
            this.roles = resp;
          })
   }
-  
-  /**
-   * Get Role by Id
-   * @param id - roleId
-   */
-  getRole(id: string) {
-    this.mpuserService.getRoleById(id)
-      .subscribe((role: AppRole) => {
-        this.mpUserUpdate.role = role;
-        this.mpUserUpdate.roleId = role.id
-        this.role = role;
-      })
-  }
+
   /**
    * Get Profile by id
    * @param id - mpProfileId
@@ -136,8 +125,8 @@ export class MpEditusersComponent implements OnInit {
   getMPProfile(id: string) {
     this.mpprofileService.getMPProfileById(id)
     .subscribe((profile: MPProfile) => {
-      this.mpUserUpdate.mpProfile = profile
-      this.mpUserUpdate.mpProfileId = profile.id;
+      this.mpUserUpdate.businessProfileId = profile.id;
+      //this.mpUserUpdate.mpProfileId = profile.id;
       this.mpProfile = profile;
     })
   }
@@ -148,8 +137,8 @@ export class MpEditusersComponent implements OnInit {
   getLocation(id: string) {
     this.locationService.getMPLocationById(id)
     .subscribe((location: Mplocation) => {
-      this.mpUserUpdate.location = location;
-      this.mpUserUpdate.mpLocationId = location.id;
+      this.mpUserUpdate.locationId = location.id;
+      //this.mpUserUpdate.mpLocationId = location.id;
       this.location = location;
     })
   }
@@ -195,24 +184,27 @@ export class MpEditusersComponent implements OnInit {
         });
       }
        else {
-        this.getRole(form.role);
         this.getMPProfile(this.idProfile);
         this.getLocation(form.location);
         let identity = new AppUser();
-        identity.userName = form.username;
-        identity.firstName = form.firstname;
-        identity.lastName = form.lastname;
-        identity.email = form.email;
-        this.mpUserUpdate.identity = identity;
-        this.mpUserUpdate.lockedOut = form.locked;
-        this.mpUserUpdate.identity.scope = Scope.MP;
+        this.mpUserUpdate.role = form.role;
+        this.mpUserUpdate.roleId = form.role;
+        this.mpUserUpdate.id = this.idUser;
+        this.mpUserUpdate.identityId = identity.id;
+        this.mpUserUpdate.userName = form.username;
+        this.mpUserUpdate.firstName = form.firstname;
+        this.mpUserUpdate.lastName = form.lastname;
+        this.mpUserUpdate.email = form.email;
+        this.mpUserUpdate.identityId = identity.id;
+        this.mpUserUpdate.isLockedOut = form.locked;
+        this.mpUserUpdate.scope = Scope.MP;
         this.mpUserUpdate.sendActivationEmail = form.sendActivationMail;
         this.mpUserUpdate.forcePasswordChange = form.passwordChange;
         //this.mpUserUpdate.identity.passwordHash = form.password;
-        this.mpUserUpdate.enabled = form.isEnabled;
-        this.mpUserUpdate.npi='';
+        this.mpUserUpdate.isEnabled = form.isEnabled;
         this.mpUserUpdate.title = '';
-         this.mpuserService.updateMPUser(this.mpUser)
+        console.log(this.mpUserUpdate);
+         this.mpuserService.updateMPUser(this.mpUserUpdate)
          .subscribe(resp => {})
        }
 

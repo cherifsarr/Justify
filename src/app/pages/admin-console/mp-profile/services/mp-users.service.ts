@@ -42,7 +42,7 @@ export class MpUsersService {
     * @param mpUser 
     */
    updateMPUser(mpUser: User) {
-        return this.http.put(this.configService.getApiURI() + '/MPUsers/'+ mpUser.id, httpOptions)
+        return this.http.put(this.configService.getApiURI() + '/MPUsers/'+ mpUser.id, mpUser, httpOptions)
         .pipe(
           tap(_ => this.toastrService.success("User updated successfully")),
           catchError(this.handleError<User>('updateMPUser'))

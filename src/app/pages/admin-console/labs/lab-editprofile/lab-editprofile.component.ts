@@ -85,7 +85,7 @@ export class LabEditprofileComponent implements OnInit {
    */
   onFormSubmit(form){
     this.loading = true;
-    this.labProfile.orgProfileId = '680b4638-e23c-4bd6-72cd-08d58e2d9e43';
+    this.labProfile.orgProfileId = this.orgProfileId;
     this.labProfile.businessEntity.name = form.labName;
     this.labProfile.businessEntity.displayName = form.displayName;
     this.labProfile.logoImage = form.logoImage ? form.logoImage : null;
