@@ -31,6 +31,7 @@ export class LabEdituserComponent implements OnInit {
     private user: User;
     isDisabled: boolean;
 
+
   constructor(router: ActivatedRoute, fb: FormBuilder, private userService: LabUsersService) {
       this.router = router;
       this.isDisabled = false;
@@ -62,7 +63,7 @@ export class LabEdituserComponent implements OnInit {
 
   ngOnInit() {
 
-      this.loading = true;
+      //this.loading = true;
       /**
        * get parent id = id lab profile
        */
@@ -99,7 +100,6 @@ export class LabEdituserComponent implements OnInit {
           this.form.get('locked').setValue(user.isLockedOut);
           this.isDisabled = true;
           this.user = user;
-             //console.log('userupdate ' + this.user);
          })
   }
 
