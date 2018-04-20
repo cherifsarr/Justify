@@ -161,7 +161,7 @@ export class MpEditprofileComponent implements OnInit {
           this.form.get('fax').setValue(mpProfile.businessEntity.fax);
           this.form.get('contactName').setValue(mpProfile.businessEntity.contactName);
           this.form.get('email').setValue(mpProfile.businessEntity.email);
-          this.form.get('testRights').setValue(mpProfile.testRights);
+         // this.form.get('testRights').setValue(mpProfile.testRights);
           this.form.get('website').setValue(mpProfile.businessEntity.website);
           this.logoUrl = this.oCS.GetString(mpProfile.logoUrl);
           mpProfile.testRights === this.testRight.PGx ? this.isCheckedPgx = true : this.isCheckedPgx = false;
@@ -169,22 +169,22 @@ export class MpEditprofileComponent implements OnInit {
           mpProfile.testRights === this.testRight.Toxicology ? this.isCheckedTox = true : this.isCheckedTox = false;
           
           if (mpProfile.testRights == (this.testRight.PGx + this.testRight.Cancer)) {
-             this.isCheckedPgx = true;
-             this.isCheckedCan = true ;
+             this.form.get('testRightsPGx').setValue(this.testRight.PGx);
+             this.form.get('testRightsCancer').setValue(this.testRight.Cancer);
           }
           if (mpProfile.testRights == (this.testRight.PGx + this.testRight.Toxicology)) {
-            this.isCheckedPgx = true;
-            this.isCheckedTox = true;
+            this.form.get('testRightsPGx').setValue(this.testRight.PGx);
+            this.form.get('testRightsToxicology').setValue(this.testRight.Toxicology);
           }
           if (mpProfile.testRights == (this.testRight.Cancer + this.testRight.Toxicology)) {
-            this.isCheckedCan = true;
-            this.isCheckedTox = true;
+            this.form.get('testRightsCancer').setValue(this.testRight.Cancer);
+            this.form.get('testRightsToxicology').setValue(this.testRight.Toxicology);
           }
 
           if (mpProfile.testRights == (this.testRight.Cancer + this.testRight.Toxicology + this.testRight.PGx)) {
-            this.isCheckedCan = true;
-            this.isCheckedTox = true;
-            this.isCheckedPgx = true;
+            this.form.get('testRightsPGx').setValue(this.testRight.PGx);
+            this.form.get('testRightsCancer').setValue(this.testRight.Cancer);
+            this.form.get('testRightsToxicology').setValue(this.testRight.Toxicology);
           }
           if (!mpProfile.logoUrl) {
             this.logoUrl = this.defaultLogo;
@@ -214,8 +214,8 @@ export class MpEditprofileComponent implements OnInit {
    * @param image - logo image base64
    */
   onLogo(image: any) {
-    console.log(JSON.parse(image))
-    //this.form.get('logo').setValue(image);
+  //console.log(JSON.parse(image))
+    this.form.get('logo').setValue(image);
   }
   cancelme(e) {
     e.preventDefault();
