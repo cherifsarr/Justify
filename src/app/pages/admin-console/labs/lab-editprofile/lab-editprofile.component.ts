@@ -83,7 +83,7 @@ export class LabEditprofileComponent implements OnInit {
    * Save or Update Lab Profile 
    * @param form  
    */
-  onFormSubmit(form){
+  onFormSubmit(form) {
     this.loading = true;
     this.labProfile.orgProfileId = this.orgProfileId;
     this.labProfile.businessEntity.name = form.labName;

@@ -24,11 +24,6 @@
     }
 }
 
-.dropdown {
-    opacity: 0.6;
-    pointer-events: none;
-}
-
 #billingPhone  input {
     width: 100%;
     display: inline-block;
@@ -50,7 +45,16 @@
     font-family: inherit;
     height: 34px;
 }
-
+#phoneStyleOwner input {
+    width: 100%;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-sizing: border-box;
+    font-size: 13px;
+    font-family: inherit;
+    height: 34px;
+}
 #phoneStyle .input-group  {
    display: block;
 }
@@ -61,4 +65,7 @@
 
 #billingPhone .input-group > span {
     display: none
+}
+#phoneStyleOwner .input-group > span {
+    display: none;
 }
